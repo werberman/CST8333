@@ -16,6 +16,13 @@ struct Row_Key
     std::vector<string> incident_numbers;
 };
 
+struct Data_Bundle 
+{
+    Data_Headers data_headers;
+    Data_Rows data_rows;
+    Row_Key row_keys;
+};
+
 // class Data
 // {
 // public:

@@ -1,5 +1,6 @@
 #include "C:/SJunk/C++/CST8333/src/lib/csv.h"
 #include "C:/SJunk/C++/CST8333/src/Data.cpp"
+#include "C:/Sjunk/C++/CST8333/src/reader.cpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,48 +11,52 @@ using namespace std;
 
 int main()
 {
+    int m;
     string fname = "C:/Sjunk/C++/pipeline-incidents-comprehensive-data.csv";
 
-    vector<vector<string>> content;
-    vector<string> row;
-    string line, word;
+    Data_Bundle bundle;
 
-    int m;
+    bundle = reader(fname);
+    // vector<vector<string>> content;
+    // vector<string> row;
+    // string line, word;
 
-    vector<string> incidentNoVector;
+    // int m;
 
-    fstream file(fname, ios::in);
-    if (file.is_open())
-    {
-        while (getline(file, line))
-        {
-            row.clear();
+    // vector<string> incidentNoVector;
 
-            stringstream str(line);
+    // fstream file(fname, ios::in);
+    // if (file.is_open())
+    // {
+    //     while (getline(file, line))
+    //     {
+    //         row.clear();
 
-            while (getline(str, word, ','))
-                row.push_back(word);
-            content.push_back(row);
-        }
-    }
-    else
-        cout << "Could not open the file\n";
+    //         stringstream str(line);
 
-    // Place the header information in a struct, then remove it from the vector
-    Data_Headers colHeader;
-    colHeader.column_headers = content[0];
-    content.erase(content.begin());
+    //         while (getline(str, word, ','))
+    //             row.push_back(word);
+    //         content.push_back(row);
+    //     }
+    // }
+    // else
+    //     cout << "Could not open the file\n";
 
-    // Place the row data in a struct.
-    Data_Rows allData;
-    allData.column_data = content;
+    // // Place the header information in a struct, then remove it from the vector
+    // Data_Headers colHeader;
+    // colHeader.column_headers = content[0];
+    // content.erase(content.begin());
 
-    Row_Key incidentNumbers;
-    for (int i = 0; i < allData.column_data.size(); i++)
-    {
-        incidentNoVector.push_back(allData.column_data[i][0]);
-    }
-    incidentNumbers.incident_numbers = incidentNoVector;
+    // // Place the row data in a struct.
+    // Data_Rows allData;
+    // allData.column_data = content;
+
+    // Row_Key incidentNumbers;
+    // for (int i = 0; i < allData.column_data.size(); i++)
+    // {
+    //     incidentNoVector.push_back(allData.column_data[i][0]);
+    // }
+    // incidentNumbers.incident_numbers = incidentNoVector;
 
 
     cout << "Select the number of records to display: ";
@@ -59,10 +64,10 @@ int main()
     cout << "\n";
     for (int i = 0; i < 5; i++)
     {
-        cout << "*******************************\n" << colHeader.column_headers[i] << " : \n";
+        cout << "*******************************\n" << bundle.data_headers.column_headers[i] << " : \n";
         for (int j = 0; j < m; j++)
         {
-            cout << "Record No: " << (j+1) << ": " << allData.column_data[j][i] << "\n";
+            cout << "Record No: " << (j+1) << ": " << bundle.data_rows.column_data[j][i] << "\n";
         }
     }
 
