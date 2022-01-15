@@ -4,9 +4,16 @@
 #include <vector>
 #include <sstream>
 
+/**
+ * @brief 
+ * 
+ * @param bundle 
+ * @return true 
+ * @return false 
+ */
 bool writeCSV(Data_Bundle bundle)
 {
-    string csv;
+    std::string csv;
 
     for (int i = 0; i < bundle.data_headers.column_headers.size(); i++)
     {

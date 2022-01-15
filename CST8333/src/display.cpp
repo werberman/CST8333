@@ -18,9 +18,27 @@ void mainMenu()
          << "3) Add a record\n"
          << "4) Remove a record\n"
          << "5) Save as a new CSV file\n";
-}
+};
 
+/**
+ * @brief prompt the user for the number of records they would like displayed.
+ *
+ */
 void displaySelectedNoRecords()
 {
     cout << "Select the number of records to display: ";
-}
+};
+
+/**
+ * @brief Display invalid menu selection prompt
+ *
+ */
+void invalidInput()
+{
+    cout << "Invalid selection. Please try again.\n";
+};
+
+void displayReloadCSV()
+{
+    cout << "DEBUG: THIS IS THE displayReloadCSV Function";
+};

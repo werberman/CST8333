@@ -22,9 +22,9 @@ int main()
     bundle = reader(fname);
 
     mainMenu();
-    menuSelectionInt();
+    controller(menuSelectionInt());
 
-    displayRecords(bundle);
+    // displayRecords(bundle);
 
     return 0;
 }

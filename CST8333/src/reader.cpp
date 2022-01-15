@@ -6,6 +6,12 @@
 
 using namespace std;
 
+/**
+ * @brief 
+ * 
+ * @param fname 
+ * @return Data_Bundle 
+ */
 Data_Bundle reader (string fname) 
 {
     vector<vector<string>> content;
