@@ -46,15 +46,15 @@ void controller(int i, Data_Bundle bundle)
 
     case 4:
         // remove a record;
-        genericMessage(dltMsg);
-        if (yesNo(menuSelectionChar()))
-        {
-            removeRecord(bundle);
-        }
-        else
-        {
-            genericMessage(reviewMsg);
-        }
+        // genericMessage(dltMsg);
+        // if (yesNo(menuSelectionChar()))
+        // {
+        //     removeRecord(bundle);
+        // }
+        // else
+        // {
+        //     genericMessage(reviewMsg);
+        // }
 
         break;
 

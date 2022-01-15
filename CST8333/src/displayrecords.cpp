@@ -23,10 +23,10 @@ void displayRecords(Data_Bundle bundle)
     for (int i = 0; i < 5; i++)
     {
         cout << "*******************************\n"
-             << bundle.data_headers.column_headers[i] << " : \n";
+             << bundle.data_headers.getColumn_headers()[i] << " : \n";
         for (int j = 0; j < m; j++)
         {
-            cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.column_data[j][i] << "\n";
+            cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.getColumn_data()[j][i] << "\n";
         }
     }
 

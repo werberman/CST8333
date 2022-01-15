@@ -40,19 +40,19 @@ Data_Bundle reader (string fname)
 
     // Place the header information in a struct, then remove it from the vector
     Data_Headers colHeader;
-    colHeader.column_headers = content[0];
+    colHeader.setColumn_headers(content[0]);
     content.erase(content.begin());
 
     // Place the row data in a struct.
     Data_Rows allData;
-    allData.column_data = content;
+    allData.setColumn_data(content);
 
     Row_Key incidentNumbers;
-    for (int i = 0; i < allData.column_data.size(); i++)
+    for (int i = 0; i < allData.getColumn_data().size(); i++)
     {
-        incidentNoVector.push_back(allData.column_data[i][0]);
+        incidentNoVector.push_back(allData.getColumn_data()[i][0]);
     }
-    incidentNumbers.incident_numbers = incidentNoVector;
+    incidentNumbers.setIncident_numbers(incidentNoVector);
 
     Data_Bundle bundle;
     bundle.data_headers = colHeader;
