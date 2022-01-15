@@ -66,5 +66,7 @@ int main()
         }
     }
 
+    cout << "\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022";
+
     return 0;
 }
