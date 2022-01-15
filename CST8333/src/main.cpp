@@ -1,7 +1,6 @@
 #include "C:/SJunk/C++/CST8333/src/lib/csv.h"
 #include "Data.cpp"
 #include "reader.cpp"
-#include "displayrecords.cpp"
 #include "display.cpp"
 #include "controller.cpp"
 #include <iostream>
@@ -22,7 +21,7 @@ int main()
     bundle = reader(fname);
 
     mainMenu();
-    controller(menuSelectionInt());
+    controller(menuSelectionInt(), bundle);
 
     // displayRecords(bundle);
 
