@@ -2,8 +2,22 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#ifndef DISPLAYRECORDS_CPP
+#define DISPLAYRECORDS_CPP
 #include "displayrecords.cpp"
+#endif
+#ifndef ADDREMOVERECORD_CPP
+#define ADDREMOVERECORD_CPP
 #include "addRemoveRecord.cpp"
+#endif
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
+#ifndef CONTROLLER_CPP
+#define CONTROLLER_CPP
+#include "controller.cpp"
+#endif
 
 /**
  * @brief
@@ -75,7 +89,7 @@ void controller(int i, Data_Bundle bundle)
     default:
         genericMessage(invalidMsg);
     }
-}
+};
 // }
 
 bool yesNo(char i)

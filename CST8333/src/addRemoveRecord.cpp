@@ -3,6 +3,15 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
+#ifndef DISPLAY_CPP
+#define DISPLAY_CPP
+#include "display.cpp"
+#endif
+
 
 void addRecord(Data_Bundle bundle)
 {

@@ -3,6 +3,10 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
 
 /**
  * @brief 

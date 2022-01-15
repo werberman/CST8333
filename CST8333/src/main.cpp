@@ -1,13 +1,17 @@
 #include "C:/SJunk/C++/CST8333/src/lib/csv.h"
+#ifndef DATA_CPP
+#define DATA_CPP
 #include "Data.cpp"
+#endif
 #include "reader.cpp"
+#ifndef DISPLAY_CPP
+#define DISPLAY_CPP
 #include "display.cpp"
+#endif
+#ifndef CONTROLLER_CPP
+#define CONTROLLER_CPP
 #include "controller.cpp"
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <sstream>
+#endif
 
 using namespace std;
 

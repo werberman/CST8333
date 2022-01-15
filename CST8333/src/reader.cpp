@@ -3,21 +3,30 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#ifndef DISPLAY_CPP
+#define DISPLAY_CPP
+#include "display.cpp"
+#endif
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
 
 using namespace std;
 
 /**
- * @brief 
- * 
- * @param fname 
- * @return Data_Bundle 
+ * @brief
+ *
+ * @param fname
+ * @return Data_Bundle
  */
-Data_Bundle reader (string fname) 
+Data_Bundle reader(string fname)
 {
+    string message = "Loading CSV File...\n";
+    genericMessage(message);
     vector<vector<string>> content;
     vector<string> row;
     string line, word;
-
 
     vector<string> incidentNoVector;
 
