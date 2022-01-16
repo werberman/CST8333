@@ -28,11 +28,20 @@ void addRecord(Data_Bundle bundle)
     }
     //add a carrage return to the end of the record
     recordVector.push_back("\n");
+
+    std::vector<vector<std::string>> newRow;
+    //Add the new record into the existing data
+    newRow = bundle.data_rows.getColumn_data();
+    newRow.push_back(recordVector);
+    bundle.data_rows.setColumn_data(newRow); //TODO: See if there's a better way to do this.
 };
 
 void removeRecord(Data_Bundle bundle)
 {
-    std::string incidentNo = "\nWhat is the incident number you wish to remove?: ";
-    genericMessage(incidentNo);
+    string input;
+    std::vector<vector<std::string>> temp;
+    genericMessage("\nWhat is the incident number you wish to remove?: ");
+    input = stringInput();
 
+    
 }
