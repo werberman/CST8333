@@ -6,6 +6,11 @@
 
 using namespace std;
 
+void shamelessPlug()
+{
+    cout << "\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022";
+};
+
 /**
  * @brief display the main menu selection options and wait.
  *
@@ -22,13 +27,11 @@ void mainMenu()
          << "0) Exit program\n";
 };
 
-/**
- * @brief prompt the user for the number of records they would like displayed.
- *
- */
-void displaySelectedNoRecords()
+void displayRecMenu()
 {
-    cout << "Select the number of records to display: ";
+    cout << "\nPlease select one of the following:\n"
+         << "1) Display selected number of records starting from any point in the data\n"
+         << "2) Search for a specific record by Incident Number\n";
 };
 
 /**
@@ -46,12 +49,12 @@ void genericMessage(string message)
 };
 
 //********************************************************************************
-                            /*Inputs (move to its own file)*/
+/*Inputs (move to its own file)*/
 
 /**
- * @brief 
- * 
- * @return int 
+ * @brief
+ *
+ * @return int
  */
 int menuSelectionInt()
 {
@@ -61,9 +64,9 @@ int menuSelectionInt()
 };
 
 /**
- * @brief 
- * 
- * @return char 
+ * @brief
+ *
+ * @return char
  */
 char menuSelectionChar()
 {
@@ -80,4 +83,4 @@ string stringInput()
 }
 
 // ********************************************************************************
-                            /*addRemoveRecord Displays*/
+/*addRemoveRecord Displays*/

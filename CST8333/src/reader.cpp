@@ -26,7 +26,7 @@ Data_Bundle reader(string fname)
     genericMessage(message);
     vector<vector<string>> content;
     vector<string> row;
-    string line, word;
+    string line, word, block;
 
     vector<string> incidentNoVector;
 
@@ -47,12 +47,12 @@ Data_Bundle reader(string fname)
     else
         cout << "Could not open the file\n";
 
-    // Place the header information in a struct, then remove it from the vector
+    // Place the header information in an object, then remove it from the vector
     Data_Headers colHeader;
     colHeader.setColumn_headers(content[0]);
     content.erase(content.begin());
 
-    // Place the row data in a struct.
+    // Place the row data in an object.
     Data_Rows allData;
     allData.setColumn_data(content);
 
