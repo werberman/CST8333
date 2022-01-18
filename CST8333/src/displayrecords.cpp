@@ -43,7 +43,7 @@ void displayIncidentNos(Row_Key keys)
 };
 
 int found; // Declared here to ensure access to the variable outside the loop.
-bool searchRecords(Data_Bundle bundle, string incidentNo)
+bool searchRecordsBool(Data_Bundle bundle, string incidentNo)
 {
     bool foundFlag = false;
     bool noResultFlag = false;
@@ -71,7 +71,6 @@ bool searchRecords(Data_Bundle bundle, string incidentNo)
     }
     if (foundFlag)
     {
-        displayRecords(bundle, found, 1, 101 /*All the fields*/);
         return true;
     }
     else
@@ -80,3 +79,9 @@ bool searchRecords(Data_Bundle bundle, string incidentNo)
         return false;
     }
 };
+
+int searchRecords() 
+{
+    return found; //this is the index value found in the function searchRecordsBool();
+}
+

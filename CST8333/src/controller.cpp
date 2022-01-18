@@ -82,7 +82,6 @@ void controller(int i, Data_Bundle bundle)
         {
             genericMessage(reviewMsg);
         }
-
         break;
 
     case 5:
@@ -103,6 +102,7 @@ void controller(int i, Data_Bundle bundle)
 
     case 0:
         // Exit program
+
         loopCtrl = false;
         break;
 
@@ -119,7 +119,7 @@ void displayRecController(Data_Bundle bundle)
     int num;
     int col;
     string incidentNo;
-    bool found;
+    int index;
 
     switch (i)
     {
@@ -139,17 +139,25 @@ void displayRecController(Data_Bundle bundle)
                   << col;
 
         std::cout << bundle.data_headers.getColumn_headers()[start]
-        << "\n"
-        << bundle.data_rows.getColumn_data()[num][start];
+                  << "\n"
+                  << bundle.data_rows.getColumn_data()[num][start];
 
         displayRecords(bundle, start, num, col);
         break;
 
-        case 2:
+    case 2:
         //"2) Search for a specific record by Incident Number";
         genericMessage("\nWhat is the specific incident number you are looking for?: ");
         incidentNo = stringInput();
-        found = searchRecords(bundle, incidentNo);
+        if (searchRecordsBool(bundle, incidentNo))
+        {
+            index = searchRecords(); //TODO: See if this actually works
+            displayRecords(bundle, index, 1, 101 /*All the fields*/);
+        }
+        else
+        {
+            genericMessage("Record could not be found.");
+        }
         break;
 
     default:

@@ -12,28 +12,27 @@
 #include "display.cpp"
 #endif
 
-
 void addRecord(Data_Bundle bundle)
 {
     Data_Rows newRecord;
     std::vector<std::string> recordVector;
 
-    //Prompt for each field by iterating through the column headers.
+    // Prompt for each field by iterating through the column headers.
     for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
     {
         std::string currentField = bundle.data_headers.getColumn_headers()[i] + ": ";
         genericMessage(currentField);
-        //modify each input to match csv formatting and place in the vector
+        // modify each input to match csv formatting and place in the vector
         recordVector.push_back("\"" + stringInput() + "\",");
     }
-    //add a carrage return to the end of the record
+    // add a carrage return to the end of the record
     recordVector.push_back("\n");
 
     std::vector<vector<std::string>> newRow;
-    //Add the new record into the existing data
+    // Add the new record into the existing data
     newRow = bundle.data_rows.getColumn_data();
     newRow.push_back(recordVector);
-    bundle.data_rows.setColumn_data(newRow); //TODO: See if there's a better way to do this.
+    bundle.data_rows.setColumn_data(newRow); // TODO: See if there's a better way to do this.
 };
 
 void removeRecord(Data_Bundle bundle)
@@ -42,6 +41,13 @@ void removeRecord(Data_Bundle bundle)
     std::vector<vector<std::string>> temp;
     genericMessage("\nWhat is the incident number you wish to remove?: ");
     input = stringInput();
-
-    
+    if (searchRecordsBool(bundle, input)) // if the record is found
+    {
+        int index = searchRecords(); // Get the index of the record to be deleted.
+        // TODO: Write the logic for this
+    }
+    else
+    {
+        genericMessage("\nUnable to find the record.");
+    }
 }

@@ -17,7 +17,7 @@ void shamelessPlug()
  */
 void mainMenu()
 {
-    cout << "Please select one fo the following options: \n"
+    cout << "\nPlease select one of the following options: \n"
          << "1) Reload the csv file\n"
          << "2) Display records\n"
          << "3) Add a record\n"

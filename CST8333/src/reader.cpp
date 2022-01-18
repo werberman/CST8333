@@ -26,17 +26,54 @@ Data_Bundle reader(string fname)
     genericMessage(message);
     vector<vector<string>> content;
     vector<string> row;
-    string line, word, block;
+    string line, word;
 
     vector<string> incidentNoVector;
+    char quote = '"';
+    char star = '*';
+
+    bool inquotes = false;
+    string thing;
 
     fstream file(fname, ios::in);
     if (file.is_open())
     {
-        while (getline(file, line))
+        while (getline(file, line)) // read in a line from the file
         {
-            row.clear();
+            row.clear(); // clear the row vector so it's ready for new data
 
+            // std::cout << line;
+
+            // check each element in the line and see if it is a quotation mark
+            for (int i = 0; i < line.size(); i++)
+            {
+                // Check if the character is a quote mark
+                if (line[i] == '"')
+                {
+                    if (!inquotes)
+                    {
+                        inquotes = true;
+                        thing = inquotes;
+                        genericMessage(thing);
+                    }
+                    if (inquotes)
+                    {
+                        inquotes = false;
+                        thing = inquotes;
+
+                        genericMessage(thing);
+                    }
+                }
+                // check if the character is a comma
+                if (inquotes)
+                {
+                    genericMessage("TRIGGERED");
+                    replace(line.begin(), line.end(), ',', '*');
+                }
+            }
+
+            // cout << "\nDEBUG: Line: "
+            //      << line;
             stringstream str(line);
 
             while (getline(str, word, ','))
