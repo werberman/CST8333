@@ -29,8 +29,6 @@ Data_Bundle reader(string fname)
     string line, word;
 
     vector<string> incidentNoVector;
-    char quote = '"';
-    char star = '*';
 
     bool inquotes = false;
     string thing;

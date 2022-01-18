@@ -43,6 +43,7 @@ void controller(int i, Data_Bundle bundle)
     string reviewMsg = "\nYou can review the current incident numbers from the main menu.";
 
     string newCSV;
+    string newFileName;
 
     bool loopCtrl = true;
 
@@ -88,11 +89,14 @@ void controller(int i, Data_Bundle bundle)
     case 5:
         // Save as a new csv file
         cout << "DEBUG - Case 5 triggered - about to go to writeCSV";
+        genericMessage("\nName your new file(do not include \".csv\")");
+        newFileName = stringInput();
         newCSV = writeCSV(bundle);
         cout << "DEBUG - Cleared the writeCSV function";
-        newFile.open("C:/Sjunk/C++/newcsv.csv");
-        newFile << newCSV;
-        newFile.close();
+        newFileName = newFileName + ".csv"; //TODO: Check syntax of this
+        newFile.open("C:/Sjunk/C++/newcsv.csv"); //TODO: Change this once testing is done to use user filename
+        newFile << newCSV; //write the string to the new file
+        newFile.close(); //close the file
         break;
 
     case 6:
@@ -103,7 +107,8 @@ void controller(int i, Data_Bundle bundle)
 
     case 0:
         // Exit program
-
+        genericMessage("\nGoodbye!");
+        shamelessPlug();
         loopCtrl = false;
         break;
 
