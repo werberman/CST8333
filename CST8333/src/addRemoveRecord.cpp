@@ -52,9 +52,9 @@ void removeRecord(Data_Bundle bundle)
     std::vector<vector<std::string>> temp;
     genericMessage("\nWhat is the incident number you wish to remove?: ");
     input = stringInput();
-    if (searchRecordsBool(bundle, input)) // if the record is found
+    int index = searchRecords(bundle, input);
+    if (index > 0) // if the record is found (searchRecords returns -1 if not found)
     {
-        int index = searchRecords(); // Get the index of the record to be deleted.
         // TODO: Write the logic for this
     }
     else

@@ -53,15 +53,15 @@ void displayIncidentNos(Row_Key keys)
 
 int found; // Declared here to ensure access to the variable outside the loop.
 /**
- * @brief THIS MUST BE CALLED BEFORE searchRecords() - Check if a gien incident number value is found in a given data bundle. The index number of the found record is 
+ * @brief Check if a given incident number value is found in a given data bundle. The index number of the found record is 
  * saved in an int outside the function so that it can be called later. 
  * 
  * @param bundle data bundle
  * @param incidentNo desired incident number
- * @return true if found
- * @return false if not found
+ * @return -1 if record cannot be found
+ * @return index number if found
  */
-bool searchRecordsBool(Data_Bundle bundle, string incidentNo)
+int searchRecords(Data_Bundle bundle, string incidentNo)
 {
     bool foundFlag = false;
     bool noResultFlag = false;
@@ -89,22 +89,11 @@ bool searchRecordsBool(Data_Bundle bundle, string incidentNo)
     }
     if (foundFlag)
     {
-        return true;
+        return found;
     }
     else
     {
         genericMessage("Unable to locate record. Please try again.");
-        return false;
+        return -1;
     }
 };
-
-/**
- * @brief searchRecordsBool() MUST BE CALLED IMMEDIATELY BEFORE THIS. Returns the index value of the found record.
- * 
- * @return int index value of the found record from searchRecordsBool()
- */
-int searchRecords() 
-{
-    return found; //this is the index value found in the function searchRecordsBool();
-}
-

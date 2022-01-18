@@ -155,9 +155,9 @@ void displayRecController(Data_Bundle bundle)
         //"2) Search for a specific record by Incident Number";
         genericMessage("\nWhat is the specific incident number you are looking for?: ");
         incidentNo = stringInput();
-        if (searchRecordsBool(bundle, incidentNo))
+        index = searchRecords(bundle, incidentNo);
+        if (index > 0) //searchRecords() returns -1 if the record is not found
         {
-            index = searchRecords(); //TODO: See if this actually works
             displayRecords(bundle, index, 1, 101 /*All the fields*/);
         }
         else
