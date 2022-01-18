@@ -6,6 +6,10 @@
 
 using namespace std;
 
+/**
+ * @brief Place all my student information on screen as required for the assignment.
+ * 
+ */
 void shamelessPlug()
 {
     cout << "\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022";
@@ -27,6 +31,10 @@ void mainMenu()
          << "0) Exit program\n";
 };
 
+/**
+ * @brief Display the menu for the display a record menu
+ * 
+ */
 void displayRecMenu()
 {
     cout << "\nPlease select one of the following:\n"
@@ -43,6 +51,11 @@ void invalidInput()
     cout << "Invalid selection. Please try again.\n";
 };
 
+/**
+ * @brief Generic message printer for any string.
+ * 
+ * @param message string to be printed on screen.
+ */
 void genericMessage(string message)
 {
     cout << message;
@@ -81,6 +94,3 @@ string stringInput()
     std::cin >> input;
     return input;
 }
-
-// ********************************************************************************
-/*addRemoveRecord Displays*/

@@ -29,9 +29,10 @@ void displayRecController(Data_Bundle bundle); // forward declaration;
 bool yesNo(char i);                            // forward declaration;
 
 /**
- * @brief
- *
- * @param i
+ * @brief 
+ * 
+ * @param i 
+ * @param bundle 
  */
 void controller(int i, Data_Bundle bundle)
 {
@@ -111,6 +112,11 @@ void controller(int i, Data_Bundle bundle)
     }
 };
 
+/**
+ * @brief display record controller logic is here
+ * 
+ * @param bundle current data
+ */
 void displayRecController(Data_Bundle bundle)
 {
     displayRecMenu();
@@ -166,6 +172,13 @@ void displayRecController(Data_Bundle bundle)
     }
 };
 
+/**
+ * @brief Check if a character response is a true or false:
+ * 
+ * @param i character to be checked
+ * @return true if y/Y
+ * @return false if f/F
+ */
 bool yesNo(char i)
 {
     bool yesNo;

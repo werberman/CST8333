@@ -12,6 +12,11 @@
 #include "display.cpp"
 #endif
 
+/**
+ * @brief add a record to the existing records
+ * 
+ * @param bundle current data
+ */
 void addRecord(Data_Bundle bundle)
 {
     Data_Rows newRecord;
@@ -35,6 +40,12 @@ void addRecord(Data_Bundle bundle)
     bundle.data_rows.setColumn_data(newRow); // TODO: See if there's a better way to do this.
 };
 
+/**
+ * @brief Delete a record from the exisiting record.
+ * NOTE: This does NOT remove the record from the file, just from the working memory. New file must still be written.
+ * 
+ * @param bundle existing data
+ */
 void removeRecord(Data_Bundle bundle)
 {
     string input;

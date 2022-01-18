@@ -6,11 +6,15 @@
 #include <sstream>
 
 /**
- * @brief CURRENTLY BROKEN...
- *
- * @param bundle
+ * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns 
+ * that are displayed. 
+ * 
+ * @param bundle data bundle to be used in the display.
+ * @param start where in the data to start (index number)
+ * @param length number of records to display
+ * @param fields number of columns to display for each record.
  */
-void displayRecords(Data_Bundle bundle, int start, int length, int fields) // BROKEN - FIX THIS
+void displayRecords(Data_Bundle bundle, int start, int length, int fields)
 {
     std::cout << "\nDEBUG: start: "
               << start
@@ -34,6 +38,11 @@ void displayRecords(Data_Bundle bundle, int start, int length, int fields) // BR
     shamelessPlug();
 };
 
+/**
+ * @brief Displays all the existing incident numbers
+ * 
+ * @param keys Row_Keys data that should be displayed.
+ */
 void displayIncidentNos(Row_Key keys)
 {
     for (int i = 0; i < keys.getIncident_numbers().size(); i++)
@@ -43,6 +52,15 @@ void displayIncidentNos(Row_Key keys)
 };
 
 int found; // Declared here to ensure access to the variable outside the loop.
+/**
+ * @brief THIS MUST BE CALLED BEFORE searchRecords() - Check if a gien incident number value is found in a given data bundle. The index number of the found record is 
+ * saved in an int outside the function so that it can be called later. 
+ * 
+ * @param bundle data bundle
+ * @param incidentNo desired incident number
+ * @return true if found
+ * @return false if not found
+ */
 bool searchRecordsBool(Data_Bundle bundle, string incidentNo)
 {
     bool foundFlag = false;
@@ -80,6 +98,11 @@ bool searchRecordsBool(Data_Bundle bundle, string incidentNo)
     }
 };
 
+/**
+ * @brief searchRecordsBool() MUST BE CALLED IMMEDIATELY BEFORE THIS. Returns the index value of the found record.
+ * 
+ * @return int index value of the found record from searchRecordsBool()
+ */
 int searchRecords() 
 {
     return found; //this is the index value found in the function searchRecordsBool();
