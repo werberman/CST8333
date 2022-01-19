@@ -1,11 +1,31 @@
-#include "C:/SJunk/C++/CST8333/src/lib/csv.h"
-#include "C:/SJunk/C++/CST8333/src/Data.cpp"
-#include "C:/Sjunk/C++/CST8333/src/reader.cpp"
+#ifndef DATA_CPP
+#define DARTA_CPP
+#include "Data.cpp"
+#endif
+#ifndef READER_CPP
+#define READER_CPP
+#include "reader.cpp"
+#endif
+#ifndef IOSTREAM
+#define IOSTREAM
 #include <iostream>
+#endif
+#ifndef FSTREAM
+#define FSTREAM
 #include <fstream>
+#endif
+#ifndef STRING
+#define STRING
 #include <string>
+#endif
+#ifndef VECTOR
+#define VECTOR
 #include <vector>
+#endif
+#ifndef SSTREAM
+#define SSTREAM
 #include <sstream>
+#endif
 
 using namespace std;
 
