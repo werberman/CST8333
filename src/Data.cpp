@@ -42,13 +42,3 @@ struct Data_Bundle
     Data_Rows data_rows;
     Row_Key row_keys;
 };
-
-// class Data
-// {
-// public:
-//     vector<string> stringData;
-//     Data(vector<string> row)
-//     {
-//         stringData = row;
-//     }
-// };
