@@ -21,24 +21,53 @@
 
 using namespace std;
 
-struct Data_Headers
+class Data_Rows
 {
-    vector<string> column_headers;
-};
-
-struct Data_Rows
-{
+private:
     std::vector<vector<string>> column_data;
+
+public:
+    void setColumn_data(std::vector<vector<string>> col)
+    {
+        column_data = col;
+    }
+
+    std::vector<vector<string>> getColumn_data()
+    {
+        return column_data;
+    }
 };
 
-struct Row_Key
+class Data_Headers
 {
+private:
+    std::vector<string> column_headers;
+
+public:
+    void setColumn_headers(std::vector<string> head)
+    {
+        column_headers = head;
+    }
+
+    std::vector<string> getColumn_headers()
+    {
+        return column_headers;
+    }
+};
+
+class Row_Key
+{
+private:
     std::vector<string> incident_numbers;
-};
 
-struct Data_Bundle 
-{
-    Data_Headers data_headers;
-    Data_Rows data_rows;
-    Row_Key row_keys;
+public:
+    void setIncident_numbers(std::vector<string> ino)
+    {
+        incident_numbers = ino;
+    }
+
+    std::vector<string> getIncident_numbers()
+    {
+        return incident_numbers;
+    }
 };
