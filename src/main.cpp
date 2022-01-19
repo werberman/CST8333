@@ -52,7 +52,7 @@ int main()
         cout << "*******************************\n" << bundle.data_headers.getColumn_headers()[i] << " : \n";
         for (int j = 0; j < m; j++)
         {
-            cout << "Record No: " << (j+1) << ": " << bundle.data_rows.getColumn_data()[j][i] << "\n";
+            cout << "Record No: " << (j+1) << ": " << bundle.data_rows.getColumn_data()[j][i] << endl;
         }
     }
 
