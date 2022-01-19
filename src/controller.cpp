@@ -29,10 +29,10 @@ void displayRecController(Data_Bundle bundle); // forward declaration;
 bool yesNo(char i);                            // forward declaration;
 
 /**
- * @brief 
- * 
- * @param i 
- * @param bundle 
+ * @brief
+ *
+ * @param i
+ * @param bundle
  */
 void controller(int i, Data_Bundle bundle)
 {
@@ -93,16 +93,21 @@ void controller(int i, Data_Bundle bundle)
         newFileName = stringInput();
         newCSV = writeCSV(bundle);
         cout << "DEBUG - Cleared the writeCSV function";
-        newFileName = newFileName + ".csv"; //TODO: Check syntax of this
-        newFile.open("C:/Sjunk/C++/newcsv1.csv"); //TODO: Change this once testing is done to use user filename
-        newFile << newCSV; //write the string to the new file
-        newFile.close(); //close the file
+        newFileName = newFileName + ".csv";       // TODO: Check syntax of this
+        newFile.open("C:/Sjunk/C++/newcsv1.csv"); // TODO: Change this once testing is done to use user filename
+        newFile << newCSV;                        // write the string to the new file
+        newFile.close();                          // close the file
         break;
 
     case 6:
         // display current incident numbers
         genericMessage(currentINo);
         displayIncidentNos(bundle.row_keys);
+        break;
+
+    case 9:
+        // DEBUG
+        displayRecords(bundle, 0, 5, 3);
         break;
 
     case 0:
@@ -119,7 +124,7 @@ void controller(int i, Data_Bundle bundle)
 
 /**
  * @brief display record controller logic is here
- * 
+ *
  * @param bundle current data
  */
 void displayRecController(Data_Bundle bundle)
@@ -161,7 +166,7 @@ void displayRecController(Data_Bundle bundle)
         genericMessage("\nWhat is the specific incident number you are looking for?: ");
         incidentNo = stringInput();
         index = searchRecords(bundle, incidentNo);
-        if (index > 0) //searchRecords() returns -1 if the record is not found
+        if (index > 0) // searchRecords() returns -1 if the record is not found
         {
             displayRecords(bundle, index, 1, 101 /*All the fields*/);
         }
@@ -179,7 +184,7 @@ void displayRecController(Data_Bundle bundle)
 
 /**
  * @brief Check if a character response is a true or false:
- * 
+ *
  * @param i character to be checked
  * @return true if y/Y
  * @return false if f/F

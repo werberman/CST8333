@@ -18,9 +18,8 @@ using namespace std;
 
 int main()
 {
-    int m;
-    // string fname = "C:/Sjunk/C++/pipeline-incidents-comprehensive-data.csv";
-    string fname = "C:/SJunk/C++/newcsv.csv";
+    // string fname = "C:/SJunk/C++/newcsv.csv";
+    string fname = "C:/Users/werbe/Documents/Programming Files/C++/CST8333/newcsv.csv";
 
     Data_Bundle bundle;
 

@@ -50,7 +50,6 @@ Data_Bundle reader(string fname)
     vector<string> incidentNoVector;
 
     bool inquotes = false;
-    string thing;
 
     fstream file(fname, ios::in);
     if (file.is_open())
@@ -65,38 +64,45 @@ Data_Bundle reader(string fname)
             for (int i = 0; i < line.size(); i++)
             {
                 // Check if the character is a quote mark
-                if (line[i] == '"')
+                if (line[i] == '\"')
                 {
                     if (!inquotes)
                     {
                         inquotes = true;
-                        thing = inquotes;
-                        genericMessage(thing);
+                        genericMessage("\nTriggered not in Quotes");
                     }
-                    if (inquotes)
+                    else if (inquotes)
                     {
                         inquotes = false;
-                        thing = inquotes;
 
-                        genericMessage(thing);
+                        genericMessage("\nin Quotes");
                     }
-                }
-                // check if the character is a comma
-                if (inquotes)
+                };
+                // check if the character is a comma and switch it to a star
+                if (inquotes && line[i] == ',')
                 {
-                    genericMessage("TRIGGERED");
-                    replace(line.begin(), line.end(), ',', '*');
+                    line[i] = '*';
                 }
             }
 
-            // cout << "\nDEBUG: Line: "
-            //      << line;
             stringstream str(line);
 
             while (getline(str, word, ','))
                 row.push_back(word);
-            content.push_back(row);
+                content.push_back(row);
         }
+        // Change the stars back to commas
+        // for (int i = 0; i < content.size(); i++)
+        // {
+        //     cout << content[0].size();
+        //     cout << content.size();
+        //     cout << "\nTEMP";
+        //     for (int j = 0; j < content[0].size(); i++)
+        //     {
+        //         cout << "BLAH";
+        //         // content[j][i].replace(content[j][i].begin(), content[j][i].end(), '*', ',');
+        //     }
+        // };
     }
     else
         cout << "Could not open the file\n";
@@ -117,6 +123,7 @@ Data_Bundle reader(string fname)
     }
     incidentNumbers.setIncident_numbers(incidentNoVector);
 
+    //Make the Data_Bundle
     Data_Bundle bundle;
     bundle.data_headers = colHeader;
     bundle.data_rows = allData;
