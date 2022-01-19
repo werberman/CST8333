@@ -71,13 +71,10 @@ Data_Bundle reader(string fname)
                     if (!inquotes)
                     {
                         inquotes = true;
-                        genericMessage("\nTriggered not in Quotes");
                     }
                     else if (inquotes)
                     {
                         inquotes = false;
-
-                        genericMessage("\nin Quotes");
                     }
                 };
                 // check if the character is a comma and switch it to a star
