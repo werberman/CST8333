@@ -1,3 +1,7 @@
+#ifndef ALGORITHM
+#define ALGORITHM
+#include <algorithm>
+#endif
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -18,50 +22,108 @@
 #define SSTREAM
 #include <sstream>
 #endif
+#ifndef DISPLAY_CPP
+#define DISPLAY_CPP
+#include "display.cpp"
+#endif
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
+
 using namespace std;
 
-Data_Bundle reader (string fname) 
+/**
+ * @brief
+ *
+ * @param fname
+ * @return Data_Bundle
+ */
+Data_Bundle reader(string fname)
 {
+    string message = "Loading CSV File...\n";
+    genericMessage(message);
     vector<vector<string>> content;
     vector<string> row;
     string line, word;
 
-
     vector<string> incidentNoVector;
+
+    bool inquotes = false;
 
     fstream file(fname, ios::in);
     if (file.is_open())
     {
-        while (getline(file, line))
+        while (getline(file, line)) // read in a line from the file
         {
-            row.clear();
+            row.clear(); // clear the row vector so it's ready for new data
+
+            // std::cout << line;
+
+            // check each element in the line and see if it is a quotation mark
+            for (int i = 0; i < line.size(); i++)
+            {
+                // Check if the character is a quote mark
+                if (line[i] == '\"')
+                {
+                    if (!inquotes)
+                    {
+                        inquotes = true;
+                        genericMessage("\nTriggered not in Quotes");
+                    }
+                    else if (inquotes)
+                    {
+                        inquotes = false;
+
+                        genericMessage("\nin Quotes");
+                    }
+                };
+                // check if the character is a comma and switch it to a star
+                if (inquotes && line[i] == ',')
+                {
+                    line[i] = '*';
+                }
+            }
 
             stringstream str(line);
 
             while (getline(str, word, ','))
                 row.push_back(word);
-            content.push_back(row);
+                content.push_back(row);
         }
+        // Change the stars back to commas
+        // for (int i = 0; i < content.size(); i++)
+        // {
+        //     cout << content[0].size();
+        //     cout << content.size();
+        //     cout << "\nTEMP";
+        //     for (int j = 0; j < content[0].size(); i++)
+        //     {
+        //         cout << "BLAH";
+        //         // content[j][i].replace(content[j][i].begin(), content[j][i].end(), '*', ',');
+        //     }
+        // };
     }
     else
         cout << "Could not open the file\n";
 
-    // Place the header information in a struct, then remove it from the vector
+    // Place the header information in an object, then remove it from the vector
     Data_Headers colHeader;
-    colHeader.column_headers = content[0];
+    colHeader.setColumn_headers(content[0]);
     content.erase(content.begin());
 
-    // Place the row data in a struct.
+    // Place the row data in an object.
     Data_Rows allData;
-    allData.column_data = content;
+    allData.setColumn_data(content);
 
     Row_Key incidentNumbers;
-    for (int i = 0; i < allData.column_data.size(); i++)
+    for (int i = 0; i < allData.getColumn_data().size(); i++)
     {
-        incidentNoVector.push_back(allData.column_data[i][0]);
+        incidentNoVector.push_back(allData.getColumn_data()[i][0]);
     }
-    incidentNumbers.incident_numbers = incidentNoVector;
+    incidentNumbers.setIncident_numbers(incidentNoVector);
 
+    //Make the Data_Bundle
     Data_Bundle bundle;
     bundle.data_headers = colHeader;
     bundle.data_rows = allData;
