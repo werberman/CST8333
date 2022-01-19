@@ -22,14 +22,6 @@
 #define SSTREAM
 #include <sstream>
 #endif
-#ifndef DISPLAY_CPP
-#define DISPLAY_CPP
-#include "display.cpp"
-#endif
-#ifndef DATA_CPP
-#define DATA_CPP
-#include "Data.cpp"
-#endif
 
 using namespace std;
 
@@ -41,8 +33,6 @@ using namespace std;
  */
 Data_Bundle reader(string fname)
 {
-    string message = "Loading CSV File...\n";
-    genericMessage(message);
     vector<vector<string>> content;
     vector<string> row;
     string line, word;
@@ -69,13 +59,10 @@ Data_Bundle reader(string fname)
                     if (!inquotes)
                     {
                         inquotes = true;
-                        genericMessage("\nTriggered not in Quotes");
                     }
                     else if (inquotes)
                     {
                         inquotes = false;
-
-                        genericMessage("\nin Quotes");
                     }
                 };
                 // check if the character is a comma and switch it to a star
