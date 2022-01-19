@@ -29,6 +29,12 @@
 
 using namespace std;
 
+/**
+ * @brief Load the given file and ask the user how many records they wish to display. Only 
+ * displays the first 5 fields of each record. 
+ * 
+ * @return int 0 when finished.
+ */
 int main()
 {
     int m;

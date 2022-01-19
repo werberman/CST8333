@@ -21,6 +21,10 @@
 
 using namespace std;
 
+/**
+ * @brief Individual rows of data broken into columns (stored as a vector). Column headers should NOT be included here.
+ * 
+ */
 class Data_Rows
 {
 private:
@@ -38,6 +42,10 @@ public:
     }
 };
 
+/**
+ * @brief First line of a csv (presumably the data header) is stored here for quick access as a vector.
+ * 
+ */
 class Data_Headers
 {
 private:
@@ -55,6 +63,10 @@ public:
     }
 };
 
+/**
+ * @brief A vector of the incident numbers (a unique value). This allows for quick checks when a record is being searched. 
+ * 
+ */
 class Row_Key
 {
 private:
@@ -73,7 +85,7 @@ public:
 };
 
 /**
- * @brief
+ * @brief Full bundle of all the data types (Data_Headers, Data_Rows, and Row_Key). 
  *
  */
 struct Data_Bundle
