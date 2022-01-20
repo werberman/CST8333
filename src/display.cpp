@@ -22,12 +22,27 @@
 using namespace std;
 
 /**
+ * @brief Generic message printer for any string.
+ * 
+ * @param message string to be printed on screen.
+ */
+void genericMessage(string message)
+{
+    cout << message <<endl;
+};
+
+/**
  * @brief Place all my student information on screen as required for the assignment.
  * 
  */
 void shamelessPlug()
 {
-    cout << "\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022";
+    genericMessage("\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022");
+};
+
+void shamelessBanner()
+{
+    genericMessage("\n***Kristopher Houston***041015388***CST8333***Winer, 2022***");
 };
 
 /**
@@ -36,6 +51,7 @@ void shamelessPlug()
  */
 void mainMenu()
 {
+    shamelessBanner();
     cout << "\nPlease select one of the following options: \n"
          << "1) Reload the csv file\n"
          << "2) Display records\n"
@@ -52,9 +68,12 @@ void mainMenu()
  */
 void displayRecMenu()
 {
+    shamelessBanner();
     cout << "\nPlease select one of the following:\n"
          << "1) Display selected number of records starting from any point in the data\n"
-         << "2) Search for a specific record by Incident Number\n";
+         << "2) Search for a specific record by Incident Number\n"
+         << "3) Display all records and columns\n"
+         << "9) Go back to main menu\n";
 };
 
 /**
@@ -64,16 +83,6 @@ void displayRecMenu()
 void invalidInput()
 {
     cout << "Invalid selection. Please try again.\n";
-};
-
-/**
- * @brief Generic message printer for any string.
- * 
- * @param message string to be printed on screen.
- */
-void genericMessage(string message)
-{
-    cout << message;
 };
 
 //********************************************************************************

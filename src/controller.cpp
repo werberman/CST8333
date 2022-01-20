@@ -34,12 +34,10 @@ bool yesNo(char i);                            // forward declaration;
  * @param i
  * @param bundle
  */
-void controller(int i, Data_Bundle bundle)
+void controller(Data_Bundle bundle, string fname)
 {
     string rldMsg = "\nThis will undo any changes you've made that haven't been saved and reload the orginal file. Are you sure? (y/n): ";
-    string addMsg = "\nAdding a record: \nPlease input each field one at a time when prompted:\n";
     string dltMsg = "\nDo you know the incident number of the record you wish to delete? (y/n): ";
-    string currentINo = "\nThe following are the current incident numbers: \n";
     string reviewMsg = "\nYou can review the current incident numbers from the main menu.";
 
     string newCSV;
@@ -47,10 +45,13 @@ void controller(int i, Data_Bundle bundle)
 
     bool loopCtrl = true;
 
+    mainMenu();
+    int i = menuSelectionInt(); // get menu selection
+
     ofstream newFile;
 
-    // do // doesn't work like I'd have expected...
-    // {
+    while (true) // doesn't work like I'd have expected...
+    {
         switch (i)
         {
         case 1:
@@ -58,6 +59,10 @@ void controller(int i, Data_Bundle bundle)
             char i;
             genericMessage(rldMsg);
             i = menuSelectionChar();
+            if (yesNo(i))
+            {
+                bundle = reader(fname); // See if this causes a memory leak
+            }
             // reloadCSV(i);
             break;
 
@@ -69,8 +74,8 @@ void controller(int i, Data_Bundle bundle)
         case 3:
             // add a record
 
-            genericMessage(addMsg);
-            addRecord(bundle);
+            genericMessage("\nAdding a record: \nPlease input each field one at a time when prompted:\n");
+            bundle = addRecord(bundle);
             break;
 
         case 4:
@@ -101,7 +106,7 @@ void controller(int i, Data_Bundle bundle)
 
         case 6:
             // display current incident numbers
-            genericMessage(currentINo);
+            genericMessage("The following are the current incident numbers: ");
             displayIncidentNos(bundle.row_keys);
             break;
 
@@ -120,24 +125,36 @@ void controller(int i, Data_Bundle bundle)
         default:
             genericMessage(invalidMsg);
         }
-//     } while (loopCtrl);
+        if (loopCtrl)
+        {
+            mainMenu();
+            i = menuSelectionInt();
+        }
+        else
+        {
+            break; // Break the menu loop
+        }
+    }
 };
 
-    /**
-     * @brief display record controller logic is here
-     *
-     * @param bundle current data
-     */
-    void displayRecController(Data_Bundle bundle)
-    {
-        displayRecMenu();
-        int i = menuSelectionInt();
-        int start;
-        int num;
-        int col;
-        string incidentNo;
-        int index;
+/**
+ * @brief display record controller logic is here
+ *
+ * @param bundle current data
+ */
+void displayRecController(Data_Bundle bundle)
+{
+    displayRecMenu();
+    int i = menuSelectionInt();
+    int start;
+    int num;
+    int col;
+    string incidentNo;
+    int index;
+    bool loopCtrl = true;
 
+    while (true)
+    {
         switch (i)
         {
         case 1:
@@ -177,41 +194,73 @@ void controller(int i, Data_Bundle bundle)
             }
             break;
 
+        case 3:
+            // Show all records
+            genericMessage("Are you sure? This can take quite a while and may not display properly. (y/n): ");
+            if (yesNo(menuSelectionChar()))
+            {
+                cout << bundle.data_rows.getColumn_data().size()
+                     << ", "
+                     << bundle.data_rows.getColumn_data()[0].size();
+                displayRecords(bundle, 0, bundle.data_headers.getColumn_headers().size(), bundle.data_rows.getColumn_data().size());
+            }
+            else
+            {
+                break;
+            }
+            break;
+
+        case 9:
+            // Go back to main menu
+            loopCtrl = false;
+            break;
+
         default:
             genericMessage(invalidMsg);
             break;
         }
-    };
-
-    /**
-     * @brief Check if a character response is a true or false:
-     *
-     * @param i character to be checked
-     * @return true if y/Y
-     * @return false if f/F
-     */
-    bool yesNo(char i)
-    {
-        bool yesNo;
-        if (i == 'y' || i == 'Y')
+        if (loopCtrl)
         {
-            yesNo = true;
+            displayRecMenu();
+            i = menuSelectionInt();
         }
         else
         {
-            yesNo = false;
+            // TODO: Going back sometimes causes an infinite loop
+            break; // break the menu loop
         }
-        return yesNo;
-    };
+    }
+};
 
-    // void reloadCSV(char i)
-    // {
-    //     if (i == 'y' || i == 'Y')
-    //     {
-    //         reader(fname);
-    //     }
-    //     else if (i == 'n' || i == 'N')
-    //     {
-    //     }
-    // }
-    // TODO: Make an interface for this.
+/**
+ * @brief Check if a character response is a true or false:
+ *
+ * @param i character to be checked
+ * @return true if y/Y
+ * @return false if f/F
+ */
+bool yesNo(char i)
+{
+    bool yesNo;
+    if (i == 'y' || i == 'Y')
+    {
+        yesNo = true;
+    }
+    else
+    {
+        yesNo = false;
+    }
+    return yesNo;
+};
+
+// void reloadCSV(char i)
+// {
+//     if (i == 'y' || i == 'Y')
+//     {
+//         reader(fname);
+//     }
+//     else if (i == 'n' || i == 'N')
+//     {
+//     }
+// }
+// TODO: Make an interface for this.

@@ -55,7 +55,7 @@ void displayIncidentNos(Row_Key keys)
 {
     for (int i = 0; i < keys.getIncident_numbers().size(); i++)
     {
-        genericMessage(keys.getIncident_numbers()[i] + "\n");
+        genericMessage(keys.getIncident_numbers()[i]);
     }
 };
 
