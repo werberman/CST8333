@@ -26,6 +26,10 @@
 #define SSTREAM
 #include <sstream>
 #endif
+#ifndef EXCEPTION
+#define EXCEPTION
+#include <exception>
+#endif
 
 using namespace std;
 
@@ -42,7 +46,13 @@ int main()
 
     Data_Bundle bundle;
 
+try {
     bundle = reader(fname);
+} catch (Read_Exception& e1 )
+{
+    cout << "Could not open file\n";
+    return 0;
+}
     
     cout << "Select the number of records to display: ";
     cin >> m;

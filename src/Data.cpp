@@ -94,3 +94,11 @@ struct Data_Bundle
     Data_Rows data_rows;
     Row_Key row_keys;
 };
+
+struct Read_Exception : public exception 
+{
+    const char * what () const throw () 
+    {
+        return "Reader Exception";
+    }
+};
