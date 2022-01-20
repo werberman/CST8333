@@ -42,7 +42,7 @@ void shamelessPlug()
 
 void shamelessBanner()
 {
-    genericMessage("\n***Kristopher Houston***041015388***CST8333***Winer, 2022***");
+    genericMessage("\n***Kristopher Houston***041015388***CST8333***Winter, 2022***");
 };
 
 /**

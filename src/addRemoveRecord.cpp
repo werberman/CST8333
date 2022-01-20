@@ -29,7 +29,7 @@
 
 /**
  * @brief add a record to the existing records
- * 
+ *
  * @param bundle current data
  */
 Data_Bundle addRecord(Data_Bundle bundle)
@@ -53,7 +53,7 @@ Data_Bundle addRecord(Data_Bundle bundle)
     bundle.data_rows.setColumn_data(newRow); // TODO: See if there's a better way to do this.
 
     std::vector<std::string> newKeys;
-    //Add the new record key to the existing keys
+    // Add the new record key to the existing keys
     newKeys = bundle.row_keys.getIncident_numbers();
     newKeys.push_back(recordVector[0]);
     bundle.row_keys.setIncident_numbers(newKeys);
@@ -63,10 +63,10 @@ Data_Bundle addRecord(Data_Bundle bundle)
 /**
  * @brief Delete a record from the exisiting record.
  * NOTE: This does NOT remove the record from the file, just from the working memory. New file must still be written.
- * 
+ *
  * @param bundle existing data
  */
-void removeRecord(Data_Bundle bundle)
+Data_Bundle removeRecord(Data_Bundle bundle) //TODO NOt working
 {
     string input;
     std::vector<vector<std::string>> temp;
@@ -75,10 +75,13 @@ void removeRecord(Data_Bundle bundle)
     int index = searchRecords(bundle, input);
     if (index > 0) // if the record is found (searchRecords returns -1 if not found)
     {
-        // TODO: Write the logic for this
+        temp = bundle.data_rows.getColumn_data();
+        temp.erase(temp.begin()+index);
+        bundle.data_rows.setColumn_data(temp);
     }
     else
     {
         genericMessage("\nUnable to find the record.");
     }
+    return bundle;
 }

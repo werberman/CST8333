@@ -83,7 +83,7 @@ void controller(Data_Bundle bundle, string fname)
             genericMessage(dltMsg);
             if (yesNo(menuSelectionChar()))
             {
-                removeRecord(bundle);
+                bundle = removeRecord(bundle);
             }
             else
             {
@@ -182,7 +182,7 @@ void displayRecController(Data_Bundle bundle)
         case 2:
             //"2) Search for a specific record by Incident Number";
             genericMessage("\nWhat is the specific incident number you are looking for?: ");
-            incidentNo = stringInput();
+            incidentNo = "\"" + stringInput() + "\"";
             index = searchRecords(bundle, incidentNo);
             if (index > 0) // searchRecords() returns -1 if the record is not found
             {
