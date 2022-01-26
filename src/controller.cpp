@@ -93,13 +93,11 @@ void controller(Data_Bundle bundle, string fname)
 
         case 5:
             // Save as a new csv file
-            cout << "DEBUG - Case 5 triggered - about to go to writeCSV";
             genericMessage("\nName your new file(do not include \".csv\"): ");
-            newFileName = stringInput();
+            newFileName = "C:/SJunk/C++/" + stringInput();
             newCSV = writeCSV(bundle);
-            cout << "DEBUG - Cleared the writeCSV function";
-            newFileName = newFileName + ".csv";       // TODO: Check syntax of this
-            newFile.open("C:/Sjunk/C++/newcsv1.csv"); // TODO: Change this once testing is done to use user filename
+            newFileName = newFileName + ".csv";       
+            newFile.open(newFileName); 
             newFile << newCSV;                        // write the string to the new file
             newFile.close();                          // close the file
             break;
@@ -186,7 +184,7 @@ void displayRecController(Data_Bundle bundle)
             index = searchRecords(bundle, incidentNo);
             if (index > 0) // searchRecords() returns -1 if the record is not found
             {
-                displayRecords(bundle, index, 1, 101 /*All the fields*/);
+                displayRecords(bundle, index, 1, bundle.data_headers.getColumn_headers().size() /*All the fields*/);
             }
             else
             {
@@ -252,15 +250,3 @@ bool yesNo(char i)
     }
     return yesNo;
 };
-
-// void reloadCSV(char i)
-// {
-//     if (i == 'y' || i == 'Y')
-//     {
-//         reader(fname);
-//     }
-//     else if (i == 'n' || i == 'N')
-//     {
-//     }
-// }
-// TODO: Make an interface for this.
