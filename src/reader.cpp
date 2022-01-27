@@ -30,111 +30,63 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
 
 using namespace std;
 
-string ReplaceAll(string str, const string& from, const string& to);
-
-/**
- * @brief
- *
- * @param fname
- * @return Data_Bundle
- */
-Data_Bundle reader(string fname)
+Data_Bundle reader(Data_Bundle bundle, string fname)
 {
-    string message = "Loading CSV File...\n";
-    genericMessage(message);
-    vector<vector<string>> content;
-    vector<string> row;
-    string line, word;
-
-    vector<string> incidentNoVector;
-
-    bool inquotes = false;
-
-    fstream file(fname, ios::in);
+    ifstream file(fname);
     if (file.is_open())
     {
-        while (getline(file, line)) // read in a line from the file
+        aria::csv::CsvParser parser = aria::csv::CsvParser(file)
+                                          .delimiter(',')
+                                          .quote('"')
+                                          .terminator('\n');
+
+        vector<vector<string>> content;
+        vector<string> record;
+        string buffer;
+        int i = 0;
+
+        for (auto &row : parser)
         {
-            row.clear(); // clear the row vector so it's ready for new data
-
-            // std::cout << line;
-
-            // check each element in the line and see if it is a quotation mark
-            for (int i = 0; i < line.size(); i++)
+            for (auto &field : row)
             {
-                // Check if the character is a quote mark
-                if (line[i] == '\"')
-                {
-                    if (!inquotes)
-                    {
-                        inquotes = true;
-                    }
-                    else if (inquotes)
-                    {
-                        inquotes = false;
-                    }
-                };
-                // check if the character is a comma and switch it to a star
-                if (inquotes && line[i] == ',')
-                {
-                    line[i] = '*';
-                }
+                record.push_back(field);
             }
-            stringstream str(line);
-
-            while (getline(str, word, ','))
-                row.push_back(ReplaceAll(string(word), string("*"), string(",")));
-                content.push_back(row);
+            if (i > 0) // if the row number is over 0, add it to content and clear record for new line
+            {
+                content.push_back(record);
+                record.clear();
+            }
+            else // otherwise, create the column header object and clear the record for a new line.
+            {
+                bundle.data_headers.setColumn_headers(record);
+                record.clear();
+            }
+            i++;
         }
+
+        bundle.data_rows.setColumn_data(content); // write the rest of the data to the Column_data object
+
+        record.clear();
+
+        for (int i = 0; i < content.size(); i++)
+        {
+            record.push_back(content[i][0]);
+        }
+        bundle.row_keys.setIncident_numbers(record);
+        record.clear(); // get rid of the extra data.
+
+        return bundle;
     }
     else
-        cout << "Could not open the file\n";
-
-    // Place the header information in an object, then remove it from the vector
-    Data_Headers colHeader;
-    colHeader.setColumn_headers(content[0]);
-    content.erase(content.begin());
-
-    // Place the row data in an object.
-    Data_Rows allData;
-    allData.setColumn_data(content);
-
-    Row_Key incidentNumbers;
-    for (int i = 0; i < allData.getColumn_data().size(); i++)
     {
-        incidentNoVector.push_back(allData.getColumn_data()[i][0]);
+        throw Read_Exception();
+        return bundle;
     }
-    incidentNumbers.setIncident_numbers(incidentNoVector);
-
-    //Make the Data_Bundle
-    Data_Bundle bundle;
-    bundle.data_headers = colHeader;
-    bundle.data_rows = allData;
-    bundle.row_keys = incidentNumbers;
-
-    return bundle;
-};
-
-/**
- * @brief 
- * Replace all given substrings of a string with another substring
- * https://stackoverflow.com/questions/2896600/how-to-replace-all-occurrences-of-a-character-in-string
- * 
- * @param str string to be changed
- * @param from substring to be changed
- * @param to new substring
- * @return std::string 
- */
-std::string ReplaceAll(std::string str, const std::string& from, const std::string& to)
-{
-    size_t start_pos = 0;
-    while ((start_pos = str.find(from, start_pos)) != string::npos)
-    {
-        str.replace(start_pos, from.length(), to);
-        start_pos += to.length();
-    }
-    return str;
 }
