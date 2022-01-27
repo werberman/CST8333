@@ -33,6 +33,15 @@
 
 using namespace std;
 
+/**
+ * @brief Read the data in using a parser and place each element in a vector<string>. Headers are placed in a class called "Data_Headers".
+ * All other data is placed in a vector<vector<string>> of elements in a class called "Data_Rows". Finally, a third class, Row_Keys, is used to make a 
+ * final vector<string> of all the Incident Numbers (generically speaking, the first column of each row). These are all placed in a Data_Bundle bundle and returned.
+ * 
+ * @param bundle class that holds all the various classes associated with a read CSV.
+ * @param fname string of the csv file's location.
+ * @return Data_Bundle bundle of all data from the CSV as well as the Row_Keys.
+ */
 Data_Bundle reader(Data_Bundle bundle, string fname)
 {
     ifstream file(fname);
@@ -45,7 +54,6 @@ Data_Bundle reader(Data_Bundle bundle, string fname)
 
         vector<vector<string>> content;
         vector<string> record;
-        string buffer;
         int i = 0;
 
         for (auto &row : parser)

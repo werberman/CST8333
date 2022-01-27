@@ -95,6 +95,10 @@ struct Data_Bundle
     Row_Key row_keys;
 };
 
+/**
+ * @brief Read exception - to be used when a file cannot be read.
+ * 
+ */
 struct Read_Exception : public exception 
 {
     const char * what () const throw () 

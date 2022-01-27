@@ -35,7 +35,7 @@ using namespace std;
 
 /**
  * @brief Load the given file and ask the user how many records they wish to display. Only
- * displays the first 5 fields of each record.
+ * displays the first 5 columns of each record.
  *
  * @return int 0 when finished.
  */
@@ -55,15 +55,6 @@ int main()
         return 0;
     }
 
-    // try
-    // {
-    //     bundle = reader(fname);
-    // }
-    // catch (Read_Exception &e1)
-    // {
-    //     cout << "Could not open file\n";
-    //     return 0;
-    // }
 
     cout << "Select the number of records to display: ";
     cin >> m;
