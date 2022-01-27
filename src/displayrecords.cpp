@@ -21,9 +21,9 @@
 #endif
 
 /**
- * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns 
- * that are displayed. 
- * 
+ * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns
+ * that are displayed.
+ *
  * @param bundle data bundle to be used in the display.
  * @param start where in the data to start (index number)
  * @param length number of records to display
@@ -33,14 +33,13 @@ void displayRecords(Data_Bundle bundle, int start, int length, int fields)
 {
     char chars[] = "\""; // Chars to be removed.
 
-
     for (int i = 0; i < fields /*|| i < bundle.data_headers.getColumn_headers().size()*/; i++) // make sure not to accidentally try and read records outside of range!!
     {
         cout << "*******************************\n"
              << bundle.data_headers.getColumn_headers()[i] << " : \n";
         for (int j = start; j < (start + length) /*|| j < (bundle.data_headers.getColumn_headers().size() - start)*/; j++)
         {
-            cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.getColumn_data()[j][i] /*<< " -- " << j << "," << i*/ << endl; //Clear the output buffer after each line
+            cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.getColumn_data()[j][i] /*<< " -- " << j << "," << i*/ << endl; // Clear the output buffer after each line
         }
     }
     shamelessPlug();
@@ -48,7 +47,7 @@ void displayRecords(Data_Bundle bundle, int start, int length, int fields)
 
 /**
  * @brief Displays all the existing incident numbers
- * 
+ *
  * @param keys Row_Keys data that should be displayed.
  */
 void displayIncidentNos(Row_Key keys)
@@ -61,9 +60,9 @@ void displayIncidentNos(Row_Key keys)
 
 int found; // Declared here to ensure access to the variable outside the loop.
 /**
- * @brief Check if a given incident number value is found in a given data bundle. The index number of the found record is 
- * saved in an int outside the function so that it can be called later. 
- * 
+ * @brief Check if a given incident number value is found in a given data bundle. The index number of the found record is
+ * saved in an int outside the function so that it can be called later.
+ *
  * @param bundle data bundle
  * @param incidentNo desired incident number
  * @return -1 if record cannot be found
@@ -87,12 +86,6 @@ int searchRecords(Data_Bundle bundle, string incidentNo)
         {
             noResultFlag = true;
         }
-        cout << "\nDEBUG: foundFlag: "
-             << foundFlag
-             << "\nDEBUG: noResultFlag: "
-             << noResultFlag
-             << "\nDEBUG: found: "
-             << found;
         break; // Get out of the while loop
     }
     if (foundFlag)

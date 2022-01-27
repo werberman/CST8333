@@ -83,14 +83,12 @@ Data_Bundle reader(string fname)
                     line[i] = '*';
                 }
             }
-
             stringstream str(line);
 
             while (getline(str, word, ','))
                 row.push_back(ReplaceAll(string(word), string("*"), string(",")));
                 content.push_back(row);
         }
-
     }
     else
         cout << "Could not open the file\n";

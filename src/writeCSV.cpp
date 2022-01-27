@@ -23,14 +23,16 @@
 #include "Data.cpp"
 #endif
 
+void fileWriter(string line, string newFileName);
+
 /**
- * @brief NOT WORKING
+ * @brief NOT WORKING - TODO: Make it write each line to the file and clear the buffer rather than make a giant string 
  *
  * @param bundle
  * @return true
  * @return false
  */
-string writeCSV(Data_Bundle bundle)
+string writeCSV(Data_Bundle bundle, string newFileName)
 {
     std::string csv = "";
     int numRecords = bundle.data_rows.getColumn_data().size();
@@ -47,6 +49,8 @@ string writeCSV(Data_Bundle bundle)
         {
             csv.append("\n"); // End the line with a carrage return.
         }
+    fileWriter(csv, newFileName);
+    csv.clear();
     }
 
     // Add each element of each record to the string and seperate them with a comma
@@ -66,4 +70,13 @@ string writeCSV(Data_Bundle bundle)
         }
     }
     return csv;
+}
+
+void fileWriter(string line, string newFileName)
+{
+    ofstream newFile;
+
+    newFile.open(newFileName);
+    newFile << line; // write the string to the new file
+    newFile.close();   // close the file
 }

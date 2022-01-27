@@ -48,8 +48,6 @@ void controller(Data_Bundle bundle, string fname)
     mainMenu();
     int i = menuSelectionInt(); // get menu selection
 
-    ofstream newFile;
-
     while (true) // doesn't work like I'd have expected...
     {
         switch (i)
@@ -95,11 +93,8 @@ void controller(Data_Bundle bundle, string fname)
             // Save as a new csv file
             genericMessage("\nName your new file(do not include \".csv\"): ");
             newFileName = "C:/SJunk/C++/" + stringInput();
-            newCSV = writeCSV(bundle);
-            newFileName = newFileName + ".csv";       
-            newFile.open(newFileName); 
-            newFile << newCSV;                        // write the string to the new file
-            newFile.close();                          // close the file
+            newFileName = newFileName + ".csv";
+            newCSV = writeCSV(bundle, newFileName);
             break;
 
         case 6:
