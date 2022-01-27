@@ -82,3 +82,29 @@ struct Data_Bundle
     Data_Rows data_rows;
     Row_Key row_keys;
 };
+
+
+/*************************************** Errors ******************************/
+struct Read_Exception : public exception 
+{
+    const char * what () const throw () 
+    {
+        return "Reader Exception";
+    }
+};
+
+struct Write_Exception : public exception 
+{
+    const char * what () const throw () 
+    {
+        return "File Write Exception";
+    }
+};
+
+// struct Input_Error : public exception 
+// {
+//     const char * what () const throw () 
+//     {
+//         return "Invalid Input Exception";
+//     }
+// };

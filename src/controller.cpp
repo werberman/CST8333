@@ -23,6 +23,8 @@
 #include "writeCSV.cpp"
 #endif
 
+bool c_writeCSV(Data_Bundle bundle, string newFileName);
+
 string invalidMsg = "\nInvalid menu selection, please try again: ";
 
 void displayRecController(Data_Bundle bundle); // forward declaration;
@@ -43,9 +45,10 @@ void controller(Data_Bundle bundle, string fname)
     string newFileName;
 
     bool loopCtrl = true;
+    bool taskSuccess;
 
     mainMenu();
-    int i = menuSelectionInt(); // get menu selection
+    int i = menuSelectionInt(); //Get menu selection
 
     while (true) // doesn't work like I'd have expected...
     {
@@ -58,7 +61,27 @@ void controller(Data_Bundle bundle, string fname)
             i = menuSelectionChar();
             if (yesNo(i))
             {
-                bundle = reader(fname); // See if this causes a memory leak
+                try
+                {
+                    bundle = reader(bundle, fname); // See if this causes a memory leak
+                }
+                catch (Read_Exception &r1)
+                {
+                    genericMessage("Cannot reload the CSV... You may still be able to save your work. Do you want to continue (y/n)?: ");
+                    i = menuSelectionChar();
+                    if (yesNo(i))
+                    {
+                        if(!c_writeCSV(bundle, fname))
+                        {
+                            genericMessage("Do you wish to continue (y/n)?: ");
+                            if (!yesNo(menuSelectionChar()))
+                            {
+                                loopCtrl = false;
+                            }
+
+                        }
+                    }
+                }
             }
             // reloadCSV(i);
             break;
@@ -90,10 +113,10 @@ void controller(Data_Bundle bundle, string fname)
 
         case 5:
             // Save as a new csv file
-            genericMessage("\nName your new file(do not include \".csv\"): ");
-            newFileName = "C:/SJunk/C++/" + stringInput();
-            newFileName = newFileName + ".csv";
-            writeCSV(bundle, newFileName);
+            taskSuccess = c_writeCSV(bundle, fname);
+            /*
+            *TODO: add handler for if the file cannot be written.
+            */
             break;
 
         case 6:
@@ -243,4 +266,20 @@ bool yesNo(char i)
         yesNo = false;
     }
     return yesNo;
+};
+
+bool c_writeCSV(Data_Bundle bundle, string newFileName)
+{
+    genericMessage("\nName your new file(do not include \".csv\"): ");
+    newFileName = "C:/SJunk/C++/" + stringInput();
+    newFileName = newFileName + ".csv";
+    try{
+    writeCSV(bundle, newFileName);
+    }
+    catch (Write_Exception &w1)
+    {
+        genericMessage("Unable to create or open the requested file. Check folder permissions and try again.");
+        return false;
+    }
+    return true;
 };

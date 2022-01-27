@@ -30,9 +30,13 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
-#ifndef DATA_CPP
-#define DATA_CPP
-#include "Data.cpp"
+#ifndef PARSER_HPP
+#define PARSER_HPP
+#include "parser.hpp"
+#endif
+#ifndef EXCEPTION
+#define EXCEPTION
+#include <exception>
 #endif
 
 using namespace std;

@@ -22,6 +22,10 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
+#ifndef EXCEPTION
+#define EXCEPTION
+#include <exception>
+#endif
 
 /**
  * @brief Write the csv data in memory to a new csv file - TODO: Fix the performance issues reading and writing.
@@ -39,7 +43,7 @@ void writeCSV(Data_Bundle bundle, string newFileName)
     }
     catch (...) //Has to be a catch all since .open doesn't return anything
     {
-        genericMessage("Could not create new file! Try another name or check folder permissions.");
+        throw Write_Exception();
         return;
     }
 
