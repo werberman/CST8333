@@ -40,7 +40,6 @@ void controller(Data_Bundle bundle, string fname)
     string dltMsg = "\nDo you know the incident number of the record you wish to delete? (y/n): ";
     string reviewMsg = "\nYou can review the current incident numbers from the main menu.";
 
-    string newCSV;
     string newFileName;
 
     bool loopCtrl = true;
@@ -94,7 +93,7 @@ void controller(Data_Bundle bundle, string fname)
             genericMessage("\nName your new file(do not include \".csv\"): ");
             newFileName = "C:/SJunk/C++/" + stringInput();
             newFileName = newFileName + ".csv";
-            newCSV = writeCSV(bundle, newFileName);
+            writeCSV(bundle, newFileName);
             break;
 
         case 6:

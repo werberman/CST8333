@@ -23,17 +23,26 @@
 #include "Data.cpp"
 #endif
 
-void fileWriter(string line, string newFileName);
-
 /**
- * @brief NOT WORKING - TODO: Make it write each line to the file and clear the buffer rather than make a giant string 
- *
- * @param bundle
- * @return true
- * @return false
+ * @brief Write the csv data in memory to a new csv file - TODO: Fix the performance issues reading and writing.
+ * 
+ * @param bundle the bundled records stored in memory
+ * @param newFileName desired name for the new CSV file
  */
-string writeCSV(Data_Bundle bundle, string newFileName)
+void writeCSV(Data_Bundle bundle, string newFileName)
 {
+    ofstream newFile;
+
+    try // handle if the file cannot be written for any reason.
+    {
+        newFile.open(newFileName);
+    }
+    catch (...) //Has to be a catch all since .open doesn't return anything
+    {
+        genericMessage("Could not create new file! Try another name or check folder permissions.");
+        return;
+    }
+
     std::string csv = "";
     int numRecords = bundle.data_rows.getColumn_data().size();
 
@@ -49,9 +58,9 @@ string writeCSV(Data_Bundle bundle, string newFileName)
         {
             csv.append("\n"); // End the line with a carrage return.
         }
-    fileWriter(csv, newFileName);
-    csv.clear();
     }
+    newFile << csv; // write the string to the new file
+    csv.clear();
 
     // Add each element of each record to the string and seperate them with a comma
     for (int i = 0; i < bundle.data_rows.getColumn_data().size(); i++)
@@ -59,24 +68,19 @@ string writeCSV(Data_Bundle bundle, string newFileName)
         for (int j = 0; j < bundle.data_rows.getColumn_data()[0].size(); j++)
         {
             csv.append(bundle.data_rows.getColumn_data()[i][j]);
-            if (j < (bundle.data_rows.getColumn_data().size() - 1))
+            if (j < (bundle.data_rows.getColumn_data()[0].size() - 1))
             {
-                csv.append(",");
+                csv.append(","); // Add commas between each value
             }
             else
             {
                 csv.append("\n"); // End each row with a carrage return
             }
         }
+        csv.erase(0, 0);
+        newFile << csv;
+        genericMessage(csv);
+        csv.clear();
     }
-    return csv;
-}
-
-void fileWriter(string line, string newFileName)
-{
-    ofstream newFile;
-
-    newFile.open(newFileName);
-    newFile << line; // write the string to the new file
-    newFile.close();   // close the file
+    newFile.close(); //Close the file when finished writing
 }
