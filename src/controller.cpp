@@ -224,7 +224,7 @@ void displayRecController(Data_Bundle bundle)
                 cout << bundle.data_rows.getColumn_data().size()
                      << ", "
                      << bundle.data_rows.getColumn_data()[0].size();
-                displayRecords(bundle, 0, bundle.data_headers.getColumn_headers().size(), bundle.data_rows.getColumn_data().size());
+                displayRecords(bundle, 0, bundle.data_rows.getColumn_data().size(), bundle.data_rows.getColumn_data()[0].size());
             }
             else
             {

@@ -4,7 +4,10 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
+#ifndef READER_CPP
+#define READER_CPP
 #include "reader.cpp"
+#endif
 #ifndef DISPLAY_CPP
 #define DISPLAY_CPP
 #include "display.cpp"

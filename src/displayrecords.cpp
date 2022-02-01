@@ -19,6 +19,19 @@
 #define SSTREAM
 #include <sstream>
 #endif
+#ifndef DATA_CPP
+#define DATA_CPP
+#include "Data.cpp"
+#endif
+#ifndef READER_CPP
+#define READER_CPP
+#include "reader.cpp"
+#endif
+#ifndef DISPLAY_CPP
+#define DISPLAY_CPP
+#include "display.cpp"
+#endif
+
 
 /**
  * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns
