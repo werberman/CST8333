@@ -59,6 +59,7 @@ void mainMenu()
          << "4) Remove a record\n"
          << "5) Save as a new CSV file\n"
          << "6) Review current Incident Numbers\n"
+         << "7) Edit an existing record\n"
          << "0) Exit program\n";
 };
 

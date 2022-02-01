@@ -27,6 +27,8 @@
 #include "display.cpp"
 #endif
 
+Data_Bundle removeRecord(Data_Bundle bundle, int index);
+
 /**
  * @brief add a record to the existing records
  *
@@ -66,7 +68,7 @@ Data_Bundle addRecord(Data_Bundle bundle)
  *
  * @param bundle existing data
  */
-Data_Bundle removeRecord(Data_Bundle bundle) //TODO NOt working
+Data_Bundle removeRecord(Data_Bundle bundle)
 {
     string input;
     std::vector<vector<std::string>> temp;
@@ -75,13 +77,32 @@ Data_Bundle removeRecord(Data_Bundle bundle) //TODO NOt working
     int index = searchRecords(bundle, input);
     if (index > 0) // if the record is found (searchRecords returns -1 if not found)
     {
-        temp = bundle.data_rows.getColumn_data();
-        temp.erase(temp.begin()+index);
-        bundle.data_rows.setColumn_data(temp);
+        // temp = bundle.data_rows.getColumn_data();
+        // temp.erase(temp.begin() + index);
+        // bundle.data_rows.setColumn_data(temp);
+        bundle = removeRecord(bundle, index);
     }
     else
     {
         genericMessage("\nUnable to find the record.");
     }
+    return bundle;
+}
+
+/**
+ * @brief 
+ * TODO: Consider using this function in the function above.
+ * 
+ * @param bundle existing data
+ * @param index index number of the record to be removed. 
+ * @return Data_Bundle 
+ */
+Data_Bundle removeRecord(Data_Bundle bundle, int index)
+{
+    std::vector<vector<std::string>> temp;
+    temp = bundle.data_rows.getColumn_data();
+    temp.erase(temp.begin() + index);
+    bundle.data_rows.setColumn_data(temp);
+
     return bundle;
 }

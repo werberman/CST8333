@@ -31,7 +31,6 @@
  */
 void displayRecords(Data_Bundle bundle, int start, int length, int fields)
 {
-    char chars[] = "\""; // Chars to be removed.
 
     for (int i = 0; i < fields /*|| i < bundle.data_headers.getColumn_headers().size()*/; i++) // make sure not to accidentally try and read records outside of range!!
     {
