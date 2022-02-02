@@ -23,17 +23,17 @@ using namespace std;
 
 /**
  * @brief Generic message printer for any string.
- * 
+ *
  * @param message string to be printed on screen.
  */
 void genericMessage(string message)
 {
-    cout << message <<endl;
+    cout << message << endl;
 };
 
 /**
  * @brief Place all my student information on screen as required for the assignment.
- * 
+ *
  */
 void shamelessPlug()
 {
@@ -65,7 +65,7 @@ void mainMenu()
 
 /**
  * @brief Display the menu for the display a record menu
- * 
+ *
  */
 void displayRecMenu()
 {
@@ -90,14 +90,25 @@ void invalidInput()
 /*Inputs (move to its own file)*/
 
 /**
- * @brief
+ * @brief Get an integer as input. Recieves the input as a string and catches any input that cannot be
+ * converted to an int. Returns '999' if a non-int is entered
  *
- * @return int
+ * @return int i: the int input by the user. Returns 999 if the user input was not an int.
  */
 int menuSelectionInt()
 {
+    std::string input = "";
     int i;
-    std::cin >> i;
+    std::cin >> input;
+    try
+    {
+        i = stoi(input);
+    }
+    catch (const std::exception &e)
+    {
+        return 999;
+    }
+
     return i;
 };
 
@@ -108,9 +119,18 @@ int menuSelectionInt()
  */
 char menuSelectionChar()
 {
+    std::string input = "";
     char i;
-    std::cin >> i;
-    return i;
+    std::cin >> input;
+    i = input.at(0);
+    if (isalpha(i))
+    {
+        return i;
+    }
+    else
+    {
+        return 'z';
+    }
 }
 
 string stringInput()
