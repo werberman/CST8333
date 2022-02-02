@@ -20,18 +20,19 @@
 #define EXCEPTION
 #include <exception>
 #endif
+#include <filesystem>
 
 using namespace std;
 
 int main()
 {
     // string fname = "C:/SJunk/C++/newcsv.csv";
-    string fname = "C:/Users/werbe/Documents/Programming Files/C++/CST8333/pipeline-incidents-comprehensive-data.csv";
+    string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
     // string fname = "c:/SJunk/C++/pipeline-incidents-comprehensive-data.csv";
 
     Data_Bundle bundle;
 
-    try{
+    try {
     bundle = reader(bundle, fname);
     }
     catch (Read_Exception &e1)

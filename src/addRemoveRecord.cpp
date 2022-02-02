@@ -91,7 +91,7 @@ Data_Bundle removeRecord(Data_Bundle bundle)
 
 /**
  * @brief 
- * TODO: Consider using this function in the function above.
+ * TODO: Consider changing this to recursively pull apart and add everything in the exisiting records to data EXCEPT the value chosen for deletion
  * 
  * @param bundle existing data
  * @param index index number of the record to be removed. 
