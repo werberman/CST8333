@@ -26,8 +26,13 @@
 #define DISPLAY_CPP
 #include "display.cpp"
 #endif
+#ifndef TEMPLATEDATA_CPP
+#define TEMPLATEDATA_CPP
+#include "templatedata.cpp"
+#endif
 
 Data_Bundle removeRecord(Data_Bundle bundle, int index);
+vector<string> defaultRecordFiller(vector<std::string>, int index, int size);
 
 /**
  * @brief add a record to the existing records
@@ -37,6 +42,7 @@ Data_Bundle removeRecord(Data_Bundle bundle, int index);
 Data_Bundle addRecord(Data_Bundle bundle)
 {
     std::vector<std::string> recordVector;
+    std::string recordHolder = "";
 
     // Prompt for each field by iterating through the column headers.
     for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
@@ -44,7 +50,15 @@ Data_Bundle addRecord(Data_Bundle bundle)
         std::string currentField = bundle.data_headers.getColumn_headers()[i] + ": ";
         genericMessage(currentField);
         // modify each input to match csv formatting and place in the vector
-        recordVector.push_back(stringInput());
+        recordHolder = stringInput();
+        if (recordHolder == "DEFAULT")
+        {
+            genericMessage("Filling the rest of the record with the default values");
+            recordVector = defaultRecordFiller(recordVector, i, bundle.data_headers.getColumn_headers().size()); //send the record to a template generator function and save it to recordVector.
+            break;
+        }
+        recordVector.push_back(recordHolder);
+        recordHolder.clear();
     }
 
     std::vector<vector<std::string>> newData;
@@ -123,4 +137,22 @@ Data_Bundle removeRecord(Data_Bundle bundle, int index)
     
 
     return bundle;
+}
+
+/**
+ * @brief Fill the remaining fields with the values found in the default template. 
+ * 
+ * @param recordVector new record currently being made by user
+ * @param index current column to be input
+ * @param size total number of columns in the record. 
+ * @return vector<string> of the finished new record.
+ */
+vector<string> defaultRecordFiller(vector<string> recordVector, int index, int size)
+{
+    for (int i = index; i < size; i++)
+    {
+        recordVector.push_back(RECORD_TEMPLATE[i]); //see if I can find a more effecient way to do this.
+        cout << "."; //Theoretically a loading bar... 
+    }
+    return recordVector;
 }

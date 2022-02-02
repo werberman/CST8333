@@ -96,7 +96,8 @@ void controller(Data_Bundle bundle, string fname)
         case 3:
             // add a record
 
-            genericMessage("\nAdding a record: \nPlease input each field one at a time when prompted:\n");
+            genericMessage("Adding a record: \nPlease input each field one at a time when prompted: ");
+            genericMessage("If at any time you wish to fill the rest of the values with the default template values, enter DEFAULT for any of the fields: ");
             bundle = addRecord(bundle);
             break;
 
