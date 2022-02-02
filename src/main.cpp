@@ -4,7 +4,10 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
+#ifndef READER_CPP
+#define READER_CPP
 #include "reader.cpp"
+#endif
 #ifndef DISPLAY_CPP
 #define DISPLAY_CPP
 #include "display.cpp"
@@ -23,8 +26,8 @@ using namespace std;
 int main()
 {
     // string fname = "C:/SJunk/C++/newcsv.csv";
-    // string fname = "C:/Users/werbe/Documents/Programming Files/C++/CST8333/newcsv.csv";
-    string fname = "c:/SJunk/C++/pipeline-incidents-comprehensive-data.csv";
+    string fname = "C:/Users/werbe/Documents/Programming Files/C++/CST8333/pipeline-incidents-comprehensive-data.csv";
+    // string fname = "c:/SJunk/C++/pipeline-incidents-comprehensive-data.csv";
 
     Data_Bundle bundle;
 

@@ -43,12 +43,15 @@ void controller(Data_Bundle bundle, string fname)
     string reviewMsg = "\nYou can review the current incident numbers from the main menu.";
 
     string newFileName;
+    string incidentNo;
 
     bool loopCtrl = true;
     bool taskSuccess;
 
+    int index;
+
     mainMenu();
-    int i = menuSelectionInt(); //Get menu selection
+    int i = menuSelectionInt(); // Get menu selection
 
     while (true) // doesn't work like I'd have expected...
     {
@@ -71,14 +74,13 @@ void controller(Data_Bundle bundle, string fname)
                     i = menuSelectionChar();
                     if (yesNo(i))
                     {
-                        if(!c_writeCSV(bundle, fname))
+                        if (!c_writeCSV(bundle, fname))
                         {
                             genericMessage("Do you wish to continue (y/n)?: ");
                             if (!yesNo(menuSelectionChar()))
                             {
                                 loopCtrl = false;
                             }
-
                         }
                     }
                 }
@@ -115,14 +117,29 @@ void controller(Data_Bundle bundle, string fname)
             // Save as a new csv file
             taskSuccess = c_writeCSV(bundle, fname);
             /*
-            *TODO: add handler for if the file cannot be written.
-            */
+             *TODO: add handler for if the file cannot be written.
+             */
             break;
 
         case 6:
             // display current incident numbers
             genericMessage("The following are the current incident numbers: ");
             displayIncidentNos(bundle.row_keys);
+            break;
+
+        case 7:
+            // Edit an existing record
+            genericMessage("What is the incident number of the record you wish to edit?: ");
+            incidentNo = stringInput();
+            index = searchRecords(bundle, incidentNo);
+            if (index > 0) // searchRecords() returns -1 if the record is not found
+            {
+                removeRecord(bundle, index);
+            }
+            else
+            {
+                genericMessage("Record could not be found.");
+            }
             break;
 
         case 9:
@@ -180,16 +197,6 @@ void displayRecController(Data_Bundle bundle)
             num = menuSelectionInt();
             genericMessage("\nHow many data fields would you like to display?: ");
             col = menuSelectionInt();
-            std::cout << "Start: "
-                      << start
-                      << "\nnum: "
-                      << num
-                      << "\ncol: "
-                      << col;
-
-            std::cout << bundle.data_headers.getColumn_headers()[start]
-                      << "\n"
-                      << bundle.data_rows.getColumn_data()[num][start];
 
             displayRecords(bundle, start, num, col);
             break;
@@ -197,7 +204,7 @@ void displayRecController(Data_Bundle bundle)
         case 2:
             //"2) Search for a specific record by Incident Number";
             genericMessage("\nWhat is the specific incident number you are looking for?: ");
-            incidentNo = "\"" + stringInput() + "\"";
+            incidentNo = stringInput();
             index = searchRecords(bundle, incidentNo);
             if (index > 0) // searchRecords() returns -1 if the record is not found
             {
@@ -217,7 +224,7 @@ void displayRecController(Data_Bundle bundle)
                 cout << bundle.data_rows.getColumn_data().size()
                      << ", "
                      << bundle.data_rows.getColumn_data()[0].size();
-                displayRecords(bundle, 0, bundle.data_headers.getColumn_headers().size(), bundle.data_rows.getColumn_data().size());
+                displayRecords(bundle, 0, bundle.data_rows.getColumn_data().size(), bundle.data_rows.getColumn_data()[0].size());
             }
             else
             {
@@ -273,8 +280,9 @@ bool c_writeCSV(Data_Bundle bundle, string newFileName)
     genericMessage("\nName your new file(do not include \".csv\"): ");
     newFileName = "C:/SJunk/C++/" + stringInput();
     newFileName = newFileName + ".csv";
-    try{
-    writeCSV(bundle, newFileName);
+    try
+    {
+        writeCSV(bundle, newFileName);
     }
     catch (Write_Exception &w1)
     {
