@@ -106,10 +106,21 @@ Data_Bundle removeRecord(Data_Bundle bundle)
  */
 Data_Bundle removeRecord(Data_Bundle bundle, int index)
 {
+    genericMessage("Current index number: ");
+    cout << index;
     std::vector<vector<std::string>> temp;
-    temp = bundle.data_rows.getColumn_data();
-    temp.erase(temp.begin() + index);
-    bundle.data_rows.setColumn_data(temp);
+    std::vector<string> tempKey;
+    
+    //Remove the row from the data records
+    temp = bundle.data_rows.getColumn_data(); //move data into temp
+    temp.erase(temp.begin() + index); //remove the record
+    bundle.data_rows.setColumn_data(temp); //update the data bundle
+
+    //Remove the row key from the index
+    tempKey = bundle.row_keys.getIncident_numbers(); //move data into tempKeys
+    tempKey.erase(tempKey.begin() + index); //remove the record.
+    bundle.row_keys.setIncident_numbers(tempKey); //update the data bundle.
+    
 
     return bundle;
 }
