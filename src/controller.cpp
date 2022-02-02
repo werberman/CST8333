@@ -51,11 +51,11 @@ void controller(Data_Bundle bundle, string fname)
     int index;
 
     mainMenu();
-    int i = menuSelectionInt(); // Get menu selection
+    int menuSelect = menuSelectionInt(); // Get menu selection
 
     while (true) // doesn't work like I'd have expected...
     {
-        switch (i)
+        switch (menuSelect)
         {
         case 1:
             // reload the csv
@@ -96,7 +96,8 @@ void controller(Data_Bundle bundle, string fname)
         case 3:
             // add a record
 
-            genericMessage("\nAdding a record: \nPlease input each field one at a time when prompted:\n");
+            genericMessage("Adding a record: \nPlease input each field one at a time when prompted: ");
+            genericMessage("If at any time you wish to fill the rest of the values with the default template values, enter DEFAULT for any of the fields: ");
             bundle = addRecord(bundle);
             break;
 
@@ -157,10 +158,11 @@ void controller(Data_Bundle bundle, string fname)
         default:
             genericMessage(invalidMsg);
         }
+
         if (loopCtrl)
         {
             mainMenu();
-            i = menuSelectionInt();
+            menuSelect = menuSelectionInt();
         }
         else
         {
@@ -177,7 +179,7 @@ void controller(Data_Bundle bundle, string fname)
 void displayRecController(Data_Bundle bundle)
 {
     displayRecMenu();
-    int i = menuSelectionInt();
+    int menuSelect = menuSelectionInt();
     int start;
     int num;
     int col;
@@ -187,7 +189,7 @@ void displayRecController(Data_Bundle bundle)
 
     while (true)
     {
-        switch (i)
+        switch (menuSelect)
         {
         case 1:
             //"1) Display selected number of records starting from any point in the data\n"
@@ -241,10 +243,11 @@ void displayRecController(Data_Bundle bundle)
             genericMessage(invalidMsg);
             break;
         }
+
         if (loopCtrl)
         {
             displayRecMenu();
-            i = menuSelectionInt();
+            menuSelect = menuSelectionInt();
         }
         else
         {
@@ -257,20 +260,30 @@ void displayRecController(Data_Bundle bundle)
 /**
  * @brief Check if a character response is a true or false:
  *
- * @param i character to be checked
+ * @param i Char - character to be checked
  * @return true if y/Y
  * @return false if f/F
  */
 bool yesNo(char i)
 {
     bool yesNo;
-    if (i == 'y' || i == 'Y')
+    while (true)
     {
-        yesNo = true;
-    }
-    else
-    {
-        yesNo = false;
+        if (i == 'y' || i == 'Y')
+        {
+            yesNo = true;
+            break;
+        }
+        else if (i == 'n' || i == 'N')
+        {
+            yesNo = false;
+            break;
+        }
+        else
+        {
+            genericMessage("Invalid selection. Please try again: ");
+            i = menuSelectionChar();
+        }
     }
     return yesNo;
 };

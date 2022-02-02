@@ -26,8 +26,13 @@
 #define DISPLAY_CPP
 #include "display.cpp"
 #endif
+#ifndef TEMPLATEDATA_CPP
+#define TEMPLATEDATA_CPP
+#include "templatedata.cpp"
+#endif
 
 Data_Bundle removeRecord(Data_Bundle bundle, int index);
+vector<string> defaultRecordFiller(vector<std::string>, int index, int size);
 
 /**
  * @brief add a record to the existing records
@@ -36,8 +41,8 @@ Data_Bundle removeRecord(Data_Bundle bundle, int index);
  */
 Data_Bundle addRecord(Data_Bundle bundle)
 {
-    Data_Rows newRecord;
     std::vector<std::string> recordVector;
+    std::string recordHolder = "";
 
     // Prompt for each field by iterating through the column headers.
     for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
@@ -45,20 +50,36 @@ Data_Bundle addRecord(Data_Bundle bundle)
         std::string currentField = bundle.data_headers.getColumn_headers()[i] + ": ";
         genericMessage(currentField);
         // modify each input to match csv formatting and place in the vector
-        recordVector.push_back("\"" + stringInput() + "\"");
+        recordHolder = stringInput();
+        if (recordHolder == "DEFAULT")
+        {
+            genericMessage("Filling the rest of the record with the default values");
+            recordVector = defaultRecordFiller(recordVector, i, bundle.data_headers.getColumn_headers().size()); //send the record to a template generator function and save it to recordVector.
+            break;
+        }
+        recordVector.push_back(recordHolder);
+        recordHolder.clear();
     }
 
-    std::vector<vector<std::string>> newRow;
+    std::vector<vector<std::string>> newData;
     // Add the new record into the existing data
-    newRow = bundle.data_rows.getColumn_data();
-    newRow.push_back(recordVector);
-    bundle.data_rows.setColumn_data(newRow); // TODO: See if there's a better way to do this.
+    newData.push_back(recordVector); //put the new record in first.
+    for (int i = 0; i < bundle.data_rows.getColumn_data().size(); i++)
+    {
+        newData.push_back(bundle.data_rows.getColumn_data()[i]); //add all other data after
+    }
+    bundle.data_rows.setColumn_data(newData); //update the data bundle
 
     std::vector<std::string> newKeys;
     // Add the new record key to the existing keys
-    newKeys = bundle.row_keys.getIncident_numbers();
-    newKeys.push_back(recordVector[0]);
-    bundle.row_keys.setIncident_numbers(newKeys);
+    newKeys.push_back(recordVector[0]); //add the new record key first
+
+    for (int i = 0; i < bundle.row_keys.getIncident_numbers().size(); i++)
+    {
+        newKeys.push_back(bundle.row_keys.getIncident_numbers()[i]); //add all other keys after
+    }
+    bundle.row_keys.setIncident_numbers(newKeys); //update the data bundle
+
     return bundle;
 };
 
@@ -99,10 +120,39 @@ Data_Bundle removeRecord(Data_Bundle bundle)
  */
 Data_Bundle removeRecord(Data_Bundle bundle, int index)
 {
+    genericMessage("Current index number: ");
+    cout << index;
     std::vector<vector<std::string>> temp;
-    temp = bundle.data_rows.getColumn_data();
-    temp.erase(temp.begin() + index);
-    bundle.data_rows.setColumn_data(temp);
+    std::vector<string> tempKey;
+    
+    //Remove the row from the data records
+    temp = bundle.data_rows.getColumn_data(); //move data into temp
+    temp.erase(temp.begin() + index); //remove the record
+    bundle.data_rows.setColumn_data(temp); //update the data bundle
+
+    //Remove the row key from the index
+    tempKey = bundle.row_keys.getIncident_numbers(); //move data into tempKeys
+    tempKey.erase(tempKey.begin() + index); //remove the record.
+    bundle.row_keys.setIncident_numbers(tempKey); //update the data bundle.
+    
 
     return bundle;
+}
+
+/**
+ * @brief Fill the remaining fields with the values found in the default template. 
+ * 
+ * @param recordVector new record currently being made by user
+ * @param index current column to be input
+ * @param size total number of columns in the record. 
+ * @return vector<string> of the finished new record.
+ */
+vector<string> defaultRecordFiller(vector<string> recordVector, int index, int size)
+{
+    for (int i = index; i < size; i++)
+    {
+        recordVector.push_back(RECORD_TEMPLATE[i]); //see if I can find a more effecient way to do this.
+        cout << "."; //Theoretically a loading bar... 
+    }
+    return recordVector;
 }

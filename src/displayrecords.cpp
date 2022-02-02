@@ -1,4 +1,3 @@
-// Move this into the controller ??
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -94,10 +93,6 @@ int searchRecords(Data_Bundle bundle, string incidentNo)
                 foundFlag = true;
             }
         } // When out of the above, if found flag is not true, entry was not in the dataset.
-        if (!foundFlag)
-        {
-            noResultFlag = true;
-        }
         break; // Get out of the while loop
     }
     if (foundFlag)
@@ -106,7 +101,7 @@ int searchRecords(Data_Bundle bundle, string incidentNo)
     }
     else
     {
-        genericMessage("Unable to locate record. Please try again.");
+        genericMessage("Unable to locate record. Please try again."); //consider moving this out of here and into functions that call it
         return -1;
     }
 };
