@@ -75,6 +75,8 @@ Data_Bundle removeRecord(Data_Bundle bundle) //TODO NOt working
     int index = searchRecords(bundle, input);
     if (index > 0) // if the record is found (searchRecords returns -1 if not found)
     {
+        //Consider changing this so it iterates through all the elements in the data and writes them into temp only IF they are
+        //not the value to be removed. 
         temp = bundle.data_rows.getColumn_data();
         temp.erase(temp.begin()+index);
         bundle.data_rows.setColumn_data(temp);
