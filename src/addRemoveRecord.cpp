@@ -36,7 +36,6 @@ Data_Bundle removeRecord(Data_Bundle bundle, int index);
  */
 Data_Bundle addRecord(Data_Bundle bundle)
 {
-    Data_Rows newRecord;
     std::vector<std::string> recordVector;
 
     // Prompt for each field by iterating through the column headers.
@@ -45,20 +44,28 @@ Data_Bundle addRecord(Data_Bundle bundle)
         std::string currentField = bundle.data_headers.getColumn_headers()[i] + ": ";
         genericMessage(currentField);
         // modify each input to match csv formatting and place in the vector
-        recordVector.push_back("\"" + stringInput() + "\"");
+        recordVector.push_back(stringInput());
     }
 
-    std::vector<vector<std::string>> newRow;
+    std::vector<vector<std::string>> newData;
     // Add the new record into the existing data
-    newRow = bundle.data_rows.getColumn_data();
-    newRow.push_back(recordVector);
-    bundle.data_rows.setColumn_data(newRow); // TODO: See if there's a better way to do this.
+    newData.push_back(recordVector); //put the new record in first.
+    for (int i = 0; i < bundle.data_rows.getColumn_data().size(); i++)
+    {
+        newData.push_back(bundle.data_rows.getColumn_data()[i]); //add all other data after
+    }
+    bundle.data_rows.setColumn_data(newData); //update the data bundle
 
     std::vector<std::string> newKeys;
     // Add the new record key to the existing keys
-    newKeys = bundle.row_keys.getIncident_numbers();
-    newKeys.push_back(recordVector[0]);
-    bundle.row_keys.setIncident_numbers(newKeys);
+    newKeys.push_back(recordVector[0]); //add the new record key first
+
+    for (int i = 0; i < bundle.row_keys.getIncident_numbers().size(); i++)
+    {
+        newKeys.push_back(bundle.row_keys.getIncident_numbers()[i]); //add all other keys after
+    }
+    bundle.row_keys.setIncident_numbers(newKeys); //update the data bundle
+
     return bundle;
 };
 

@@ -26,22 +26,23 @@ using namespace std;
 
 int main()
 {
-    // string fname = "C:/SJunk/C++/newcsv.csv";
+    // File location (relative) of the csv.
     string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
-    // string fname = "c:/SJunk/C++/pipeline-incidents-comprehensive-data.csv";
 
     Data_Bundle bundle;
 
-    try {
-    bundle = reader(bundle, fname);
+//Try to open the file, catch if it fails.
+    try
+    {
+        bundle = reader(bundle, fname);
     }
     catch (Read_Exception &e1)
     {
         genericMessage("Unable to open the CSV file!");
-        return 0; //currently set to simply exit if this happens.
+        return 0; // currently set to simply exit if this happens.
     }
 
-    controller(bundle, fname);
+    controller(bundle, fname); //Primary logic is handled here.
 
     // displayRecords(bundle);
 
