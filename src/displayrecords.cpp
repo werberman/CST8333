@@ -48,7 +48,7 @@ void displayRecords(Data_Bundle bundle, int start, int length, int fields)
     {
         cout << "*******************************\n"
              << bundle.data_headers.getColumn_headers()[i] << " : \n";
-        for (int j = start; j < (start + length) /*|| j < (bundle.data_headers.getColumn_headers().size() - start)*/; j++)
+        for (int j = start; j < (start + length) || j < (bundle.data_headers.getColumn_headers().size() - start); j++)
         {
             cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.getColumn_data()[j][i] /*<< " -- " << j << "," << i*/ << endl; // Clear the output buffer after each line
         }
