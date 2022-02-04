@@ -19,6 +19,8 @@
 #include <sstream>
 #endif
 
+//TODO: Consider moving menues into consts here
+
 using namespace std;
 
 /**
@@ -32,6 +34,19 @@ void genericMessage(string message)
 };
 
 /**
+ * @brief Special function to display records:
+ * 
+ *  Record No 1: This is an example record
+ * 
+ * @param recordNo the record number to be displayed
+ * @param colData string containing the record data to be displayed
+ */
+void displayRecords(int recordNo, string colData)
+{
+    cout << "Record No " << recordNo << " : " << colData << endl;
+}
+
+/**
  * @brief Place all my student information on screen as required for the assignment.
  *
  */
@@ -40,6 +55,10 @@ void shamelessPlug()
     genericMessage("\nBy: Kristopher Houston\nStudent No: 041015388\nCST8333\nWinter, 2022");
 };
 
+/**
+ * @brief Place a banner with all of my student information on screen as required for the assingment.
+ * 
+ */
 void shamelessBanner()
 {
     genericMessage("\n***Kristopher Houston***041015388***CST8333***Winter, 2022***");

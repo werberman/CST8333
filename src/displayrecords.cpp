@@ -31,7 +31,6 @@
 #include "display.cpp"
 #endif
 
-
 /**
  * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns
  * that are displayed.
@@ -43,14 +42,35 @@
  */
 void displayRecords(Data_Bundle bundle, int start, int length, int fields)
 {
-
-    for (int i = 0; i < fields /*|| i < bundle.data_headers.getColumn_headers().size()*/; i++) // make sure not to accidentally try and read records outside of range!!
+    /*
+    These if statements are inelegant - conditional for loops are not working as I expected them
+    TODO: See if I can fix this
+    */
+    if (fields > bundle.data_headers.getColumn_headers().size())
     {
-        cout << "*******************************\n"
-             << bundle.data_headers.getColumn_headers()[i] << " : \n";
-        for (int j = start; j < (start + length) /*|| j < (bundle.data_headers.getColumn_headers().size() - start)*/; j++)
+        fields = bundle.data_headers.getColumn_headers().size(); // make sure not to accidentally try to show columns that do not exist
+    }
+
+    if (start > bundle.data_rows.getColumn_data().size()) // Check that start point is not outside the number of records in memory
+    {
+        genericMessage("Invalid start point. Current number of records is " + to_string(bundle.data_rows.getColumn_data().size())); //This doesn't work...
+        return;
+    }
+    else
+    {
+        if ((start + length) > bundle.data_rows.getColumn_data().size()) // make sure that it will not try to access a record that does not exist
         {
-            cout << "Record No: " << (j + 1) << ": " << bundle.data_rows.getColumn_data()[j][i] /*<< " -- " << j << "," << i*/ << endl; // Clear the output buffer after each line
+            length = (bundle.data_rows.getColumn_data().size() - start); // change length so it will display only to the last record.
+        }
+    }
+
+    for (int i = 0; i < fields; i++)
+    {
+        genericMessage(("*******************************\n" + bundle.data_headers.getColumn_headers()[i]) + ":");
+
+        for (int j = start; j < (start + length); j++)
+        {
+            displayRecords((j + 1), bundle.data_rows.getColumn_data()[j][i]);
         }
     }
     shamelessPlug();
@@ -92,7 +112,7 @@ int searchRecords(Data_Bundle bundle, string incidentNo)
                 found = i;
                 foundFlag = true;
             }
-        } // When out of the above, if found flag is not true, entry was not in the dataset.
+        }      // When out of the above, if found flag is not true, entry was not in the dataset.
         break; // Get out of the while loop
     }
     if (foundFlag)
@@ -101,7 +121,7 @@ int searchRecords(Data_Bundle bundle, string incidentNo)
     }
     else
     {
-        genericMessage("Unable to locate record. Please try again."); //consider moving this out of here and into functions that call it
+        genericMessage("Unable to locate record. Please try again."); // consider moving this out of here and into functions that call it
         return -1;
     }
 };

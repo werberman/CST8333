@@ -101,6 +101,14 @@ struct Write_Exception : public exception
     }
 };
 
+struct End_of_Records_Exception : public exception
+{
+    const char * what () const throw ()
+    {
+        return "End of Records Reached";
+    }
+};
+
 // struct Input_Error : public exception 
 // {
 //     const char * what () const throw () 
