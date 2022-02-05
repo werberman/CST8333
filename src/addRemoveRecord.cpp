@@ -160,7 +160,7 @@ vector<string> defaultRecordFiller(vector<string> recordVector, int index, int s
  * @brief TODO: Not working because the console does not recognize a blank input as input at all.
  * 
  * @param bundle: all of the bundled data
- * @param index: 
+ * @param index: index number of the record to be modifieds
  */
 void editRecord(Data_Bundle bundle, int index)
 {
