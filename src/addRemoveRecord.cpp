@@ -54,7 +54,7 @@ Data_Bundle addRecord(Data_Bundle bundle)
         if (recordHolder == "DEFAULT")
         {
             genericMessage("Filling the rest of the record with the default values");
-            recordVector = defaultRecordFiller(recordVector, i, bundle.data_headers.getColumn_headers().size()); //send the record to a template generator function and save it to recordVector.
+            recordVector = defaultRecordFiller(recordVector, i, bundle.data_headers.getColumn_headers().size()); // send the record to a template generator function and save it to recordVector.
             break;
         }
         recordVector.push_back(recordHolder);
@@ -63,22 +63,22 @@ Data_Bundle addRecord(Data_Bundle bundle)
 
     std::vector<vector<std::string>> newData;
     // Add the new record into the existing data
-    newData.push_back(recordVector); //put the new record in first.
+    newData.push_back(recordVector); // put the new record in first.
     for (int i = 0; i < bundle.data_rows.getColumn_data().size(); i++)
     {
-        newData.push_back(bundle.data_rows.getColumn_data()[i]); //add all other data after
+        newData.push_back(bundle.data_rows.getColumn_data()[i]); // add all other data after
     }
-    bundle.data_rows.setColumn_data(newData); //update the data bundle
+    bundle.data_rows.setColumn_data(newData); // update the data bundle
 
     std::vector<std::string> newKeys;
     // Add the new record key to the existing keys
-    newKeys.push_back(recordVector[0]); //add the new record key first
+    newKeys.push_back(recordVector[0]); // add the new record key first
 
     for (int i = 0; i < bundle.row_keys.getIncident_numbers().size(); i++)
     {
-        newKeys.push_back(bundle.row_keys.getIncident_numbers()[i]); //add all other keys after
+        newKeys.push_back(bundle.row_keys.getIncident_numbers()[i]); // add all other keys after
     }
-    bundle.row_keys.setIncident_numbers(newKeys); //update the data bundle
+    bundle.row_keys.setIncident_numbers(newKeys); // update the data bundle
 
     return bundle;
 };
@@ -111,12 +111,12 @@ Data_Bundle removeRecord(Data_Bundle bundle)
 }
 
 /**
- * @brief 
+ * @brief
  * TODO: Consider changing this to recursively pull apart and add everything in the exisiting records to data EXCEPT the value chosen for deletion
- * 
+ *
  * @param bundle existing data
- * @param index index number of the record to be removed. 
- * @return Data_Bundle 
+ * @param index index number of the record to be removed.
+ * @return Data_Bundle
  */
 Data_Bundle removeRecord(Data_Bundle bundle, int index)
 {
@@ -124,35 +124,66 @@ Data_Bundle removeRecord(Data_Bundle bundle, int index)
     cout << index;
     std::vector<vector<std::string>> temp;
     std::vector<string> tempKey;
-    
-    //Remove the row from the data records
-    temp = bundle.data_rows.getColumn_data(); //move data into temp
-    temp.erase(temp.begin() + index); //remove the record
-    bundle.data_rows.setColumn_data(temp); //update the data bundle
 
-    //Remove the row key from the index
-    tempKey = bundle.row_keys.getIncident_numbers(); //move data into tempKeys
-    tempKey.erase(tempKey.begin() + index); //remove the record.
-    bundle.row_keys.setIncident_numbers(tempKey); //update the data bundle.
-    
+    // Remove the row from the data records
+    temp = bundle.data_rows.getColumn_data(); // move data into temp
+    temp.erase(temp.begin() + index);         // remove the record
+    bundle.data_rows.setColumn_data(temp);    // update the data bundle
+
+    // Remove the row key from the index
+    tempKey = bundle.row_keys.getIncident_numbers(); // move data into tempKeys
+    tempKey.erase(tempKey.begin() + index);          // remove the record.
+    bundle.row_keys.setIncident_numbers(tempKey);    // update the data bundle.
 
     return bundle;
 }
 
 /**
- * @brief Fill the remaining fields with the values found in the default template. 
- * 
+ * @brief Fill the remaining fields with the values found in the default template.
+ *
  * @param recordVector new record currently being made by user
  * @param index current column to be input
- * @param size total number of columns in the record. 
+ * @param size total number of columns in the record.
  * @return vector<string> of the finished new record.
  */
 vector<string> defaultRecordFiller(vector<string> recordVector, int index, int size)
 {
     for (int i = index; i < size; i++)
     {
-        recordVector.push_back(RECORD_TEMPLATE[i]); //see if I can find a more effecient way to do this.
-        cout << "."; //Theoretically a loading bar... 
+        recordVector.push_back(RECORD_TEMPLATE[i]); // see if I can find a more effecient way to do this.
+        cout << ".";                                // Theoretically a loading bar...
     }
     return recordVector;
+}
+
+/**
+ * @brief TODO: Not working because the console does not recognize a blank input as input at all.
+ * 
+ * @param bundle: all of the bundled data
+ * @param index: 
+ */
+void editRecord(Data_Bundle bundle, int index)
+{
+    vector<vector<string>> temp;
+    vector<string> newRecord;
+    string input = "";
+    genericMessage("Enter new value for each column as it appears on the screen. If no change is required, press enter without entering anything.");
+
+    for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
+    {
+        genericMessage("Current Value: " + bundle.data_headers.getColumn_headers()[i] + "\n");
+        input = stringInput();
+        if (input != "")
+        {
+            newRecord.push_back(input); // place it in the new record vector
+        }
+        else
+        {
+            newRecord.push_back(bundle.data_rows.getColumn_data()[index][i]); // put the value currently stored in that column into the new record.
+        }
+        input.clear(); // clear the string
+    }
+    temp = bundle.data_rows.getColumn_data(); //move the datarecords into a temporary vector (temp)
+    temp[index] = newRecord; //modify the selected record
+    bundle.data_rows.setColumn_data(temp); //replace the Data_Bundle data
 }
