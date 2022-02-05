@@ -21,6 +21,12 @@
 
 using namespace std;
 
+/**
+ * @brief Start the program. 
+ * TODO: Consider making the data bundle static so there is only one copy being passed around.
+ * 
+ * @return int 
+ */
 int main()
 {
     // File location (relative) of the csv.

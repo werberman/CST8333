@@ -135,7 +135,7 @@ void controller(Data_Bundle bundle, string fname)
             index = searchRecords(bundle, incidentNo);
             if (index > 0) // searchRecords() returns -1 if the record is not found
             {
-                removeRecord(bundle, index);
+                editRecord(bundle, index);
             }
             else
             {
