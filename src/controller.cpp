@@ -291,7 +291,7 @@ bool yesNo(char i)
 bool c_writeCSV(Data_Bundle bundle, string newFileName)
 {
     genericMessage("\nName your new file(do not include \".csv\"): ");
-    newFileName = "C:/SJunk/C++/" + stringInput();
+    newFileName = ".\\datafiles\\" + stringInput();
     newFileName = newFileName + ".csv";
     try
     {
