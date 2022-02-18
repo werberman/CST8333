@@ -1,3 +1,13 @@
+/**
+ * @file display.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief Handles all user output and input. If it's user I/O related, it should be in here.
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -25,7 +35,7 @@ using namespace std;
 
 /**
  * @brief Generic message printer for any string.
- *
+ * 
  * @param message string to be printed on screen.
  */
 void genericMessage(string message)
@@ -132,9 +142,10 @@ int menuSelectionInt()
 };
 
 /**
- * @brief
+ * @brief get a menu selection from a user and verify that it is an alphabetical character. If input was NOT
+ * an alphabetical character, it returns 'z'.
  *
- * @return char
+ * @return char either 'z' in case of invalid input, or else whatever the user input.
  */
 char menuSelectionChar()
 {

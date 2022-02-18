@@ -1,3 +1,14 @@
+/**
+ * @file displayrecords.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief Helper of display, this file contains functions that translate user selecions into nicely 
+ * formatted outputs for the display.
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -34,7 +45,7 @@
 /**
  * @brief Display records. Fields displayed are controlled by the start and length fields, and the 'fields' field controlls the columns
  * that are displayed.
- *
+ * 
  * @param bundle data bundle to be used in the display.
  * @param start where in the data to start (index number)
  * @param length number of records to display

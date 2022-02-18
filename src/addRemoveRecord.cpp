@@ -1,3 +1,13 @@
+/**
+ * @file addRemoveRecord.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief handle the adding or removing of a record from a data bundle (that is, from working memory)
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -36,7 +46,7 @@ vector<string> defaultRecordFiller(vector<std::string>, int index, int size);
 
 /**
  * @brief add a record to the existing records
- *
+ * 
  * @param bundle current data
  */
 Data_Bundle addRecord(Data_Bundle bundle)
@@ -111,9 +121,9 @@ Data_Bundle removeRecord(Data_Bundle bundle)
 }
 
 /**
- * @brief
+ * @brief remove a record from the data_bundle passed into it
  * TODO: Consider changing this to recursively pull apart and add everything in the exisiting records to data EXCEPT the value chosen for deletion
- *
+ * 
  * @param bundle existing data
  * @param index index number of the record to be removed.
  * @return Data_Bundle
@@ -157,7 +167,8 @@ vector<string> defaultRecordFiller(vector<string> recordVector, int index, int s
 }
 
 /**
- * @brief TODO: Not working because the console does not recognize a blank input as input at all.
+ * @brief Edit an existing record in the passed in data_bundle
+ * TODO: Not working because the console does not recognize a blank input as input at all.
  * 
  * @param bundle: all of the bundled data
  * @param index: index number of the record to be modifieds

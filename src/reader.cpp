@@ -1,3 +1,13 @@
+/**
+ * @file reader.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief Reads a .csv file and places the data therein into working memory in the form of a data_bundle
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef ALGORITHM
 #define ALGORITHM
 #include <algorithm>
@@ -41,6 +51,13 @@
 
 using namespace std;
 
+/**
+ * @brief Calls a 3rd pary reader (parser.hpp) and uses it to populate the data_bundle object passed in
+ * 
+ * @param bundle bundle of all data types to be written to
+ * @param fname name of the file to be read into the data bundle
+ * @return Data_Bundle 
+ */
 Data_Bundle reader(Data_Bundle bundle, string fname)
 {
     ifstream file(fname);

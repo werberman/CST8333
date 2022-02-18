@@ -1,3 +1,14 @@
+/**
+ * @file controller.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief All control logic is contained here. As such, all classes contained herein are effectively focused on
+ * translating user input into the appropriate function calls
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -31,10 +42,10 @@ void displayRecController(Data_Bundle bundle); // forward declaration;
 bool yesNo(char i);                            // forward declaration;
 
 /**
- * @brief
- *
- * @param i
- * @param bundle
+ * @brief Primary display controller. Handles most interactions with the user
+ * 
+ * @param bundle bundle of data from the csv
+ * @param fname directory to the csv that is loaded into bundle (used to reload upon user request)
  */
 void controller(Data_Bundle bundle, string fname)
 {
@@ -288,6 +299,14 @@ bool yesNo(char i)
     return yesNo;
 };
 
+/**
+ * @brief controller for input/output related to writing a new csv file from the passed in bundle
+ * 
+ * @param bundle bundled csv data to be written
+ * @param newFileName name of the new file 
+ * @return true 
+ * @return false 
+ */
 bool c_writeCSV(Data_Bundle bundle, string newFileName)
 {
     genericMessage("\nName your new file(do not include \".csv\"): ");

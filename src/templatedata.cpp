@@ -1,3 +1,13 @@
+/**
+ * @file templatedata.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief This entire file is used for testing - it provides default values for the required .csv file
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef STRING
 #define STRING
 #include <string>
@@ -8,7 +18,10 @@
 #endif
 
 using namespace std;
-
+/**
+ * @brief provides default values for the required .csv file
+ * 
+ */
 static const vector<string> RECORD_TEMPLATE =
     {
         "INC2022-TEST", //Incident Number

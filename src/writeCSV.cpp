@@ -1,3 +1,13 @@
+/**
+ * @file writeCSV.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief write a data_bundle to a new file
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef IOSTREAM
 #define IOSTREAM
 #include <iostream>
@@ -29,7 +39,7 @@
 
 /**
  * @brief Write the csv data in memory to a new csv file - TODO: Fix the performance issues reading and writing.
- *
+ * 
  * @param bundle the bundled records stored in memory
  * @param newFileName desired name for the new CSV file
  */

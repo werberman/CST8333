@@ -1,3 +1,18 @@
+/**
+ * @file main.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief Primary entry point of the program
+ * @version 0.1
+ * @date 2022-02-18
+ * 
+ * NOTE: As we discuessed privately, while this project is generic in that it will work with virtually any .csv,
+ * the search function is very specifically tied to the Incident Numbers column and I have documented the entire
+ * project both in docs and in the incremental updates that have been made over the course of the project (GitHub
+ * access is available upon request). If you have any concerns or comments, please do not hesitate to contact me.
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef DATA_CPP
 #define DATA_CPP
 #include "Data.cpp"
@@ -23,7 +38,6 @@ using namespace std;
 
 /**
  * @brief Start the program. 
- * TODO: Consider making the data bundle static so there is only one copy being passed around.
  * 
  * @return int 
  */
