@@ -1,0 +1,62 @@
+\hypertarget{reader_8cpp}{}\doxysection{reader.\+cpp File Reference}
+\label{reader_8cpp}\index{reader.cpp@{reader.cpp}}
+
+
+Reads a .csv file and places the data therein into working memory in the form of a data\+\_\+bundle.  
+
+
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}display.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Data.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}./libraries/parser.\+hpp\char`\"{}}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} \mbox{\hyperlink{reader_8cpp_a91ff4c4345d228c36e8f4025a826cea3}{reader}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, string fname)
+\begin{DoxyCompactList}\small\item\em Calls a 3rd pary reader (parser.\+hpp) and uses it to populate the data\+\_\+bundle object passed in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reads a .csv file and places the data therein into working memory in the form of a data\+\_\+bundle. 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{reader_8cpp_a91ff4c4345d228c36e8f4025a826cea3}\label{reader_8cpp_a91ff4c4345d228c36e8f4025a826cea3}} 
+\index{reader.cpp@{reader.cpp}!reader@{reader}}
+\index{reader@{reader}!reader.cpp@{reader.cpp}}
+\doxysubsubsection{\texorpdfstring{reader()}{reader()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} reader (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{string}]{fname }\end{DoxyParamCaption})}
+
+
+
+Calls a 3rd pary reader (parser.\+hpp) and uses it to populate the data\+\_\+bundle object passed in. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & bundle of all data types to be written to \\
+\hline
+{\em fname} & name of the file to be read into the data bundle \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} 
+\end{DoxyReturn}

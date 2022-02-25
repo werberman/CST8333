@@ -1,0 +1,125 @@
+\hypertarget{controller_8cpp}{}\doxysection{controller.\+cpp File Reference}
+\label{controller_8cpp}\index{controller.cpp@{controller.cpp}}
+
+
+All control logic is contained here. As such, all classes contained herein are effectively focused on translating user input into the appropriate function calls.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}displayrecords.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}add\+Remove\+Record.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}controller.\+cpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{controller_8cpp_a56300ee488cab37f3300a139120ed38f}{c\+\_\+write\+CSV}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, string new\+File\+Name)
+\begin{DoxyCompactList}\small\item\em controller for input/output related to writing a new csv file from the passed in bundle \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8cpp_ab162d834734f0554c861452e4c3eaed7}{display\+Rec\+Controller}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle)
+\begin{DoxyCompactList}\small\item\em display record controller logic is here \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{controller_8cpp_a40ccac42625aeb8bcf2e0462d64a8219}{yes\+No}} (char i)
+\begin{DoxyCompactList}\small\item\em Check if a character response is a true or false\+: \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{controller_8cpp_a6b43a9e520a6e1624d08d9e3f8e08bdf}{controller}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, string fname)
+\begin{DoxyCompactList}\small\item\em Primary display controller. Handles most interactions with the user. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{controller_8cpp_a03a403ef0c254c7576ebbe448481684a}\label{controller_8cpp_a03a403ef0c254c7576ebbe448481684a}} 
+string {\bfseries invalid\+Msg} = \char`\"{}\textbackslash{}n\+Invalid menu selection, please try again\+: \char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+All control logic is contained here. As such, all classes contained herein are effectively focused on translating user input into the appropriate function calls. 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{controller_8cpp_a56300ee488cab37f3300a139120ed38f}\label{controller_8cpp_a56300ee488cab37f3300a139120ed38f}} 
+\index{controller.cpp@{controller.cpp}!c\_writeCSV@{c\_writeCSV}}
+\index{c\_writeCSV@{c\_writeCSV}!controller.cpp@{controller.cpp}}
+\doxysubsubsection{\texorpdfstring{c\_writeCSV()}{c\_writeCSV()}}
+{\footnotesize\ttfamily bool c\+\_\+write\+CSV (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{string}]{new\+File\+Name }\end{DoxyParamCaption})}
+
+
+
+controller for input/output related to writing a new csv file from the passed in bundle 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & bundled csv data to be written \\
+\hline
+{\em new\+File\+Name} & name of the new file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{controller_8cpp_a6b43a9e520a6e1624d08d9e3f8e08bdf}\label{controller_8cpp_a6b43a9e520a6e1624d08d9e3f8e08bdf}} 
+\index{controller.cpp@{controller.cpp}!controller@{controller}}
+\index{controller@{controller}!controller.cpp@{controller.cpp}}
+\doxysubsubsection{\texorpdfstring{controller()}{controller()}}
+{\footnotesize\ttfamily void controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{string}]{fname }\end{DoxyParamCaption})}
+
+
+
+Primary display controller. Handles most interactions with the user. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & bundle of data from the csv \\
+\hline
+{\em fname} & directory to the csv that is loaded into bundle (used to reload upon user request) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8cpp_ab162d834734f0554c861452e4c3eaed7}\label{controller_8cpp_ab162d834734f0554c861452e4c3eaed7}} 
+\index{controller.cpp@{controller.cpp}!displayRecController@{displayRecController}}
+\index{displayRecController@{displayRecController}!controller.cpp@{controller.cpp}}
+\doxysubsubsection{\texorpdfstring{displayRecController()}{displayRecController()}}
+{\footnotesize\ttfamily void display\+Rec\+Controller (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle }\end{DoxyParamCaption})}
+
+
+
+display record controller logic is here 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & current data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{controller_8cpp_a40ccac42625aeb8bcf2e0462d64a8219}\label{controller_8cpp_a40ccac42625aeb8bcf2e0462d64a8219}} 
+\index{controller.cpp@{controller.cpp}!yesNo@{yesNo}}
+\index{yesNo@{yesNo}!controller.cpp@{controller.cpp}}
+\doxysubsubsection{\texorpdfstring{yesNo()}{yesNo()}}
+{\footnotesize\ttfamily bool yes\+No (\begin{DoxyParamCaption}\item[{char}]{i }\end{DoxyParamCaption})}
+
+
+
+Check if a character response is a true or false\+: 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & Char -\/ character to be checked \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if y/Y 
+
+false if f/F 
+\end{DoxyReturn}

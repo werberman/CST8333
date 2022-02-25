@@ -1,0 +1,107 @@
+\hypertarget{displayrecords_8cpp}{}\doxysection{displayrecords.\+cpp File Reference}
+\label{displayrecords_8cpp}\index{displayrecords.cpp@{displayrecords.cpp}}
+
+
+Helper of display, this file contains functions that translate user selecions into nicely formatted outputs for the display.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}Data.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reader.\+cpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{displayrecords_8cpp_aaa056f8173a0aa386291ff70e7449710}{display\+Records}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, int start, int length, int fields)
+\begin{DoxyCompactList}\small\item\em Display records. Fields displayed are controlled by the start and length fields, and the \textquotesingle{}fields\textquotesingle{} field controlls the columns that are displayed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{displayrecords_8cpp_a987e33e02e3d867ca91f81838d8a99b6}{display\+Incident\+Nos}} (\mbox{\hyperlink{class_row___key}{Row\+\_\+\+Key}} keys)
+\begin{DoxyCompactList}\small\item\em Displays all the existing incident numbers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{displayrecords_8cpp_a8028d64be6fdff2cbd692233b4c68952}{search\+Records}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, string incident\+No)
+\begin{DoxyCompactList}\small\item\em Check if a given incident number value is found in a given data bundle. The index number of the found record is saved in an int outside the function so that it can be called later. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{displayrecords_8cpp_ac6c6cd839d50c91230f55ed55d0cd635}\label{displayrecords_8cpp_ac6c6cd839d50c91230f55ed55d0cd635}} 
+int {\bfseries found}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper of display, this file contains functions that translate user selecions into nicely formatted outputs for the display. 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{displayrecords_8cpp_a987e33e02e3d867ca91f81838d8a99b6}\label{displayrecords_8cpp_a987e33e02e3d867ca91f81838d8a99b6}} 
+\index{displayrecords.cpp@{displayrecords.cpp}!displayIncidentNos@{displayIncidentNos}}
+\index{displayIncidentNos@{displayIncidentNos}!displayrecords.cpp@{displayrecords.cpp}}
+\doxysubsubsection{\texorpdfstring{displayIncidentNos()}{displayIncidentNos()}}
+{\footnotesize\ttfamily void display\+Incident\+Nos (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_row___key}{Row\+\_\+\+Key}}}]{keys }\end{DoxyParamCaption})}
+
+
+
+Displays all the existing incident numbers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em keys} & Row\+\_\+\+Keys data that should be displayed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{displayrecords_8cpp_aaa056f8173a0aa386291ff70e7449710}\label{displayrecords_8cpp_aaa056f8173a0aa386291ff70e7449710}} 
+\index{displayrecords.cpp@{displayrecords.cpp}!displayRecords@{displayRecords}}
+\index{displayRecords@{displayRecords}!displayrecords.cpp@{displayrecords.cpp}}
+\doxysubsubsection{\texorpdfstring{displayRecords()}{displayRecords()}}
+{\footnotesize\ttfamily void display\+Records (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{int}]{start,  }\item[{int}]{length,  }\item[{int}]{fields }\end{DoxyParamCaption})}
+
+
+
+Display records. Fields displayed are controlled by the start and length fields, and the \textquotesingle{}fields\textquotesingle{} field controlls the columns that are displayed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & data bundle to be used in the display. \\
+\hline
+{\em start} & where in the data to start (index number) \\
+\hline
+{\em length} & number of records to display \\
+\hline
+{\em fields} & number of columns to display for each record. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{displayrecords_8cpp_a8028d64be6fdff2cbd692233b4c68952}\label{displayrecords_8cpp_a8028d64be6fdff2cbd692233b4c68952}} 
+\index{displayrecords.cpp@{displayrecords.cpp}!searchRecords@{searchRecords}}
+\index{searchRecords@{searchRecords}!displayrecords.cpp@{displayrecords.cpp}}
+\doxysubsubsection{\texorpdfstring{searchRecords()}{searchRecords()}}
+{\footnotesize\ttfamily int search\+Records (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{string}]{incident\+No }\end{DoxyParamCaption})}
+
+
+
+Check if a given incident number value is found in a given data bundle. The index number of the found record is saved in an int outside the function so that it can be called later. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & data bundle \\
+\hline
+{\em incident\+No} & desired incident number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if record cannot be found 
+
+index number if found 
+\end{DoxyReturn}
