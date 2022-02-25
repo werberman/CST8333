@@ -131,6 +131,9 @@ void controller(Data_Bundle bundle, string fname)
             /*
              *TODO: add handler for if the file cannot be written.
              */
+            /*
+            *TODO: Consider making this occur on its owne thread
+            */
             break;
 
         case 6:

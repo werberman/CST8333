@@ -4,14 +4,14 @@
  * @brief Primary entry point of the program
  * @version 0.1
  * @date 2022-02-18
- * 
+ *
  * NOTE: As we discuessed privately, while this project is generic in that it will work with virtually any .csv,
  * the search function is very specifically tied to the Incident Numbers column and I have documented the entire
  * project both in docs and in the incremental updates that have been made over the course of the project (GitHub
  * access is available upon request). If you have any concerns or comments, please do not hesitate to contact me.
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #ifndef DATA_CPP
 #define DATA_CPP
@@ -37,18 +37,22 @@
 using namespace std;
 
 /**
- * @brief Start the program. 
- * 
- * @return int 
+ * @brief Start the program.
+ *
+ * @return int
  */
 int main()
 {
     // File location (relative) of the csv.
-    string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
+    // string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
+    string fname = ".\\datafiles\\newcsv.csv"; //The original file is (I suspect) too large for the output buffer. I will likely fix
+                                               //that going forward, but for now, this truncated test file shows full functionality. 
+                                               //This data file contains all columns, but only 100 records (plus the headers).
+                                               //Original file does work, but slows down to a crawl.
 
     Data_Bundle bundle;
 
-//Try to open the file, catch if it fails.
+    // Try to open the file, catch if it fails.
     try
     {
         bundle = reader(bundle, fname);
@@ -59,7 +63,7 @@ int main()
         return 0; // currently set to simply exit if this happens.
     }
 
-    controller(bundle, fname); //Primary logic is handled here.
+    controller(bundle, fname); // Primary logic is handled here.
 
     // displayRecords(bundle);
 
