@@ -33,6 +33,10 @@
 #define WRITECSV_CPP
 #include "writeCSV.cpp"
 #endif
+#ifndef THREAD
+#define THREAD
+#include <thread>
+#endif
 
 bool c_writeCSV(Data_Bundle bundle, string newFileName);
 
@@ -64,7 +68,7 @@ void controller(Data_Bundle bundle, string fname)
     mainMenu();
     int menuSelect = menuSelectionInt(); // Get menu selection
 
-    while (true) // doesn't work like I'd have expected...
+    while (true)
     {
         switch (menuSelect)
         {
@@ -317,7 +321,8 @@ bool c_writeCSV(Data_Bundle bundle, string newFileName)
     newFileName = newFileName + ".csv";
     try
     {
-        writeCSV(bundle, newFileName);
+        thread t_write(writeCSV, bundle, newFileName); //TODO: Use future to make this asyncronous 
+        t_write.join();
     }
     catch (Write_Exception &w1)
     {
