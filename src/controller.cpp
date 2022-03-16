@@ -321,8 +321,9 @@ bool c_writeCSV(Data_Bundle bundle, string newFileName)
     newFileName = newFileName + ".csv";
     try
     {
-        thread t_write(writeCSV, bundle, newFileName); //TODO: Use future to make this asyncronous 
-        t_write.join();
+        thread t_write(writeCSV, bundle, newFileName);
+        t_write.detach(); //detach the thread and have it run independantly
+        // t_write.join();
     }
     catch (Write_Exception &w1)
     {
