@@ -20,6 +20,14 @@
 #define DATA_CPP
 #include "Data.cpp"
 #endif
+#ifndef WRITECSV_CPP
+#define WRITECSV_CPP
+#include "writeCSV.cpp"
+#endif
+#ifndef THREAD
+#define THREAD
+#include <thread>
+#endif
 
 /**
  * @brief Extremely simple test case to show how the test works
@@ -41,20 +49,36 @@ TEST_CASE("testing the tester function - none should fail")
     CHECK(tester(10) == 20);
 };
 
+
 /**
  * @brief Get the Test Values - this is an example usage of reader();
  * 
  * @return Data_Bundle the bundled data 
  */
-Data_Bundle getTestValues()
+Data_Bundle getTestValues(string fname)
 {
-    std::string fname = ".\\datafiles\\newcsv.csv";
     Data_Bundle bundle;
     bundle = reader(bundle, fname);
     return bundle;
 };
 
-Data_Bundle bundle = getTestValues(); //Stored data to be used in tests
+
+Data_Bundle bundle = getTestValues(".\\datafiles\\newcsv.csv"); //Stored data to be used in tests
+
+Data_Bundle newFile = getTestValues(".\\datafiles\\THREADS.csv");
+
+/**
+ * @brief Write a new file using detached thread (syntax is exactly the same as in controller -
+ * c_writeCSV but does away with user input to avoid having to write an intensly complex and 
+ * unnecessairy stub function injection)
+ * 
+ */
+void TestFileThreadingOutput()
+{
+    thread t_write(writeCSV, bundle, "THREADS.csv");
+    t_write.detach();
+};
+
 
 /**
  * @brief Functional test case to see if the data loads as expected. This will pass.
@@ -72,4 +96,13 @@ TEST_CASE("This is a functional test case to see if the data loads as expected")
 TEST_CASE("Second functional test. This should FAIL")
 {
     CHECK(bundle.data_headers.getColumn_headers()[0] == "Incident");
+}
+
+/**
+ * @brief Functional test case to check that data being output by threaded file write is correct.
+ * 
+ */
+TEST_CASE("Multithreading test. This should SUCCEED")
+{
+    CHECK(newFile.data_headers.getColumn_headers()[0] == bundle.data_headers.getColumn_headers()[0]);
 }
