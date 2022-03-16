@@ -94,4 +94,5 @@ void writeCSV(Data_Bundle bundle, string newFileName)
         }
     }
     newFile.close(); // Close the file when finished writing
+    genericMessage("File successfully written!");
 }

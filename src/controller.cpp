@@ -38,7 +38,7 @@
 #include <thread>
 #endif
 
-bool c_writeCSV(Data_Bundle bundle, string newFileName);
+bool c_writeCSV(Data_Bundle bundle);
 
 string invalidMsg = "\nInvalid menu selection, please try again: ";
 
@@ -89,7 +89,7 @@ void controller(Data_Bundle bundle, string fname)
                     i = menuSelectionChar();
                     if (yesNo(i))
                     {
-                        if (!c_writeCSV(bundle, fname))
+                        if (!c_writeCSV(bundle))
                         {
                             genericMessage("Do you wish to continue (y/n)?: ");
                             if (!yesNo(menuSelectionChar()))
@@ -131,7 +131,7 @@ void controller(Data_Bundle bundle, string fname)
 
         case 5:
             // Save as a new csv file
-            taskSuccess = c_writeCSV(bundle, fname);
+            taskSuccess = c_writeCSV(bundle);
             /*
              *TODO: add handler for if the file cannot be written.
              */
@@ -306,6 +306,7 @@ bool yesNo(char i)
     return yesNo;
 };
 
+
 /**
  * @brief controller for input/output related to writing a new csv file from the passed in bundle
  * 
@@ -314,16 +315,16 @@ bool yesNo(char i)
  * @return true 
  * @return false 
  */
-bool c_writeCSV(Data_Bundle bundle, string newFileName)
+bool c_writeCSV(Data_Bundle bundle)
 {
     genericMessage("\nName your new file(do not include \".csv\"): ");
-    newFileName = ".\\datafiles\\" + stringInput();
+    string newFileName = ".\\datafiles\\" + stringInput();
     newFileName = newFileName + ".csv";
+    genericMessage("File writing is done in the background and may take a few moments. You can continue to use the program, but don't exit until the saving is complete.");
     try
     {
         thread t_write(writeCSV, bundle, newFileName);
         t_write.detach(); //detach the thread and have it run independantly
-        // t_write.join();
     }
     catch (Write_Exception &w1)
     {
