@@ -33,6 +33,10 @@
 #define EXCEPTION
 #include <exception>
 #endif
+#ifndef FUTURE
+#define FUTURE
+#include <future>
+#endif
 
 using namespace std;
 
@@ -55,7 +59,8 @@ int main()
     // Try to open the file, catch if it fails.
     try
     {
-        bundle = reader(bundle, fname);
+        std::future<Data_Bundle> future = std::async(reader, bundle, fname);
+        bundle = future.get();
     }
     catch (Read_Exception &e1)
     {
