@@ -42,6 +42,8 @@ using namespace std;
 
 /**
  * @brief Start the program.
+ * This also does the inital loading of the data from the .csv file. Loading is done on a seperate thread with the value
+ * being placed in a future so that if for some reason it is slow to load, the partly loaded values can be used in the intrim. 
  *
  * @return int
  */

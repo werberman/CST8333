@@ -308,7 +308,9 @@ bool yesNo(char i)
 
 
 /**
- * @brief controller for input/output related to writing a new csv file from the passed in bundle
+ * @brief controller for input/output related to writing a new csv file from the passed in bundle. 
+ * This is done on a seperate, detached thread and prints a notification to the user when the task has been
+ * completed successfully. 
  * 
  * @param bundle bundled csv data to be written
  * @param newFileName name of the new file 
