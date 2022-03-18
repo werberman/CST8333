@@ -61,6 +61,7 @@ int main()
     // Try to open the file, catch if it fails.
     try
     {
+        genericMessage("File is being loaded. This is done using a seperate thread.");
         std::future<Data_Bundle> future = std::async(reader, bundle, fname);
         bundle = future.get();
     }

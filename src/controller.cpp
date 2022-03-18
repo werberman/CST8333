@@ -323,6 +323,7 @@ bool c_writeCSV(Data_Bundle bundle)
     string newFileName = ".\\datafiles\\" + stringInput();
     newFileName = newFileName + ".csv";
     genericMessage("File writing is done in the background and may take a few moments. You can continue to use the program, but don't exit until the saving is complete.");
+    genericMEssage("This is done using multithrading. A message will appear in the console when the file is finished writing.");
     try
     {
         thread t_write(writeCSV, bundle, newFileName);
