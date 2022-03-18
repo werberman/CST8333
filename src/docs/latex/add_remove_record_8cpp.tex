@@ -1,0 +1,140 @@
+\hypertarget{add_remove_record_8cpp}{}\doxysection{C\+:/\+SJunk/\+C++/src/add\+Remove\+Record.cpp File Reference}
+\label{add_remove_record_8cpp}\index{C:/SJunk/C++/src/addRemoveRecord.cpp@{C:/SJunk/C++/src/addRemoveRecord.cpp}}
+
+
+handle the adding or removing of a record from a data bundle (that is, from working memory)  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include \char`\"{}Data.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}display.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}templatedata.\+cpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} \mbox{\hyperlink{add_remove_record_8cpp_a20d27d325820fcc352158bb3062cd342}{remove\+Record}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, int index)
+\begin{DoxyCompactList}\small\item\em remove a record from the data\+\_\+bundle passed into it TODO\+: Consider changing this to recursively pull apart and add everything in the exisiting records to data EXCEPT the value chosen for deletion \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{add_remove_record_8cpp_aa759a65d777e716ec4d4bdfc6dce7074}\label{add_remove_record_8cpp_aa759a65d777e716ec4d4bdfc6dce7074}} 
+vector$<$ string $>$ {\bfseries default\+Record\+Filler} (vector$<$ std\+::string $>$, int index, int size)
+\item 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} \mbox{\hyperlink{add_remove_record_8cpp_a729671aad1a6bc287db7d4c5face7f75}{add\+Record}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle)
+\begin{DoxyCompactList}\small\item\em add a record to the existing records \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} \mbox{\hyperlink{add_remove_record_8cpp_a7bfb1971af975f5690bb0de02e6a1891}{remove\+Record}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle)
+\begin{DoxyCompactList}\small\item\em Delete a record from the exisiting record. NOTE\+: This does NOT remove the record from the file, just from the working memory. New file must still be written. \end{DoxyCompactList}\item 
+vector$<$ string $>$ \mbox{\hyperlink{add_remove_record_8cpp_a041d33a9f760b156f39d52152d5ffba7}{default\+Record\+Filler}} (vector$<$ string $>$ record\+Vector, int index, int size)
+\begin{DoxyCompactList}\small\item\em Fill the remaining fields with the values found in the default template. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{add_remove_record_8cpp_abf10aa17b7d3122b265fc538c995ff03}{edit\+Record}} (\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} bundle, int index)
+\begin{DoxyCompactList}\small\item\em Edit an existing record in the passed in data\+\_\+bundle TODO\+: Not working because the console does not recognize a blank input as input at all. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+handle the adding or removing of a record from a data bundle (that is, from working memory) 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{add_remove_record_8cpp_a729671aad1a6bc287db7d4c5face7f75}\label{add_remove_record_8cpp_a729671aad1a6bc287db7d4c5face7f75}} 
+\index{addRemoveRecord.cpp@{addRemoveRecord.cpp}!addRecord@{addRecord}}
+\index{addRecord@{addRecord}!addRemoveRecord.cpp@{addRemoveRecord.cpp}}
+\doxysubsubsection{\texorpdfstring{addRecord()}{addRecord()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} add\+Record (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle }\end{DoxyParamCaption})}
+
+
+
+add a record to the existing records 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & current data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{add_remove_record_8cpp_a041d33a9f760b156f39d52152d5ffba7}\label{add_remove_record_8cpp_a041d33a9f760b156f39d52152d5ffba7}} 
+\index{addRemoveRecord.cpp@{addRemoveRecord.cpp}!defaultRecordFiller@{defaultRecordFiller}}
+\index{defaultRecordFiller@{defaultRecordFiller}!addRemoveRecord.cpp@{addRemoveRecord.cpp}}
+\doxysubsubsection{\texorpdfstring{defaultRecordFiller()}{defaultRecordFiller()}}
+{\footnotesize\ttfamily vector$<$ string $>$ default\+Record\+Filler (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{record\+Vector,  }\item[{int}]{index,  }\item[{int}]{size }\end{DoxyParamCaption})}
+
+
+
+Fill the remaining fields with the values found in the default template. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em record\+Vector} & new record currently being made by user \\
+\hline
+{\em index} & current column to be input \\
+\hline
+{\em size} & total number of columns in the record. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector$<$string$>$ of the finished new record. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{add_remove_record_8cpp_abf10aa17b7d3122b265fc538c995ff03}\label{add_remove_record_8cpp_abf10aa17b7d3122b265fc538c995ff03}} 
+\index{addRemoveRecord.cpp@{addRemoveRecord.cpp}!editRecord@{editRecord}}
+\index{editRecord@{editRecord}!addRemoveRecord.cpp@{addRemoveRecord.cpp}}
+\doxysubsubsection{\texorpdfstring{editRecord()}{editRecord()}}
+{\footnotesize\ttfamily void edit\+Record (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+Edit an existing record in the passed in data\+\_\+bundle TODO\+: Not working because the console does not recognize a blank input as input at all. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & all of the bundled data \\
+\hline
+{\em index} & index number of the record to be modifieds \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{add_remove_record_8cpp_a7bfb1971af975f5690bb0de02e6a1891}\label{add_remove_record_8cpp_a7bfb1971af975f5690bb0de02e6a1891}} 
+\index{addRemoveRecord.cpp@{addRemoveRecord.cpp}!removeRecord@{removeRecord}}
+\index{removeRecord@{removeRecord}!addRemoveRecord.cpp@{addRemoveRecord.cpp}}
+\doxysubsubsection{\texorpdfstring{removeRecord()}{removeRecord()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} remove\+Record (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle }\end{DoxyParamCaption})}
+
+
+
+Delete a record from the exisiting record. NOTE\+: This does NOT remove the record from the file, just from the working memory. New file must still be written. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & existing data \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{add_remove_record_8cpp_a20d27d325820fcc352158bb3062cd342}\label{add_remove_record_8cpp_a20d27d325820fcc352158bb3062cd342}} 
+\index{addRemoveRecord.cpp@{addRemoveRecord.cpp}!removeRecord@{removeRecord}}
+\index{removeRecord@{removeRecord}!addRemoveRecord.cpp@{addRemoveRecord.cpp}}
+\doxysubsubsection{\texorpdfstring{removeRecord()}{removeRecord()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} remove\+Record (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}}}]{bundle,  }\item[{int}]{index }\end{DoxyParamCaption})}
+
+
+
+remove a record from the data\+\_\+bundle passed into it TODO\+: Consider changing this to recursively pull apart and add everything in the exisiting records to data EXCEPT the value chosen for deletion 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bundle} & existing data \\
+\hline
+{\em index} & index number of the record to be removed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} 
+\end{DoxyReturn}

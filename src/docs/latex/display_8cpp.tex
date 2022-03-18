@@ -1,0 +1,121 @@
+\hypertarget{display_8cpp}{}\doxysection{C\+:/\+SJunk/\+C++/src/display.cpp File Reference}
+\label{display_8cpp}\index{C:/SJunk/C++/src/display.cpp@{C:/SJunk/C++/src/display.cpp}}
+
+
+Handles all user output and input. If it\textquotesingle{}s user I/O related, it should be in here.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{display_8cpp_a4b83ec1ca4a2f20c813c18e08bafc4d7}{generic\+Message}} (string message)
+\begin{DoxyCompactList}\small\item\em Generic message printer for any string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{display_8cpp_af600de8f9ba1ddd4c945fbcbddc98790}{display\+Records}} (int record\+No, string col\+Data)
+\begin{DoxyCompactList}\small\item\em Special function to display records\+: \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_af433c4188fc3d1a56aca047d2804a723}\label{display_8cpp_af433c4188fc3d1a56aca047d2804a723}} 
+void {\bfseries shameless\+Plug} ()
+\begin{DoxyCompactList}\small\item\em Place all my student information on screen as required for the assignment. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_a8c5a5f9b137c3756fe8da12ef117f918}\label{display_8cpp_a8c5a5f9b137c3756fe8da12ef117f918}} 
+void {\bfseries shameless\+Banner} ()
+\begin{DoxyCompactList}\small\item\em Place a banner with all of my student information on screen as required for the assingment. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_ab3002fe8e0074c9e2ecb5b835e5e819f}\label{display_8cpp_ab3002fe8e0074c9e2ecb5b835e5e819f}} 
+void {\bfseries main\+Menu} ()
+\begin{DoxyCompactList}\small\item\em display the main menu selection options and wait. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_a187d5605a5c1efabbf5d68cccee6bcbb}\label{display_8cpp_a187d5605a5c1efabbf5d68cccee6bcbb}} 
+void {\bfseries display\+Rec\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Display the menu for the display a record menu. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_ac18ebb2a4e0720213382942acf257fbd}\label{display_8cpp_ac18ebb2a4e0720213382942acf257fbd}} 
+void {\bfseries invalid\+Input} ()
+\begin{DoxyCompactList}\small\item\em Display invalid menu selection prompt. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{display_8cpp_ab9e702ccabe9ee44b6092c5a605843a5}{menu\+Selection\+Int}} ()
+\begin{DoxyCompactList}\small\item\em Get an integer as input. Recieves the input as a string and catches any input that cannot be converted to an int. Returns \textquotesingle{}999\textquotesingle{} if a non-\/int is entered. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{display_8cpp_a7126c12e1d5ad4cda527542c2b3039d9}{menu\+Selection\+Char}} ()
+\begin{DoxyCompactList}\small\item\em get a menu selection from a user and verify that it is an alphabetical character. If input was NOT an alphabetical character, it returns \textquotesingle{}z\textquotesingle{}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{display_8cpp_a1eb06367624c60f2d633867f8556b41e}\label{display_8cpp_a1eb06367624c60f2d633867f8556b41e}} 
+string {\bfseries string\+Input} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles all user output and input. If it\textquotesingle{}s user I/O related, it should be in here. 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{display_8cpp_af600de8f9ba1ddd4c945fbcbddc98790}\label{display_8cpp_af600de8f9ba1ddd4c945fbcbddc98790}} 
+\index{display.cpp@{display.cpp}!displayRecords@{displayRecords}}
+\index{displayRecords@{displayRecords}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{displayRecords()}{displayRecords()}}
+{\footnotesize\ttfamily void display\+Records (\begin{DoxyParamCaption}\item[{int}]{record\+No,  }\item[{string}]{col\+Data }\end{DoxyParamCaption})}
+
+
+
+Special function to display records\+: 
+
+Record No 1\+: This is an example record
+
+
+\begin{DoxyParams}{Parameters}
+{\em record\+No} & the record number to be displayed \\
+\hline
+{\em col\+Data} & string containing the record data to be displayed \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{display_8cpp_a4b83ec1ca4a2f20c813c18e08bafc4d7}\label{display_8cpp_a4b83ec1ca4a2f20c813c18e08bafc4d7}} 
+\index{display.cpp@{display.cpp}!genericMessage@{genericMessage}}
+\index{genericMessage@{genericMessage}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{genericMessage()}{genericMessage()}}
+{\footnotesize\ttfamily void generic\+Message (\begin{DoxyParamCaption}\item[{string}]{message }\end{DoxyParamCaption})}
+
+
+
+Generic message printer for any string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & string to be printed on screen. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{display_8cpp_a7126c12e1d5ad4cda527542c2b3039d9}\label{display_8cpp_a7126c12e1d5ad4cda527542c2b3039d9}} 
+\index{display.cpp@{display.cpp}!menuSelectionChar@{menuSelectionChar}}
+\index{menuSelectionChar@{menuSelectionChar}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{menuSelectionChar()}{menuSelectionChar()}}
+{\footnotesize\ttfamily char menu\+Selection\+Char (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get a menu selection from a user and verify that it is an alphabetical character. If input was NOT an alphabetical character, it returns \textquotesingle{}z\textquotesingle{}. 
+
+\begin{DoxyReturn}{Returns}
+char either \textquotesingle{}z\textquotesingle{} in case of invalid input, or else whatever the user input. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{display_8cpp_ab9e702ccabe9ee44b6092c5a605843a5}\label{display_8cpp_ab9e702ccabe9ee44b6092c5a605843a5}} 
+\index{display.cpp@{display.cpp}!menuSelectionInt@{menuSelectionInt}}
+\index{menuSelectionInt@{menuSelectionInt}!display.cpp@{display.cpp}}
+\doxysubsubsection{\texorpdfstring{menuSelectionInt()}{menuSelectionInt()}}
+{\footnotesize\ttfamily int menu\+Selection\+Int (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get an integer as input. Recieves the input as a string and catches any input that cannot be converted to an int. Returns \textquotesingle{}999\textquotesingle{} if a non-\/int is entered. 
+
+\begin{DoxyReturn}{Returns}
+int i\+: the int input by the user. Returns 999 if the user input was not an int. 
+\end{DoxyReturn}

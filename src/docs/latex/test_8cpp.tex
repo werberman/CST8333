@@ -1,0 +1,93 @@
+\hypertarget{test_8cpp}{}\doxysection{C\+:/\+SJunk/\+C++/src/test.cpp File Reference}
+\label{test_8cpp}\index{C:/SJunk/C++/src/test.cpp@{C:/SJunk/C++/src/test.cpp}}
+
+
+This file demonstrates the chosen unittest framework (doctest). This unit test framework is somewhat unique\+: it is well suited to C++ because it can be loaded onto any C++ file (or link to any file using typical headers). It is then compiled as any other C++ program\+: the output of the resulting binary are the test results!  
+
+
+{\ttfamily \#include \char`\"{}libraries/doctest.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}reader.\+cpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}write\+CSV.\+cpp\char`\"{}}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{test_8cpp_a93bf835329bc59587ed78b8a5169d572}{tester}} (int in)
+\begin{DoxyCompactList}\small\item\em Extremely simple test case to show how the test works. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{test_8cpp_aa825b9f12bd07147d7aab1f80998f090}\label{test_8cpp_aa825b9f12bd07147d7aab1f80998f090}} 
+{\bfseries TEST\+\_\+\+CASE} (\char`\"{}testing the \mbox{\hyperlink{test_8cpp_a93bf835329bc59587ed78b8a5169d572}{tester}} function -\/ none should fail\char`\"{})
+\begin{DoxyCompactList}\small\item\em All of these test cases should pass. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} \mbox{\hyperlink{test_8cpp_aae49c6b5e6c21959f52d772871147a64}{get\+Test\+Values}} (string fname)
+\begin{DoxyCompactList}\small\item\em Get the Test Values -\/ this is an example usage of \mbox{\hyperlink{reader_8cpp_a91ff4c4345d228c36e8f4025a826cea3}{reader()}};. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{test_8cpp_a9fc9b6227e949b83e7704702e50c9da3}\label{test_8cpp_a9fc9b6227e949b83e7704702e50c9da3}} 
+void {\bfseries Test\+File\+Threading\+Output} ()
+\begin{DoxyCompactList}\small\item\em Write a new file using detached thread (syntax is exactly the same as in controller -\/ c\+\_\+write\+CSV but does away with user input to avoid having to write an intensly complex and unnecessairy stub function injection) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{test_8cpp_a97205c337e1ab5f5611eef33a0852675}\label{test_8cpp_a97205c337e1ab5f5611eef33a0852675}} 
+{\bfseries TEST\+\_\+\+CASE} (\char`\"{}This is a functional test case to see if the data loads as expected\char`\"{})
+\begin{DoxyCompactList}\small\item\em Functional test case to see if the data loads as expected. This will pass. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{test_8cpp_a42ab60db94ff2f3913fac1fd68dda9b9}\label{test_8cpp_a42ab60db94ff2f3913fac1fd68dda9b9}} 
+{\bfseries TEST\+\_\+\+CASE} (\char`\"{}Second functional test. This should FAIL\char`\"{})
+\begin{DoxyCompactList}\small\item\em Functional test case to see if the data loads as expected. This will fail. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{test_8cpp_a75de27bd75f2587a7cde2fa17f23fd82}\label{test_8cpp_a75de27bd75f2587a7cde2fa17f23fd82}} 
+{\bfseries TEST\+\_\+\+CASE} (\char`\"{}Multithreading test. This should SUCCEED\char`\"{})
+\begin{DoxyCompactList}\small\item\em Functional test case to check that data being output by threaded file write is correct. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{test_8cpp_a77dc6bc9bb413b687a862d2fbe7466ba}\label{test_8cpp_a77dc6bc9bb413b687a862d2fbe7466ba}} 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} {\bfseries bundle} = \mbox{\hyperlink{test_8cpp_aae49c6b5e6c21959f52d772871147a64}{get\+Test\+Values}}(\char`\"{}.\textbackslash{}\textbackslash{}datafiles\textbackslash{}\textbackslash{}newcsv.\+csv\char`\"{})
+\item 
+\mbox{\Hypertarget{test_8cpp_a5bec0c1b8418823b05459eeed1026c54}\label{test_8cpp_a5bec0c1b8418823b05459eeed1026c54}} 
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} {\bfseries new\+File} = \mbox{\hyperlink{test_8cpp_aae49c6b5e6c21959f52d772871147a64}{get\+Test\+Values}}(\char`\"{}.\textbackslash{}\textbackslash{}datafiles\textbackslash{}\textbackslash{}\+THREADS.\+csv\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file demonstrates the chosen unittest framework (doctest). This unit test framework is somewhat unique\+: it is well suited to C++ because it can be loaded onto any C++ file (or link to any file using typical headers). It is then compiled as any other C++ program\+: the output of the resulting binary are the test results! 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{test_8cpp_aae49c6b5e6c21959f52d772871147a64}\label{test_8cpp_aae49c6b5e6c21959f52d772871147a64}} 
+\index{test.cpp@{test.cpp}!getTestValues@{getTestValues}}
+\index{getTestValues@{getTestValues}!test.cpp@{test.cpp}}
+\doxysubsubsection{\texorpdfstring{getTestValues()}{getTestValues()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} get\+Test\+Values (\begin{DoxyParamCaption}\item[{string}]{fname }\end{DoxyParamCaption})}
+
+
+
+Get the Test Values -\/ this is an example usage of \mbox{\hyperlink{reader_8cpp_a91ff4c4345d228c36e8f4025a826cea3}{reader()}};. 
+
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{struct_data___bundle}{Data\+\_\+\+Bundle}} the bundled data 
+\end{DoxyReturn}
+\mbox{\Hypertarget{test_8cpp_a93bf835329bc59587ed78b8a5169d572}\label{test_8cpp_a93bf835329bc59587ed78b8a5169d572}} 
+\index{test.cpp@{test.cpp}!tester@{tester}}
+\index{tester@{tester}!test.cpp@{test.cpp}}
+\doxysubsubsection{\texorpdfstring{tester()}{tester()}}
+{\footnotesize\ttfamily int tester (\begin{DoxyParamCaption}\item[{int}]{in }\end{DoxyParamCaption})}
+
+
+
+Extremely simple test case to show how the test works. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & integer in. This is multiplied by two and returned \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
