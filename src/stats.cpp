@@ -23,6 +23,10 @@
 #include <map>
 #endif
 
+const string TITLE_DATE = "Date of Occurance";
+const string TITLE_TYPE = "Substance Spilled";
+
+
 map<int, string> tabulate(vector<string> raw);
 void displayStats(map<int, string> totals);
 
@@ -30,36 +34,46 @@ using namespace std;
 void genStats(Data_Bundle bundle)
 {
     vector<string> rawDates;
+    vector<string> fDates;
+    vector<string> rawReleaseType;
+
     map<int, string> dateStats;
+    map<int, string> releaseTypeStats;
+
     int numRecords = bundle.row_keys.getIncident_numbers().size();
 
     // get number of incidents in each year
     for (int i = 0; i < bundle.row_keys.getIncident_numbers().size(); i++)
     {
         rawDates.push_back(bundle.data_rows.getColumn_data()[i][14]);
+        rawReleaseType.push_back(bundle.data_rows.getColumn_data()[i][10]);
     }
-    dateStats = tabulate(rawDates);
-
-    displayStats(dateStats);
+    for (int i = 0; i < rawDates.size(); i++)
+    {
+        fDates.push_back(rawDates[i].substr(0, 4));
+    }
+    dateStats = tabulate(fDates);
+    releaseTypeStats = tabulate(rawReleaseType); // figure out why this doesn't work as an optional field
+    // displayStats(dateStats);
+    // displayStats(releaseTypeStats);
+    graphDisplay(dateStats, TITLE_DATE);
+    graphDisplay(releaseTypeStats, TITLE_TYPE);
 }
 
 map<int, string> tabulate(vector<string> raw)
 {
-    vector<string> fp;
     vector<string> sp;
     map<int, string> totals;
-    for (int i = 0; i < raw.size(); i++)
-    {
-        fp.push_back(raw[i].substr(0, 4));
-    }
-    sp = fp;
-    sort(sp.begin(), sp.end()); // sort the array first so unique can clear out repeated values
+
+    sp = raw;
+
+    sort(sp.begin(), sp.end());                       // sort the array first so unique can clear out repeated values
     sp.erase(unique(sp.begin(), sp.end()), sp.end()); // Hmmm, this gives the wrong number by +1... -- empty value is at the start (0 is undefined) - see below.
-    sp.erase(sp.begin()); // remove the empty element left in the front
+    sp.erase(sp.begin());                             // remove the empty element left in the front
 
     for (int i = 0; i < sp.size(); i++) // get each unique value and figure out how many there are of each
     {
-        totals.insert(pair<int, string>((count(fp.begin(), fp.end(), sp[i])), sp[i]));
+        totals.insert(pair<int, string>((count(raw.begin(), raw.end(), sp[i])), sp[i]));
     }
 
     return totals;
