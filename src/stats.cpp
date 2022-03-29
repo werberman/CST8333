@@ -23,12 +23,14 @@
 #include <map>
 #endif
 
-void tabulate(vector<string> raw);
+map<int, string> tabulate(vector<string> raw);
+void displayStats(map<int, string> totals);
 
 using namespace std;
 void genStats(Data_Bundle bundle)
 {
     vector<string> rawDates;
+    map<int, string> dateStats;
     int numRecords = bundle.row_keys.getIncident_numbers().size();
 
     // get number of incidents in each year
@@ -36,10 +38,12 @@ void genStats(Data_Bundle bundle)
     {
         rawDates.push_back(bundle.data_rows.getColumn_data()[i][14]);
     }
-    tabulate(rawDates);
+    dateStats = tabulate(rawDates);
+
+    displayStats(dateStats);
 }
 
-void tabulate(vector<string> raw)
+map<int, string> tabulate(vector<string> raw)
 {
     vector<string> fp;
     vector<string> sp;
@@ -49,34 +53,24 @@ void tabulate(vector<string> raw)
         fp.push_back(raw[i].substr(0, 4));
     }
     sp = fp;
-    sort(sp.begin(), sp.end());
-
-    sp.erase(unique(sp.begin(), sp.end()), sp.end());
+    sort(sp.begin(), sp.end()); // sort the array first so unique can clear out repeated values
+    sp.erase(unique(sp.begin(), sp.end()), sp.end()); // Hmmm, this gives the wrong number by +1... -- empty value is at the start (0 is undefined) - see below.
     sp.erase(sp.begin()); // remove the empty element left in the front
-
-    cout << sp.size(); // Hmmm, this gives the wrong number by +1... -- empty value is at the start (0 is undefined) - see above.
-
-    string val = "2008";
 
     for (int i = 0; i < sp.size(); i++) // get each unique value and figure out how many there are of each
     {
         totals.insert(pair<int, string>((count(fp.begin(), fp.end(), sp[i])), sp[i]));
     }
 
+    return totals;
+}
+
+void displayStats(map<int, string> totals)
+{
     map<int, string>::iterator it;
     for (it = totals.begin(); it != totals.end(); it++)
     {
         cout << it->second << " " << it->first << " | ";
     }
     cout << endl;
-    //  int freq = std::count(fp.begin(), fp.end(), val);
-
-    //      for (int i = 0; i < sp.size(); i++)
-    // {
-    //     cout << "Loop no: " << i << "\n";
-    //     cout << "SP no: " << sp[i] << "\n";
-    // }
-
-    // std::cout << "Element " << val << " occurs " << freq << " times";
-    return;
 }
