@@ -37,6 +37,10 @@
 #define THREAD
 #include <thread>
 #endif
+#ifndef STATS_CPP
+#define STATS_CPP
+#include "stats.cpp"
+#endif
 
 bool c_writeCSV(Data_Bundle bundle);
 
@@ -163,7 +167,7 @@ void controller(Data_Bundle bundle, string fname)
 
         case 9:
             // DEBUG
-            displayRecords(bundle, 0, 3, 50);
+            genStats(bundle);
             break;
 
         case 0:
