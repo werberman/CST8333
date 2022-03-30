@@ -28,21 +28,10 @@
 #define SSTREAM
 #include <sstream>
 #endif
-#ifndef MAP
-#define MAP
-#include <map>
-#endif
-#ifndef CMATH
-#define CMATH
-#include <cmath>
-#endif
 
 // TODO: Consider moving menues into consts here
 
 using namespace std;
-
-string generateKey(map<int, string> totals);
-string generateGraphVal(string name, int value, int total);
 
 /**
  * @brief Generic message printer for any string.
@@ -184,94 +173,4 @@ string stringInput()
     string input;
     std::cin >> input;
     return input;
-}
-
-void graphDisplay(map<int, string> totals, string title)
-{
-    genericMessage("graphDisplay begin!");
-    bool makeKey = false; // master check to see if a key needs to be made
-    string key;
-    map<int, string>::iterator it;
-    string graphedValues;
-    int counter = 0;
-    int total;
-
-    for (it = totals.begin(); it != totals.end(); it++) // check if anything is longer than 8 chars
-    {
-        total += it->first;                      // add all the values together
-        if (it->second.length() < 8 && !makeKey) // if it's longer than 8 characters, then set makeKey to true
-        {
-            makeKey = true;
-        }
-    }
-
-    if (makeKey) // if makeKey is true, make all legend values into a hash
-    {
-        key = generateKey(totals);
-
-        for (it = totals.begin(); it != totals.end(); it++)
-        {
-            // Make formatted string
-            graphedValues += generateGraphVal("Key: " + counter, it->first, total);
-            // cout << it->second << " " << it->first << " | ";
-            counter++;
-        }
-    }
-    else
-    {
-        for (it = totals.begin(); it != totals.end(); it++)
-        {
-            graphedValues += generateGraphVal(it->second, it->first, total);
-        }
-    }
-    // have a key - max length: 8 char ("Key: 999")
-    // outer 2 stars and a space before/after, 8 for labels, 1 for space and one for '|', 100 for the data
-    // cout << "******************************************************************************************************************\n" // 114
-    //      << "*" << title << "\n";
-
-    cout << graphedValues;
-}
-
-/**
- * @brief Generate the key portion of a graph
- *
- * @param totals map of the values being graphed
- * @return string containing the formatted key
- */
-string generateKey(map<int, string> totals)
-{
-    string key = "";
-    return key;
-}
-
-/**
- * @brief
- *
- * @param name
- * @param value
- * @param total
- * @return string
- */
-string generateGraphVal(string name, int value, int total)
-{
-    string formatted = "* ";
-    int remainder = (8 - name.length());
-    for (; remainder < 8; remainder++)
-    {
-        formatted += " "; // add a blank space
-    }
-    formatted += name + " |";
-    double rd = (100 - (value / total));
-    remainder = round(rd);
-    for (int i = remainder; i > 0; i--) // this SUBTRACTS, does not add
-    {
-        formatted += "]";
-    }
-    for (; remainder < 100; remainder++)
-    {
-        formatted += " ";
-    }
-    // data now finished
-    formatted += " *\n"; // final space and edge of container
-    return formatted;
 }

@@ -22,6 +22,10 @@
 #define MAP
 #include <map>
 #endif
+#ifndef GRAPHICSDISPLAY_CPP
+#define GRAPHICSDISPLAY_CPP
+#include "./graphics/graphicsdisplay.cpp"
+#endif
 
 const string TITLE_DATE = "Date of Occurance";
 const string TITLE_TYPE = "Substance Spilled";
@@ -36,10 +40,8 @@ void genStats(Data_Bundle bundle)
     vector<string> rawDates;
     vector<string> fDates;
     vector<string> rawReleaseType;
-
     map<int, string> dateStats;
     map<int, string> releaseTypeStats;
-
     int numRecords = bundle.row_keys.getIncident_numbers().size();
 
     // get number of incidents in each year
@@ -54,10 +56,9 @@ void genStats(Data_Bundle bundle)
     }
     dateStats = tabulate(fDates);
     releaseTypeStats = tabulate(rawReleaseType); // figure out why this doesn't work as an optional field
-    // displayStats(dateStats);
-    // displayStats(releaseTypeStats);
-    graphDisplay(dateStats, TITLE_DATE);
-    graphDisplay(releaseTypeStats, TITLE_TYPE);
+    displayStats(releaseTypeStats);
+    graphDisplay(dateStats, TITLE_DATE, numRecords);
+    graphDisplay(releaseTypeStats, TITLE_TYPE, numRecords);
 }
 
 map<int, string> tabulate(vector<string> raw)
