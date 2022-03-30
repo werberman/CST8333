@@ -27,8 +27,8 @@
 #include "./graphics/graphicsdisplay.cpp"
 #endif
 
-const string TITLE_DATE = "Date of Occurance";
-const string TITLE_TYPE = "Substance Spilled";
+const static string TITLE_DATE = "Date of Occurance";
+const static string TITLE_TYPE = "Substance Spilled";
 
 
 map<int, string> tabulate(vector<string> raw);
@@ -57,6 +57,7 @@ void genStats(Data_Bundle bundle)
     dateStats = tabulate(fDates);
     releaseTypeStats = tabulate(rawReleaseType); // figure out why this doesn't work as an optional field
     displayStats(releaseTypeStats);
+    displayStats(dateStats);
     graphDisplay(dateStats, TITLE_DATE, numRecords);
     graphDisplay(releaseTypeStats, TITLE_TYPE, numRecords);
 }

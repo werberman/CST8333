@@ -13,8 +13,15 @@
 
 using namespace std;
 
-string generateKey(map<int, string> totals);
+const static int GRAPHSTARS = 114;
+const static string X_AXIS = "*          |---------|---------|---------|---------|---------|---------|---------|---------|---------|---------| *\n*                   10        20        30        40        50        60        70        80        90       100 *\n";
+const static string X_LABEL = "*                                                   Percent(%)                                                   *\n";
+const static string BUFFER = "*                                                                                                                *"; // No new line here (sub for endl in output)
+const static string BOTTOM_EDGE = "******************************************************************************************************************\n";
+
+string generateKey(string title, map<int, string> totals);
 string generateGraphVal(string name, int value, int total);
+string generateTitle(string title, int const numstars);
 
 void graphDisplay(map<int, string> totals, string title, int numRecords)
 {
@@ -23,7 +30,11 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
     map<int, string>::iterator it;
     string graphedValues;
     int counter = 0;
+    string titleString;
 
+    titleString = generateTitle(title, GRAPHSTARS);
+    cout << "\n"
+         << titleString << endl;
     for (it = totals.begin(); it != totals.end(); it++) // check if anything is longer than 8 chars
     {
         if (!makeKey && it->second.length() > 8) // if it's longer than 8 characters, then set makeKey to true
@@ -34,7 +45,7 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
 
     if (makeKey) // if makeKey is true, make all legend values into a hash
     {
-        key = generateKey(totals);
+        key = generateKey(title, totals);
         for (it = totals.begin(); it != totals.end(); it++)
         {
             // Make formatted string
@@ -51,11 +62,13 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
         }
     }
     // have a key - max length: 8 char ("Key: 999")
-    // outer 2 stars and a space before/after, 8 for labels, 1 for space and one for '|', 100 for the data
+    // outer 2 stars and a space before/after [4], 8 for labels, 1 for space and one for '|' [2], 100 for the data
     // cout << "******************************************************************************************************************\n" // 114
     //      << "*" << title << "\n";
 
-    cout << graphedValues;
+    cout << graphedValues << X_AXIS << X_LABEL << BUFFER << "\n"
+         << BOTTOM_EDGE << endl;
+    cout << key;
 }
 
 /**
@@ -64,10 +77,34 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
  * @param totals map of the values being graphed
  * @return string containing the formatted key
  */
-string generateKey(map<int, string> totals)
+string generateKey(string title, map<int, string> totals)
 {
-    cout << "\nTEMP DEBUG: GenerateKey triggered!\n";
-    string key = "";
+    map<int, string>::iterator it;
+    int counter = 0;
+    string key;
+    string temp = "";
+    int ltemp;
+    for (it = totals.begin(); it != totals.end(); it++)
+    {
+        // Make formatted string
+        temp += "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first) + " *\n";
+        // cout << it->second << " " << it->first << " | ";
+        counter++;
+    }
+    ltemp = temp.size();
+    cout << "DEBUG: generateKey temp.size() = " << to_string(temp.size()) << "\n";
+    key = generateTitle(title, ltemp);
+    key += temp;
+    key += "*";
+    for (; ltemp > 2; ltemp--)
+    {
+        key += " ";
+    }
+    key += "*\n";
+    for (int i = ltemp; i > 0; i--)
+    {
+        key += "*";
+    }
     return key;
 }
 
@@ -81,29 +118,50 @@ string generateKey(map<int, string> totals)
  */
 string generateGraphVal(string name, int value, int total)
 {
-    //convert ints to floats
+    // convert ints to floats
     float fvalue = (float)value;
     float ftotal = (float)total;
 
     string formatted = "* ";
     int remainder = (8 - name.length());
-    for (; remainder < 8; remainder++)
+    for (; remainder > 0; remainder--)
     {
         formatted += " "; // add a blank space
     }
     formatted += name + " |";
-    float rd = (100.0 - ((fvalue / ftotal)*100.0));//The .0 is REALLY important - otherwise, the compiler discards the float and treats as INT!
+    float rd = (100.0 - ((fvalue / ftotal) * 100.0)); // The .0 is REALLY important - otherwise, the compiler discards the float and treats as INT!
     remainder = round(rd);
-    cout << "DEBUG: float rd = " << rd << ", remainder int = " << remainder << "\n";
-    for (int i = remainder; i > 0; i--) // this SUBTRACTS, does not add
+    for (int i = remainder; i < 100; i++)
     {
         formatted += "]";
     }
-    for (; remainder < 100; remainder++)
+    for (; remainder > 0; remainder--)
     {
         formatted += " ";
     }
     // data now finished
     formatted += " *\n"; // final space and edge of container
     return formatted;
+}
+
+string generateTitle(string title, int const numstars)
+{
+        cout << "DEBUGL: generateTitle numstars = " << to_string(numstars) << "\n";
+
+    string genTitle;
+    int stars = numstars;
+    stars -= title.size();
+    stars = stars / 2;
+    for (int i = 0; i < stars; i++)
+    {
+        genTitle += "*";
+    }
+    genTitle += title;
+    for (int i = genTitle.size(); i < numstars; i++)
+    {
+        genTitle += "*";
+    }
+    genTitle += "\n";
+    genTitle += BUFFER;
+    return genTitle;
 }
