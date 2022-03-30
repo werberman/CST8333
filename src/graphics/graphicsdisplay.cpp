@@ -31,8 +31,10 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
     string graphedValues;
     int counter = 0;
     string titleString;
-
+    
+    title = " " + title + " ";
     titleString = generateTitle(title, GRAPHSTARS);
+    titleString += BUFFER;
     cout << "\n"
          << titleString << endl;
     for (it = totals.begin(); it != totals.end(); it++) // check if anything is longer than 8 chars
@@ -79,24 +81,46 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
  */
 string generateKey(string title, map<int, string> totals)
 {
+    title = " Key: " + title + " ";
     map<int, string>::iterator it;
     int counter = 0;
     string key;
-    string temp = "";
-    int ltemp;
+    string assemble = "";
+    int ltemp = 0;
     for (it = totals.begin(); it != totals.end(); it++)
     {
-        // Make formatted string
-        temp += "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first) + " *\n";
-        // cout << it->second << " " << it->first << " | ";
+        // Make formatted string and figure out which one is longest
+        key = "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first) + " *";
+        if (ltemp < key.size())
+        {
+            ltemp = key.size();
+        }
+        counter++;
+        key.clear();
+    }
+    key = generateTitle(title, ltemp);
+    // Add buffer line - This is technically dupilicate code
+    key += "*";
+    for (int i = ltemp; i > 2; i--)
+    {
+        key += " ";
+    }
+    key += "*\n";
+    counter = 0;
+    for (it = totals.begin(); it != totals.end(); it++)
+    {
+        assemble = "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first);
+        for (int i = assemble.size(); i < (ltemp - 1); i++)
+        {
+            assemble += " ";
+        }
+        assemble += "*\n";
+        key += assemble;
         counter++;
     }
-    ltemp = temp.size();
-    cout << "DEBUG: generateKey temp.size() = " << to_string(temp.size()) << "\n";
-    key = generateTitle(title, ltemp);
-    key += temp;
+    // Add buffer line
     key += "*";
-    for (; ltemp > 2; ltemp--)
+    for (int i = ltemp; i > 2; i--)
     {
         key += " ";
     }
@@ -146,8 +170,6 @@ string generateGraphVal(string name, int value, int total)
 
 string generateTitle(string title, int const numstars)
 {
-        cout << "DEBUGL: generateTitle numstars = " << to_string(numstars) << "\n";
-
     string genTitle;
     int stars = numstars;
     stars -= title.size();
@@ -162,6 +184,5 @@ string generateTitle(string title, int const numstars)
         genTitle += "*";
     }
     genTitle += "\n";
-    genTitle += BUFFER;
     return genTitle;
 }
