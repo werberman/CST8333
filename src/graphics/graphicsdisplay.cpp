@@ -10,6 +10,10 @@
 #define DISPLAY_CPP
 #include "./src/display.cpp"
 #endif
+#ifndef FUTURE
+#define FUTURE
+#include <future>
+#endif
 
 using namespace std;
 
@@ -19,24 +23,25 @@ const static string X_LABEL = "|                                                
 const static string BUFFER = "|                                                                                                                       |"; // No new line here (sub for endl in output)
 const static string BOTTOM_EDGE = "*************************************************************************************************************************\n";
 
-string generateKey(string title, map<int, Stats_Map_Obj> totals);
+string generateKey(string title, map<int, Stats_Map_Obj> totals, int totalRecords);
 string generateGraphVal(string name, int value, int total);
 string generateTitle(string title, int const numstars);
 /**
  * @brief Generate the graphic display using ASCI art
- * 
+ *
  * @param totals map of the stats generated (map<int, Stats_Map_Obj>)
  * @param title title to be used for the graph and key
  * @param numRecords toal number of records, so the percent can be generated
  */
 void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 {
+    future<string> keyGen;
     bool makeKey = false; // master check to see if a key needs to be made
     string key;
     map<int, Stats_Map_Obj>::iterator it;
     string graphedValues;
     string titleString;
-    
+
     title = " " + title + " ";
     titleString = generateTitle(title, GRAPHSTARS);
     titleString += BUFFER;
@@ -52,7 +57,8 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 
     if (makeKey) // if makeKey is true, make all legend values into keys
     {
-        key = generateKey(title, totals);
+        keyGen = async(generateKey, title, totals, numRecords);
+        // key = generateKey(title, totals);
         for (it = totals.begin(); it != totals.end(); it++)
         {
             // Make formatted string
@@ -69,6 +75,7 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 
     cout << graphedValues << X_AXIS << X_LABEL << BUFFER << "\n"
          << BOTTOM_EDGE << endl;
+    key = keyGen.get();
     cout << key << endl;
 }
 
@@ -78,7 +85,7 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
  * @param totals map of the values being graphed
  * @return string containing the formatted key
  */
-string generateKey(string title, map<int, Stats_Map_Obj> totals)
+string generateKey(string title, map<int, Stats_Map_Obj> totals, int totalRecords)
 {
     title = " Key: " + title + " ";
     map<int, Stats_Map_Obj>::iterator it;
@@ -87,7 +94,6 @@ string generateKey(string title, map<int, Stats_Map_Obj> totals)
     int ltemp = 0;
     for (it = totals.begin(); it != totals.end(); it++)
     {
-        // Make formatted string and figure out which one is longest
         key = "| " + to_string(it->first) + ": " + it->second.getName() + " -- total: " + to_string(it->second.getNumber()) + " |";
         if (ltemp < key.size())
         {
@@ -156,10 +162,10 @@ string generateGraphVal(string name, int value, int total)
     {
         formatted += "]";
     }
-    formatted +=" -> ";
+    formatted += " -> ";
     formatted += to_string(percent);
     remainder -= to_string(percent).size();
-    //TODO: Check if this breaks if there is a value that makes remainder a negative - if so, add if.
+    // TODO: Check if this breaks if there is a value that makes remainder a negative - if so, add if.
     for (; remainder > 0; remainder--)
     {
         formatted += " ";
