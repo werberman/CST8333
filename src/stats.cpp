@@ -27,10 +27,7 @@
 #include "./graphics/graphicsdisplay.cpp"
 #endif
 
-const static string TITLE_DATE = "Date of Occurance";
-const static string TITLE_TYPE = "Substance Spilled";
-const static string TITLE_SIGNIFICANT = "Significant?";
-const static string TITLE_STATE = "Type of Substance";
+const static string TITLE_MISSING = "N/A";
 
 map<int, string> tabulate(vector<string> raw);
 void displayStats(map<int, string> totals);
@@ -45,53 +42,31 @@ void debug(vector<string> disp)
     }
 }
 
-void genStats(Data_Bundle bundle)
+void genStats(Data_Bundle bundle, int colNo)
 {
-    vector<string> rawDates;
-    vector<string> fDates;
-    vector<string> rawReleaseType;
-    vector<string> rawSignificiant;
-    vector<string> rawReleaseState;
-    map<int, string> dateStats;
-    map<int, string> releaseTypeStats;
-    map<int, string> releaseStateStats;
-    map<int, string> significantStats;
+    vector<string> rawData;
+    vector<string> fData;
+    map<int, string> mappedData;
 
     int numRecords = bundle.row_keys.getIncident_numbers().size();
 
     // get number of incidents in each year
     for (int i = 0; i < bundle.row_keys.getIncident_numbers().size(); i++)
     {
-        rawDates.push_back(bundle.data_rows.getColumn_data()[i][14]);
-        rawReleaseType.push_back(bundle.data_rows.getColumn_data()[i][10]);
-        rawReleaseState.push_back(bundle.data_rows.getColumn_data()[i][11]);
-        rawSignificiant.push_back(bundle.data_rows.getColumn_data()[i][12]);
-    }
-    for (int i = 0; i < rawDates.size(); i++)
-    {
-        if (rawDates[i] != "")
+        if (bundle.data_rows.getColumn_data()[i][colNo] != "")
         {
-            fDates.push_back(rawDates[i].substr(0, 4));
+        rawData.push_back(bundle.data_rows.getColumn_data()[i][colNo]);
         }
-        else
+        else 
         {
-            fDates.push_back(bundle.data_rows.getColumn_data()[i][13]);
+            rawData.push_back(TITLE_MISSING);
         }
     }
-    dateStats = tabulate(fDates);
-    releaseTypeStats = tabulate(rawReleaseType); // figure out why this doesn't work as an optional field
-    releaseStateStats = tabulate(rawReleaseState);
-    significantStats = tabulate(rawSignificiant);
-    displayStats(releaseTypeStats);
-    displayStats(dateStats);
-    displayStats(significantStats);
-    displayStats(releaseStateStats);
-    cout << "DEBUG: rawDates = " << to_string(rawDates.size()) << " , Bundle = " << to_string(bundle.row_keys.getIncident_numbers().size())
-         << ", fdates = " << to_string(fDates.size()) << "\n";
-    graphDisplay(dateStats, TITLE_DATE, numRecords);
-    graphDisplay(releaseTypeStats, TITLE_TYPE, numRecords);
-    graphDisplay(significantStats, TITLE_SIGNIFICANT, numRecords);
-    graphDisplay(releaseStateStats, TITLE_STATE, numRecords);
+
+    mappedData = tabulate(rawData);
+    displayStats(mappedData);
+
+    graphDisplay(mappedData, bundle.data_headers.getColumn_headers()[colNo], numRecords);
 }
 
 /**

@@ -165,9 +165,18 @@ void controller(Data_Bundle bundle, string fname)
             }
             break;
 
-        case 9:
-            // DEBUG
-            genStats(bundle);
+        case 8:
+            genericMessage("What is the column you wish to display? (Number) - If you are not sure what the number is, \nyou can input -1 to show all column names and their numbers:");
+            index = menuSelectionInt();
+            if (index == -1)
+            {
+                for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
+                {
+                    genericMessage(to_string(i) + ": " + bundle.data_headers.getColumn_headers()[i]);
+                }
+            }
+            //TODO: Try/catch?
+            genStats(bundle, index);
             break;
 
         case 0:
