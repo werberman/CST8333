@@ -17,7 +17,7 @@
 
 using namespace std;
 /**
- * @brief A mostly debug function built to show the contents of a map<int, string>
+ * @brief A mostly DEBUG function built to show the contents of a map<int, string>
  * 
  * @param totals a map of statistical totals (must be formatted correctly - see genStats())
  */
@@ -32,9 +32,9 @@ void displayStats(map<int, Stats_Map_Obj> totals)
 }
 
 /**
- * @brief A debug method to output the contents of a vector
+ * @brief A DEBUG method to output the contents of a vector
  * 
- * @param disp 
+ * @param disp vector<string> to be iterated through and displayed. 
  */
 void debug(vector<string> disp)
 {

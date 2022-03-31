@@ -171,6 +171,7 @@ void controller(Data_Bundle bundle, string fname)
             break;
 
         case 8:
+        // View statistics in the form of a map
             genericMessage("What is the column you wish to display? (Number) - If you are not sure what the number is, \nyou can input -1 to show all column names and their numbers:");
             index = menuSelectionInt();
             if (index == -1)

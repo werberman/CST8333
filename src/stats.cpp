@@ -34,11 +34,15 @@
 const static string TITLE_MISSING = "N/A";
 
 map<int, Stats_Map_Obj> tabulate(vector<string> raw);
-void displayStats(map<int, Stats_Map_Obj> totals);
-void debug(vector<string> disp);
 
 using namespace std;
 
+/**
+ * @brief generate statistics for use in graphicsdisplay from a Data_Bundle
+ * 
+ * @param bundle Data_Bundle - data to be analysed and turned into a graph
+ * @param colNo column in the data to be turned into a graph
+ */
 void genStats(Data_Bundle bundle, int colNo)
 {
     vector<string> rawData;
@@ -61,15 +65,13 @@ void genStats(Data_Bundle bundle, int colNo)
     }
 
     mappedData = tabulate(rawData);
-    displayStats(mappedData);
-
     graphDisplay(mappedData, bundle.data_headers.getColumn_headers()[colNo], numRecords);
 }
 
 /**
- * @brief SOMETHING IS NOT WORKING HERE - gives the wrong number of values, no idea why
+ * @brief tabluate the values in the vector and make a map out of them
  *
- * @param raw
+ * @param raw raw data in the from of a vector<string>
  * @return map<int, string>
  */
 map<int, Stats_Map_Obj> tabulate(vector<string> raw)
@@ -89,7 +91,6 @@ map<int, Stats_Map_Obj> tabulate(vector<string> raw)
         values.setNumber(count(raw.begin(), raw.end(), sp[i]));
         totals.insert(pair<int, Stats_Map_Obj>(i, values));
     }
-    debug(sp);
     displayStats(totals);
     return totals;
 }

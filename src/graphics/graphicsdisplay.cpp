@@ -134,12 +134,12 @@ string generateKey(string title, map<int, Stats_Map_Obj> totals, int totalRecord
 }
 
 /**
- * @brief
+ * @brief generate the graph values (that is, turn the elements into a string that represents a bar in a larger bar graph)
  *
- * @param name
- * @param value
- * @param total
- * @return string
+ * @param name name of the bar being generated
+ * @param value value for that bar
+ * @param total total number of values in the graph (used to calculate the percentage)
+ * @return string of an ASCII bar for a bar graph, fully formatted
  */
 string generateGraphVal(string name, int value, int total)
 {
@@ -175,6 +175,13 @@ string generateGraphVal(string name, int value, int total)
     return formatted;
 }
 
+/**
+ * @brief Generate the header for a given graph or key
+ * 
+ * @param title title to embed in the header
+ * @param numstars how large the header must be to fit the graph
+ * @return string ASCII header for graph or key
+ */
 string generateTitle(string title, int const numstars)
 {
     string genTitle;
