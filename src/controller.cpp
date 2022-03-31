@@ -9,9 +9,18 @@
  * @copyright Copyright (c) 2022
  * 
  */
+#ifndef IOSTREAM
+#define IOSTREAM
 #include <iostream>
+#endif
+#ifndef FSTREAM
+#define FSTREAM
 #include <fstream>
+#endif
+#ifndef STRING
+#define STRING
 #include <string>
+#endif
 #include <sstream>
 #ifndef DISPLAYRECORDS_CPP
 #define DISPLAYRECORDS_CPP
@@ -24,10 +33,6 @@
 #ifndef DATA_CPP
 #define DATA_CPP
 #include "Data.cpp"
-#endif
-#ifndef CONTROLLER_CPP
-#define CONTROLLER_CPP
-#include "controller.cpp"
 #endif
 #ifndef WRITECSV_CPP
 #define WRITECSV_CPP

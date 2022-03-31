@@ -26,21 +26,18 @@
 #define GRAPHICSDISPLAY_CPP
 #include "./graphics/graphicsdisplay.cpp"
 #endif
+#ifndef DEBUGGER_H
+#define DEBUGGER_H
+#include "debugger.h"
+#endif
 
 const static string TITLE_MISSING = "N/A";
 
 map<int, string> tabulate(vector<string> raw);
 void displayStats(map<int, string> totals);
+void debug(vector<string> disp);
 
 using namespace std;
-
-void debug(vector<string> disp)
-{
-    for (int i = 0; i < disp.size(); i++)
-    {
-        cout << "DEBUG: vector element " << to_string(i) << ": " << disp[i] << "\n";
-    }
-}
 
 void genStats(Data_Bundle bundle, int colNo)
 {
@@ -55,9 +52,9 @@ void genStats(Data_Bundle bundle, int colNo)
     {
         if (bundle.data_rows.getColumn_data()[i][colNo] != "")
         {
-        rawData.push_back(bundle.data_rows.getColumn_data()[i][colNo]);
+            rawData.push_back(bundle.data_rows.getColumn_data()[i][colNo]);
         }
-        else 
+        else
         {
             rawData.push_back(TITLE_MISSING);
         }
@@ -79,31 +76,17 @@ map<int, string> tabulate(vector<string> raw)
 {
     vector<string> sp;
     map<int, string> totals;
-    int counter = 0; // DEBUG ONLY
 
     sp = raw;
 
-    sort(sp.begin(), sp.end());                       // sort the array first so unique can clear out repeated values
-    sp.erase(unique(sp.begin(), sp.end()), sp.end()); // Hmmm, this gives the wrong number by +1... -- empty value is at the start (0 is undefined) - see below.
-    // sp.erase(sp.begin());                             // remove the empty element left in the front
+    sort(sp.begin(), sp.end()); // sort the array first so unique can clear out repeated values
+    sp.erase(unique(sp.begin(), sp.end()), sp.end());
 
     for (int i = 0; i < sp.size(); i++) // get each unique value and figure out how many there are of each
     {
         totals.insert(pair<int, string>((count(raw.begin(), raw.end(), sp[i])), sp[i]));
-        counter++;
     }
-    cout << "DEBUG: counter = " << to_string(counter) << "\n";
     debug(sp);
     displayStats(totals);
     return totals;
-}
-
-void displayStats(map<int, string> totals)
-{
-    map<int, string>::iterator it;
-    for (it = totals.begin(); it != totals.end(); it++)
-    {
-        cout << it->second << " " << it->first << " | ";
-    }
-    cout << endl;
 }
