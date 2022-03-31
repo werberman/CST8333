@@ -50,8 +50,8 @@ using namespace std;
 int main()
 {
     // File location (relative) of the csv.
-    // string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
-    string fname = ".\\datafiles\\newcsv.csv"; //The original file is (I suspect) too large for the output buffer. I will likely fix
+    string fname = ".\\datafiles\\pipeline-incidents-comprehensive-data.csv";
+    // string fname = ".\\datafiles\\newcsv.csv"; //The original file is (I suspect) too large for the output buffer. I will likely fix
                                                //that going forward, but for now, this truncated test file shows full functionality. 
                                                //This data file contains all columns, but only 100 records (plus the headers).
                                                //Original file does work, but slows down to a crawl.
