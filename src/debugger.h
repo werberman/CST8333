@@ -21,12 +21,12 @@ using namespace std;
  * 
  * @param totals a map of statistical totals (must be formatted correctly - see genStats())
  */
-void displayStats(map<int, string> totals)
+void displayStats(map<int, Stats_Map_Obj> totals)
 {
-    map<int, string>::iterator it;
+    map<int, Stats_Map_Obj>::iterator it;
     for (it = totals.begin(); it != totals.end(); it++)
     {
-        cout << it->second << " " << it->first << " | ";
+        cout << it->first << ": " << it->second.getName() << ", " << it->second.getNumber() << " | ";
     }
     cout << endl;
 }

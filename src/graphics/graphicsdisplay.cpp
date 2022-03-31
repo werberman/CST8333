@@ -13,23 +13,22 @@
 
 using namespace std;
 
-const static int GRAPHSTARS = 114;
-const static string X_AXIS = "*          |---------|---------|---------|---------|---------|---------|---------|---------|---------|---------| *\n*                   10        20        30        40        50        60        70        80        90       100 *\n";
-const static string X_LABEL = "*                                                   Percent(%)                                                   *\n";
-const static string BUFFER = "*                                                                                                                *"; // No new line here (sub for endl in output)
-const static string BOTTOM_EDGE = "******************************************************************************************************************\n";
+const static int GRAPHSTARS = 119;
+const static string X_AXIS = "|          |---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|      |\n|                   10        20        30        40        50        60        70        80        90       100      |\n";
+const static string X_LABEL = "|                                                      Percent(%)                                                     |\n";
+const static string BUFFER = "|                                                                                                                     |"; // No new line here (sub for endl in output)
+const static string BOTTOM_EDGE = "***********************************************************************************************************************\n";
 
-string generateKey(string title, map<int, string> totals);
+string generateKey(string title, map<int, Stats_Map_Obj> totals);
 string generateGraphVal(string name, int value, int total);
 string generateTitle(string title, int const numstars);
 
-void graphDisplay(map<int, string> totals, string title, int numRecords)
+void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 {
     bool makeKey = false; // master check to see if a key needs to be made
     string key;
-    map<int, string>::iterator it;
+    map<int, Stats_Map_Obj>::iterator it;
     string graphedValues;
-    int counter = 0;
     string titleString;
     
     title = " " + title + " ";
@@ -39,28 +38,27 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
          << titleString << endl;
     for (it = totals.begin(); it != totals.end(); it++) // check if anything is longer than 8 chars
     {
-        if (!makeKey && it->second.length() > 8) // if it's longer than 8 characters, then set makeKey to true
+        if (!makeKey && it->second.getName().length() > 8) // if it's longer than 8 characters, then set makeKey to true
         {
             makeKey = true;
         }
     }
 
-    if (makeKey) // if makeKey is true, make all legend values into a hash
+    if (makeKey) // if makeKey is true, make all legend values into keys
     {
         key = generateKey(title, totals);
         for (it = totals.begin(); it != totals.end(); it++)
         {
             // Make formatted string
-            graphedValues += generateGraphVal("Key: " + to_string(counter), it->first, numRecords);
+            graphedValues += generateGraphVal("Key: " + to_string(it->first), it->second.getNumber(), numRecords);
             // cout << it->second << " " << it->first << " | ";
-            counter++;
         }
     }
     else
     {
         for (it = totals.begin(); it != totals.end(); it++)
         {
-            graphedValues += generateGraphVal(it->second, it->first, numRecords);
+            graphedValues += generateGraphVal(it->second.getName(), it->second.getNumber(), numRecords);
         }
     }
     // have a key - max length: 8 char ("Key: 999")
@@ -79,44 +77,40 @@ void graphDisplay(map<int, string> totals, string title, int numRecords)
  * @param totals map of the values being graphed
  * @return string containing the formatted key
  */
-string generateKey(string title, map<int, string> totals)
+string generateKey(string title, map<int, Stats_Map_Obj> totals)
 {
     title = " Key: " + title + " ";
-    map<int, string>::iterator it;
-    int counter = 0;
+    map<int, Stats_Map_Obj>::iterator it;
     string key;
     string assemble = "";
     int ltemp = 0;
     for (it = totals.begin(); it != totals.end(); it++)
     {
         // Make formatted string and figure out which one is longest
-        key = "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first) + " *";
+        key = "| " + to_string(it->first) + ": " + it->second.getName() + " -- total: " + to_string(it->second.getNumber()) + " |";
         if (ltemp < key.size())
         {
             ltemp = key.size();
         }
-        counter++;
         key.clear();
     }
     key = generateTitle(title, ltemp);
     // Add buffer line - This is technically dupilicate code
-    key += "*";
+    key += "|";
     for (int i = ltemp; i > 2; i--)
     {
         key += " ";
     }
-    key += "*\n";
-    counter = 0;
+    key += "|\n";
     for (it = totals.begin(); it != totals.end(); it++)
     {
-        assemble = "* " + to_string(counter) + ": " + it->second + " -- total: " + to_string(it->first);
+        assemble = "* " + to_string(it->first) + ": " + it->second.getName() + " -- total: " + to_string(it->second.getNumber());
         for (int i = assemble.size(); i < (ltemp - 1); i++)
         {
             assemble += " ";
         }
         assemble += "*\n";
         key += assemble;
-        counter++;
     }
     // Add buffer line
     key += "*";
@@ -145,8 +139,9 @@ string generateGraphVal(string name, int value, int total)
     // convert ints to floats
     float fvalue = (float)value;
     float ftotal = (float)total;
+    int percent;
 
-    string formatted = "* ";
+    string formatted = "| ";
     int remainder = (8 - name.length());
     for (; remainder > 0; remainder--)
     {
@@ -155,16 +150,21 @@ string generateGraphVal(string name, int value, int total)
     formatted += name + " |";
     float rd = (100.0 - ((fvalue / ftotal) * 100.0)); // The .0 is REALLY important - otherwise, the compiler discards the float and treats as INT!
     remainder = round(rd);
+    percent = (100 - remainder);
     for (int i = remainder; i < 100; i++)
     {
         formatted += "]";
     }
+    formatted +=" -";
+    formatted += to_string(percent);
+    remainder -= to_string(percent).size();
+    //TODO: Check if this breaks if there is a value that makes remainder a negative - if so, add if.
     for (; remainder > 0; remainder--)
     {
         formatted += " ";
     }
     // data now finished
-    formatted += " *\n"; // final space and edge of container
+    formatted += "    |\n"; // final space and edge of container
     return formatted;
 }
 

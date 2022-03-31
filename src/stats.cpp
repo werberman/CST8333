@@ -33,8 +33,8 @@
 
 const static string TITLE_MISSING = "N/A";
 
-map<int, string> tabulate(vector<string> raw);
-void displayStats(map<int, string> totals);
+map<int, Stats_Map_Obj> tabulate(vector<string> raw);
+void displayStats(map<int, Stats_Map_Obj> totals);
 void debug(vector<string> disp);
 
 using namespace std;
@@ -43,7 +43,7 @@ void genStats(Data_Bundle bundle, int colNo)
 {
     vector<string> rawData;
     vector<string> fData;
-    map<int, string> mappedData;
+    map<int, Stats_Map_Obj> mappedData;
 
     int numRecords = bundle.row_keys.getIncident_numbers().size();
 
@@ -72,10 +72,10 @@ void genStats(Data_Bundle bundle, int colNo)
  * @param raw
  * @return map<int, string>
  */
-map<int, string> tabulate(vector<string> raw)
+map<int, Stats_Map_Obj> tabulate(vector<string> raw)
 {
     vector<string> sp;
-    map<int, string> totals;
+    map<int, Stats_Map_Obj> totals;
 
     sp = raw;
 
@@ -84,7 +84,10 @@ map<int, string> tabulate(vector<string> raw)
 
     for (int i = 0; i < sp.size(); i++) // get each unique value and figure out how many there are of each
     {
-        totals.insert(pair<int, string>((count(raw.begin(), raw.end(), sp[i])), sp[i]));
+        Stats_Map_Obj values;
+        values.setName(sp[i]);
+        values.setNumber(count(raw.begin(), raw.end(), sp[i]));
+        totals.insert(pair<int, Stats_Map_Obj>(i, values));
     }
     debug(sp);
     displayStats(totals);
