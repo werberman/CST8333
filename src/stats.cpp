@@ -101,6 +101,5 @@ map<int, Stats_Map_Obj> tabulate(vector<string> raw)
         values.setNumber(count(raw.begin(), raw.end(), sp[i]));
         totals.insert(pair<int, Stats_Map_Obj>(i, values));
     }
-    displayStats(totals);
     return totals;
 }

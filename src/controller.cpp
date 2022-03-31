@@ -5,9 +5,9 @@
  * translating user input into the appropriate function calls
  * @version 3.0
  * @date 2022-02-18
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 #ifndef IOSTREAM
 #define IOSTREAM
@@ -56,7 +56,7 @@ bool yesNo(char i);                            // forward declaration;
 
 /**
  * @brief Primary display controller. Handles most interactions with the user
- * 
+ *
  * @param bundle bundle of data from the csv
  * @param fname directory to the csv that is loaded into bundle (used to reload upon user request)
  */
@@ -71,6 +71,7 @@ void controller(Data_Bundle bundle, string fname)
 
     bool loopCtrl = true;
     bool taskSuccess;
+    bool case8 = true;
 
     int index;
 
@@ -145,8 +146,8 @@ void controller(Data_Bundle bundle, string fname)
              *TODO: add handler for if the file cannot be written.
              */
             /*
-            *TODO: Consider making this occur on its owne thread
-            */
+             *TODO: Consider making this occur on its owne thread
+             */
             break;
 
         case 6:
@@ -171,18 +172,29 @@ void controller(Data_Bundle bundle, string fname)
             break;
 
         case 8:
-        // View statistics in the form of a map
-            genericMessage("What is the column you wish to display? (Number) - If you are not sure what the number is, \nyou can input -1 to show all column names and their numbers:");
-            index = menuSelectionInt();
-            if (index == -1)
+            // View statistics in the form of a map
+            while (case8)
             {
-                for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
+                genericMessage("What is the column you wish to display? (Number) - If you are not sure what the number is, \nyou can input -1 to show all column names and their numbers:");
+                index = menuSelectionInt();
+                if (index == -1)
                 {
-                    genericMessage(to_string(i) + ": " + bundle.data_headers.getColumn_headers()[i]);
+                    for (int i = 0; i < bundle.data_headers.getColumn_headers().size(); i++)
+                    {
+                        genericMessage(to_string(i) + ": " + bundle.data_headers.getColumn_headers()[i]);
+                    }
+                }
+                if (index < bundle.data_headers.getColumn_headers().size() && index > -1)
+                {
+                    genStats(bundle, index);
+                    case8 = false;
+                }
+                else
+                {
+                    genericMessage("Invalid selection. Please try again.");
                 }
             }
-            //TODO: Try/catch?
-            genStats(bundle, index);
+            case8 = true;
             break;
 
         case 0:
@@ -325,16 +337,15 @@ bool yesNo(char i)
     return yesNo;
 };
 
-
 /**
- * @brief controller for input/output related to writing a new csv file from the passed in bundle. 
+ * @brief controller for input/output related to writing a new csv file from the passed in bundle.
  * This is done on a seperate, detached thread and prints a notification to the user when the task has been
- * completed successfully. 
- * 
+ * completed successfully.
+ *
  * @param bundle bundled csv data to be written
- * @param newFileName name of the new file 
- * @return true 
- * @return false 
+ * @param newFileName name of the new file
+ * @return true
+ * @return false
  */
 bool c_writeCSV(Data_Bundle bundle)
 {
@@ -345,7 +356,7 @@ bool c_writeCSV(Data_Bundle bundle)
     try
     {
         thread t_write(writeCSV, bundle, newFileName);
-        t_write.detach(); //detach the thread and have it run independantly
+        t_write.detach(); // detach the thread and have it run independantly
     }
     catch (Write_Exception &w1)
     {
