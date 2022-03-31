@@ -13,16 +13,22 @@
 
 using namespace std;
 
-const static int GRAPHSTARS = 119;
-const static string X_AXIS = "|          |---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|      |\n|                   10        20        30        40        50        60        70        80        90       100      |\n";
-const static string X_LABEL = "|                                                      Percent(%)                                                     |\n";
-const static string BUFFER = "|                                                                                                                     |"; // No new line here (sub for endl in output)
-const static string BOTTOM_EDGE = "***********************************************************************************************************************\n";
+const static int GRAPHSTARS = 121;
+const static string X_AXIS = "|          |---------|---------|---------|---------|---------|---------|---------|---------|---------|---------|        |\n|                   10        20        30        40        50        60        70        80        90       100        |\n";
+const static string X_LABEL = "|                                                       Percent(%)                                                      |\n";
+const static string BUFFER = "|                                                                                                                       |"; // No new line here (sub for endl in output)
+const static string BOTTOM_EDGE = "*************************************************************************************************************************\n";
 
 string generateKey(string title, map<int, Stats_Map_Obj> totals);
 string generateGraphVal(string name, int value, int total);
 string generateTitle(string title, int const numstars);
-
+/**
+ * @brief Generate the graphic display using ASCI art
+ * 
+ * @param totals map of the stats generated (map<int, Stats_Map_Obj>)
+ * @param title title to be used for the graph and key
+ * @param numRecords toal number of records, so the percent can be generated
+ */
 void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 {
     bool makeKey = false; // master check to see if a key needs to be made
@@ -51,7 +57,6 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
         {
             // Make formatted string
             graphedValues += generateGraphVal("Key: " + to_string(it->first), it->second.getNumber(), numRecords);
-            // cout << it->second << " " << it->first << " | ";
         }
     }
     else
@@ -61,14 +66,10 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
             graphedValues += generateGraphVal(it->second.getName(), it->second.getNumber(), numRecords);
         }
     }
-    // have a key - max length: 8 char ("Key: 999")
-    // outer 2 stars and a space before/after [4], 8 for labels, 1 for space and one for '|' [2], 100 for the data
-    // cout << "******************************************************************************************************************\n" // 114
-    //      << "*" << title << "\n";
 
     cout << graphedValues << X_AXIS << X_LABEL << BUFFER << "\n"
          << BOTTOM_EDGE << endl;
-    cout << key;
+    cout << key << endl;
 }
 
 /**
@@ -104,21 +105,21 @@ string generateKey(string title, map<int, Stats_Map_Obj> totals)
     key += "|\n";
     for (it = totals.begin(); it != totals.end(); it++)
     {
-        assemble = "* " + to_string(it->first) + ": " + it->second.getName() + " -- total: " + to_string(it->second.getNumber());
+        assemble = "| " + to_string(it->first) + ": " + it->second.getName() + " -- total: " + to_string(it->second.getNumber());
         for (int i = assemble.size(); i < (ltemp - 1); i++)
         {
             assemble += " ";
         }
-        assemble += "*\n";
+        assemble += "|\n";
         key += assemble;
     }
     // Add buffer line
-    key += "*";
+    key += "|";
     for (int i = ltemp; i > 2; i--)
     {
         key += " ";
     }
-    key += "*\n";
+    key += "|\n";
     for (int i = ltemp; i > 0; i--)
     {
         key += "*";
@@ -155,7 +156,7 @@ string generateGraphVal(string name, int value, int total)
     {
         formatted += "]";
     }
-    formatted +=" -";
+    formatted +=" -> ";
     formatted += to_string(percent);
     remainder -= to_string(percent).size();
     //TODO: Check if this breaks if there is a value that makes remainder a negative - if so, add if.
