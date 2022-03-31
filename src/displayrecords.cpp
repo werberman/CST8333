@@ -3,7 +3,7 @@
  * @author Kristopher Houston - 041015388
  * @brief Helper of display, this file contains functions that translate user selecions into nicely 
  * formatted outputs for the display.
- * @version 0.1
+ * @version 2.0
  * @date 2022-02-18
  * 
  * @copyright Copyright (c) 2022

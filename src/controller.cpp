@@ -3,7 +3,7 @@
  * @author Kristopher Houston - 041015388
  * @brief All control logic is contained here. As such, all classes contained herein are effectively focused on
  * translating user input into the appropriate function calls
- * @version 0.1
+ * @version 3.0
  * @date 2022-02-18
  * 
  * @copyright Copyright (c) 2022

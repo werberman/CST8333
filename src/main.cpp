@@ -2,7 +2,7 @@
  * @file main.cpp
  * @author Kristopher Houston - 041015388
  * @brief Primary entry point of the program
- * @version 0.1
+ * @version 3.0
  * @date 2022-02-18
  *
  * NOTE: As we discuessed privately, while this project is generic in that it will work with virtually any .csv,

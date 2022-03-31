@@ -1,3 +1,13 @@
+/**
+ * @file debugger.h
+ * @author Kristopher Houston - 041015388
+ * @brief contains some debugger methods for re-use throughout the project if necessairy
+ * @version 1.0
+ * @date 2022-03-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef MAP
 #define MAP
 #include <map>

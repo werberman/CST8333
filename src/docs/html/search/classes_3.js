@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write_5fexception_0',['Write_Exception',['../struct_write___exception.html',1,'']]]
+  ['stats_5fmap_5fobj_0',['Stats_Map_Obj',['../class_stats___map___obj.html',1,'']]]
 ];

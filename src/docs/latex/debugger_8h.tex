@@ -1,0 +1,68 @@
+\hypertarget{debugger_8h}{}\doxysection{C\+:/\+Users/werbe/\+Documents/\+Programming Projects/\+C++/\+CST8333/src/debugger.h File Reference}
+\label{debugger_8h}\index{C:/Users/werbe/Documents/Programming Projects/C++/CST8333/src/debugger.h@{C:/Users/werbe/Documents/Programming Projects/C++/CST8333/src/debugger.h}}
+
+
+contains some debugger methods for re-\/use throughout the project if necessairy  
+
+
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{debugger_8h_a7495ae8ce69295850b05576d0d25d2dc}{display\+Stats}} (map$<$ int, \mbox{\hyperlink{class_stats___map___obj}{Stats\+\_\+\+Map\+\_\+\+Obj}} $>$ totals)
+\begin{DoxyCompactList}\small\item\em A mostly DEBUG function built to show the contents of a map$<$int, string$>$ \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{debugger_8h_a6c34dee4f283be5275586a06f738a03e}{debug}} (vector$<$ string $>$ disp)
+\begin{DoxyCompactList}\small\item\em A DEBUG method to output the contents of a vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+contains some debugger methods for re-\/use throughout the project if necessairy 
+
+\begin{DoxyAuthor}{Author}
+Kristopher Houston -\/ 041015388 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/03-\/31
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{debugger_8h_a6c34dee4f283be5275586a06f738a03e}\label{debugger_8h_a6c34dee4f283be5275586a06f738a03e}} 
+\index{debugger.h@{debugger.h}!debug@{debug}}
+\index{debug@{debug}!debugger.h@{debugger.h}}
+\doxysubsubsection{\texorpdfstring{debug()}{debug()}}
+{\footnotesize\ttfamily void debug (\begin{DoxyParamCaption}\item[{vector$<$ string $>$}]{disp }\end{DoxyParamCaption})}
+
+
+
+A DEBUG method to output the contents of a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em disp} & vector$<$string$>$ to be iterated through and displayed. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{debugger_8h_a7495ae8ce69295850b05576d0d25d2dc}\label{debugger_8h_a7495ae8ce69295850b05576d0d25d2dc}} 
+\index{debugger.h@{debugger.h}!displayStats@{displayStats}}
+\index{displayStats@{displayStats}!debugger.h@{debugger.h}}
+\doxysubsubsection{\texorpdfstring{displayStats()}{displayStats()}}
+{\footnotesize\ttfamily void display\+Stats (\begin{DoxyParamCaption}\item[{map$<$ int, \mbox{\hyperlink{class_stats___map___obj}{Stats\+\_\+\+Map\+\_\+\+Obj}} $>$}]{totals }\end{DoxyParamCaption})}
+
+
+
+A mostly DEBUG function built to show the contents of a map$<$int, string$>$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em totals} & a map of statistical totals (must be formatted correctly -\/ see \mbox{\hyperlink{stats_8cpp_a0783c66e4084b0ee4e8dbd4f771dcded}{gen\+Stats()}}) \\
+\hline
+\end{DoxyParams}

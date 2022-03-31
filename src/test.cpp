@@ -4,7 +4,7 @@
  * @brief This file demonstrates the chosen unittest framework (doctest). This unit test framework is somewhat unique: it is well
  * suited to C++ because it can be loaded onto any C++ file (or link to any file using typical headers). It is then compiled as any
  * other C++ program: the output of the resulting binary are the test results!
- * @version 0.1
+ * @version 2.0
  * @date 2022-02-18
  *
  * @copyright Copyright (c) 2022

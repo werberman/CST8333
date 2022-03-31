@@ -2,7 +2,7 @@
  * @file addRemoveRecord.cpp
  * @author Kristopher Houston - 041015388
  * @brief handle the adding or removing of a record from a data bundle (that is, from working memory)
- * @version 0.1
+ * @version 2.0
  * @date 2022-02-18
  * 
  * @copyright Copyright (c) 2022

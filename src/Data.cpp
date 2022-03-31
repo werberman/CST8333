@@ -2,7 +2,7 @@
  * @file Data.cpp
  * @author Kristopher Houston - 041015388
  * @brief Contains all data classes and error classes
- * @version 0.1
+ * @version 2.1
  * @date 2022-02-18
  *
  * @copyright Copyright (c) 2022
@@ -141,6 +141,11 @@ public:
 };
 
 /*************************************** Errors ******************************/
+
+/**
+ * @brief throw an error for when the reader cannot read the .csv file
+ * 
+ */
 struct Read_Exception : public exception
 {
     const char *what() const throw()
@@ -149,6 +154,10 @@ struct Read_Exception : public exception
     }
 };
 
+/**
+ * @brief throw an error for when the writer cannot write to a file
+ * 
+ */
 struct Write_Exception : public exception
 {
     const char *what() const throw()
@@ -157,6 +166,10 @@ struct Write_Exception : public exception
     }
 };
 
+/**
+ * @brief throw an exception for when the end of the records has been reached
+ * 
+ */
 struct End_of_Records_Exception : public exception
 {
     const char *what() const throw()

@@ -1,3 +1,13 @@
+/**
+ * @file graphicsdisplay.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief generate ASCII art graphs using formatted data from stats.cpp
+ * @version 1.0
+ * @date 2022-03-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef MAP
 #define MAP
 #include <map>

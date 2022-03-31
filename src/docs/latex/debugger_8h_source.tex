@@ -1,0 +1,41 @@
+\hypertarget{debugger_8h_source}{}\doxysection{C\+:/\+Users/werbe/\+Documents/\+Programming Projects/\+C++/\+CST8333/src/debugger.h}
+\mbox{\hyperlink{debugger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef MAP}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define MAP}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#ifndef STRING}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#define STRING}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#ifndef IOSTREAM}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#define IOSTREAM}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <iostream>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#ifndef VECTOR}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#define VECTOR}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{using namespace }std;}
+\DoxyCodeLine{34 \textcolor{keywordtype}{void} \mbox{\hyperlink{debugger_8h_a7495ae8ce69295850b05576d0d25d2dc}{displayStats}}(map<int, Stats\_Map\_Obj> totals)}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     map<int, Stats\_Map\_Obj>::iterator it;}
+\DoxyCodeLine{37     \textcolor{keywordflow}{for} (it = totals.begin(); it != totals.end(); it++)}
+\DoxyCodeLine{38     \{}
+\DoxyCodeLine{39         cout << it-\/>first << \textcolor{stringliteral}{"{}: "{}} << it-\/>second.getName() << \textcolor{stringliteral}{"{}, "{}} << it-\/>second.getNumber() << \textcolor{stringliteral}{"{} | "{}};}
+\DoxyCodeLine{40     \}}
+\DoxyCodeLine{41     cout << endl;}
+\DoxyCodeLine{42 \}}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{49 \textcolor{keywordtype}{void} \mbox{\hyperlink{debugger_8h_a6c34dee4f283be5275586a06f738a03e}{debug}}(vector<string> disp)}
+\DoxyCodeLine{50 \{}
+\DoxyCodeLine{51     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < disp.size(); i++)}
+\DoxyCodeLine{52     \{}
+\DoxyCodeLine{53         cout << \textcolor{stringliteral}{"{}DEBUG: vector element "{}} << to\_string(i) << \textcolor{stringliteral}{"{}: "{}} << disp[i] << \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{54     \}}
+\DoxyCodeLine{55 \}}
+
+\end{DoxyCode}

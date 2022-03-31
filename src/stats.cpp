@@ -1,3 +1,13 @@
+/**
+ * @file stats.cpp
+ * @author Kristopher Houston - 041015388
+ * @brief generate statistics from data_bundle for use with graphicsdisplay.cpp
+ * @version 1.0
+ * @date 2022-03-31
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
 #ifndef DATA_CPP
 #define DATA_CPP
 #include "Data.cpp"

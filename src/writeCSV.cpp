@@ -2,7 +2,7 @@
  * @file writeCSV.cpp
  * @author Kristopher Houston - 041015388
  * @brief write a data_bundle to a new file
- * @version 0.1
+ * @version 2.0
  * @date 2022-02-18
  * 
  * @copyright Copyright (c) 2022
