@@ -182,7 +182,6 @@ string generateGraphVal(string name, int value, int total)
     formatted += " -> ";
     formatted += to_string(percent);
     remainder -= to_string(percent).size();
-    // TODO: Check if this breaks if there is a value that makes remainder a negative - if so, add if.
     for (; remainder > 0; remainder--)
     {
         formatted += " ";
