@@ -85,7 +85,14 @@ void graphDisplay(map<int, Stats_Map_Obj> totals, string title, int numRecords)
 
     cout << graphedValues << X_AXIS << X_LABEL << BUFFER << "\n"
          << BOTTOM_EDGE << endl;
+    try
+    {
     key = keyGen.get();
+    }
+    catch (std::future_error &e1)
+    {
+        //nothing needs to happen here. Could log it, but I don't have a logger. Not actually an error
+    }
     cout << key << endl;
 }
 
